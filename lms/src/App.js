@@ -5,6 +5,8 @@ import Navbar from "./Components/Navbar";
 import { useState } from "react";
 import Students from "./Components/Pages/Students";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import AllBooks from "./Components/Pages/AllBooks";
+import IssuedBooks from "./Components/Pages/IssuedBooks";
 
 function App() {
   const email = "sreehari@gmail.com";
@@ -26,7 +28,9 @@ function App() {
         <div className="d-flex">
         {authCheck && <Navbar />}
       <Routes>
-      <Route path="/students" element={authCheck && <Students />}/>
+        <Route path="/students" element={authCheck && <Students />}/>
+        <Route path="/allbooks" element={authCheck &&<AllBooks/>}/>
+        <Route path="/issuedbooks"element={authCheck &&<IssuedBooks/>}/>
       </Routes>
           
           

@@ -52,11 +52,11 @@ function AddStudent({showAdd,setShowAdd,handleCloseAdd}) {
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleCloseAdd}>
+        <Button variant="outline-secondary" onClick={handleCloseAdd}>
           cancel
         </Button>
-        <Button style={{backgroundColor : "#ED7966"}}
-          variant="primary"
+        <Button style={{backgroundColor : "#ED7966",color:"white"}}
+        variant="light"
           onClick={() => {
             handleCloseAdd();
             // handleAddTask();
