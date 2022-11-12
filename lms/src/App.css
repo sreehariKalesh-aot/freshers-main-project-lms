@@ -1,4 +1,6 @@
-
+.body{
+  font-family: 'Lato';
+}
 .lms{
   font-family: 'Lato';
   font-style: normal;
@@ -91,4 +93,29 @@ a{
 }
 .tabbs{
   width: 250px;
+}
+
+.pges{
+  background-color: white;
+  height: 100vh;
+  width: 83%;
+  margin-left: auto;
+}
+
+.pg-container{
+  width: 90%;
+  margin: auto;
+}
+/* .searchinput{
+  border-color: #CECECE;
+  border-radius: 5px;
+} */
+
+.orngbtn{
+  border: none;
+  background-color: #ED7966;
+  color: white;
+  border-radius: 5px;
+  height: 40px;
+  padding: 10px 20px 10px 20px;
 }
