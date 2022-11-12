@@ -44,3 +44,51 @@ color: #09174A;
   border-radius: 5px;
   border: none;
 }
+.nav-link{
+  color: black !important;
+}
+
+.nvbar{
+  width: 17%;
+  height: 100vh;
+  background-color: #ED7966;
+}
+
+.lms2{
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 29px;
+  color: white;
+}
+a:link{
+  text-decoration: none;
+  color: white !important;
+}
+a{
+  color: white !important;
+}
+
+.rwt__tablist[aria-orientation="vertical"] {
+
+  border-right:none !important;
+  margin-right: 1rem;
+}
+
+.rwt__tab[aria-selected="false"] {
+  position: relative;
+}
+.rwt__tablist[aria-orientation="vertical"] .rwt__tab[aria-selected="true"]:after {
+  right: -1px;
+  top: 0;
+  height: 100%;
+  border-right: none !important;
+}
+#vertical-tab-one-tab ,#vertical-tab-two-tab,#vertical-tab-three-tab{
+  border-radius: 12px;
+  color: aliceblue;
+}
+.tabbs{
+  width: 250px;
+}
