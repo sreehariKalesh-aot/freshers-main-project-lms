@@ -126,3 +126,10 @@ a{
   line-height: 19px;
   color: #09174A;
 }
+
+.navcomp{
+  /* border: 1px solid; */
+  border-radius: 8px;
+  /* background: #FFFFFF;
+  opacity: 0.12; */
+}

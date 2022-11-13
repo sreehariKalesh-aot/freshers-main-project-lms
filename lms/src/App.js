@@ -4,7 +4,7 @@ import Login from "./Components/Login/Login";
 import Navbar from "./Components/Navbar";
 import { useState } from "react";
 import Students from "./Components/Pages/Students";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import AllBooks from "./Components/Pages/AllBooks";
 import IssuedBooks from "./Components/Pages/IssuedBooks";
 
@@ -15,7 +15,7 @@ function App() {
   const [authCheck, setauthCheck] = useState(false);
   return (
     <>
-      
+      <Router>
         {!authCheck && (
           <Login
             email={email}
@@ -24,13 +24,13 @@ function App() {
             setauthCheck={setauthCheck}
           />
         )}
-        <Router>
+        
         <div className="d-flex">
         {authCheck && <Navbar />}
       <Routes>
         <Route path="/students" element={authCheck && <Students />}/>
-        <Route path="/allbooks" element={authCheck &&<AllBooks/>}/>
-        <Route path="/issuedbooks"element={authCheck &&<IssuedBooks/>}/>
+        <Route path="/allbooks" element={<AllBooks/>}/>
+        <Route path="/issuedbooks"element={<IssuedBooks/>}/>
       </Routes>
           
           

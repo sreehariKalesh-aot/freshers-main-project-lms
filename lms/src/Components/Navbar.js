@@ -7,9 +7,9 @@ import {
 } from "react-icons/md";
 
 // import { Tab, TabPanel, Tabs, TabList } from "react-web-tabs";
-import Button from "react-bootstrap/esm/Button";
+// import Button from "react-bootstrap/esm/Button";
 import "react-web-tabs/dist/react-web-tabs.css";
-import Students from "./Pages/Students";
+// import Students from "./Pages/Students";
 import {Link} from "react-router-dom"
 function Navbar() {
   return (
@@ -25,26 +25,26 @@ function Navbar() {
         </div>
 
         {/* tabs using a href */}
-        <div className="ms-4 mt-5">
+        <div className="ms-2 me-4 mt-4 navcomp">
           <Link to="/issuedbooks" className="">
-            <div className="d-flex align-items-center gap-3">
+            <div className="d-flex align-items-center gap-3 ps-3 pt-2 pb-2">
               <MdTaskAlt size={20} />
               <p className="mb-0">Issued Books</p>
             </div>
           </Link>
         </div>
         {/* <button className="d-flex align-items-center gap-3"></button> */}
-        <div className="ms-4 mt-4">
+        <div className="ms-2 me-4 mt-4  navcomp">
           <Link to="/allbooks">
-            <div className="d-flex align-items-center gap-3">
+            <div className="d-flex align-items-center gap-3 ps-3 pt-2 pb-2">
               <MdMenuBook size={20}/>
               <p className="mb-0">All Books</p>
             </div>
           </Link>
         </div>
-        <div className="ms-4 mt-4">
+        <div className="ms-2 me-4 mt-4 navcomp">
           <Link to="/students">
-            <div className="d-flex align-items-center gap-3">
+            <div className="d-flex align-items-center gap-3 ps-3 pt-2 pb-2">
               <MdOutlinePeople size={20}/>
               <p className="mb-0">Students</p>
             </div>
