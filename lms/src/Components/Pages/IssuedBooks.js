@@ -1,7 +1,12 @@
 import React from 'react'
 import Form from "react-bootstrap/Form";
-
+import IssueBookModal from '../Modals/IssueBookModal';
+import { useState } from 'react';
 function IssuedBooks() {
+  const [showIssuedBooks, setShowIssuedBooks] = useState(false);
+
+  const handleCloseIssuedBooks = () => setShowIssuedBooks(false);
+  const handleShowIssuedBooks = () => setShowIssuedBooks(true);
   return (
     <>
         <div className="pges">
@@ -18,11 +23,12 @@ function IssuedBooks() {
               />
             </div>
 
-            <button className="orngbtn me-4 mt-2" >Issue Book</button>
+            <button className="orngbtn me-4 mt-2" onClick={handleShowIssuedBooks} >Issue Book</button>
           </div>
         </div>
       </div>
     
+    {showIssuedBooks && <IssueBookModal showIssuedBooks={showIssuedBooks} handleCloseIssuedBooks={handleCloseIssuedBooks}/>}
     </>
   )
 }

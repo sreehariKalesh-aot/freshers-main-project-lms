@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 
-function AddStudent({showAdd,setShowAdd,handleCloseAdd}) {
+function AddStudent({showAdd,handleCloseAdd}) {
   return (
     <Modal show={showAdd} onHide={handleCloseAdd}>
       <Modal.Header closeButton>
@@ -13,7 +13,7 @@ function AddStudent({showAdd,setShowAdd,handleCloseAdd}) {
       <Modal.Body>
         <Form>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Label>Name</Form.Label>
+            <Form.Label className="modal-labels">Name</Form.Label>
             <Form.Control
               type="text"
               placeholder="Eg: John Doe"
@@ -23,7 +23,7 @@ function AddStudent({showAdd,setShowAdd,handleCloseAdd}) {
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-            <Form.Label>Email</Form.Label>
+            <Form.Label className="modal-labels">Email</Form.Label>
             <Form.Control
               type="email"
               placeholder="Eg: johndoe@gmail.com"
@@ -32,7 +32,7 @@ function AddStudent({showAdd,setShowAdd,handleCloseAdd}) {
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
-            <Form.Label>Password</Form.Label>
+            <Form.Label className="modal-labels">Password</Form.Label>
             <Form.Control
               type="password"
               placeholder="*********"
@@ -41,7 +41,7 @@ function AddStudent({showAdd,setShowAdd,handleCloseAdd}) {
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
-            <Form.Label>Confirm Password</Form.Label>
+            <Form.Label className="modal-labels">Confirm Password</Form.Label>
             <Form.Control
               type="password"
               placeholder="*******"

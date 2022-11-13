@@ -28,7 +28,7 @@ function Students() {
           </div>
         </div>
       </div>
-      {showAdd &&<AddStudent showAdd={setShowAdd} setShowAdd={setShowAdd} handleShowAdd={handleShowAdd} handleCloseAdd={handleCloseAdd}/>}
+      {showAdd &&<AddStudent showAdd={setShowAdd}  handleCloseAdd={handleCloseAdd}/>}
     </>
   );
 }

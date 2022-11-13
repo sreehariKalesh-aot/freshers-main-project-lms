@@ -1,7 +1,13 @@
 import React from 'react'
 import Form from "react-bootstrap/Form";
+import { useState } from 'react';
+import AddBookModal from '../Modals/AddBookModal';
 
 function AllBooks() {
+  const [showAddBook, setShowAddBook] = useState(false);
+
+  const handleCloseAddBook = () => setShowAddBook(false);
+  const handleShowAddBook = () => setShowAddBook(true);
   return (
     <>
         <div className="pges">
@@ -18,10 +24,12 @@ function AllBooks() {
               />
             </div>
 
-            <button className="orngbtn me-4 mt-2">Add New Book</button>
+            <button className="orngbtn me-4 mt-2" onClick={handleShowAddBook}>Add New Book</button>
           </div>
         </div>
       </div>
+
+      {showAddBook && <AddBookModal showAddBook={showAddBook} handleCloseAddBook={handleCloseAddBook}/>}
     </>
   )
 }
