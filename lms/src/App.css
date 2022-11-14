@@ -1,39 +1,37 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.1/font/bootstrap-icons.css");
-.body{
-  font-family: 'Lato';
+.body {
+  font-family: "Lato";
 }
-.lms{
-  font-family: 'Lato';
+.lms {
+  font-family: "Lato";
   font-style: normal;
   font-weight: 800;
   font-size: 24px;
   line-height: 29px;
-  color: #ED7966;
-
+  color: #ed7966;
 }
-.login-form{
+.login-form {
   max-width: 406px;
   margin: auto;
-  
 }
-.login-div{
+.login-div {
   position: absolute;
   top: 50%;
   left: 50%;
   margin-right: -50%;
-  transform: translate(-50%, -50%)
+  transform: translate(-50%, -50%);
 }
-.login-p{
-  font-family: 'Lato';
-font-style: normal;
-font-weight: 700;
-font-size: 24px;
-line-height: 29px;
-color: #09174A;
+.login-p {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+  color: #09174a;
 }
 
-.welcome-p{
-  font-family: 'Lato';
+.welcome-p {
+  font-family: "Lato";
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -41,64 +39,66 @@ color: #09174A;
   color: #646464;
 }
 
-.login-btn{
+.login-btn {
   width: 100%;
-  background-color: #ED7966; 
+  background-color: #ed7966;
   color: white;
   border-radius: 5px;
   border: none;
 }
-.nav-link{
+.nav-link {
   color: black !important;
 }
 
-.nvbar{
+.nvbar {
   width: 17%;
   height: 100vh;
-  background-color: #ED7966;
+  background-color: #ed7966;
   position: fixed;
 }
 
-.lms2{
-  font-family: 'Lato';
+.lms2 {
+  font-family: "Lato";
   font-style: normal;
   font-weight: 800;
   font-size: 24px;
   line-height: 29px;
   color: white;
 }
-a:link{
+a:link {
   text-decoration: none;
   color: white !important;
 }
-a{
+a {
   color: white !important;
 }
 
 .rwt__tablist[aria-orientation="vertical"] {
-
-  border-right:none !important;
+  border-right: none !important;
   margin-right: 1rem;
 }
 
 .rwt__tab[aria-selected="false"] {
   position: relative;
 }
-.rwt__tablist[aria-orientation="vertical"] .rwt__tab[aria-selected="true"]:after {
+.rwt__tablist[aria-orientation="vertical"]
+  .rwt__tab[aria-selected="true"]:after {
   right: -1px;
   top: 0;
   height: 100%;
   border-right: none !important;
 }
-#vertical-tab-one-tab ,#vertical-tab-two-tab,#vertical-tab-three-tab{
+#vertical-tab-one-tab,
+#vertical-tab-two-tab,
+#vertical-tab-three-tab {
   border-radius: 12px;
   color: aliceblue;
 }
-.tabbs{
+.tabbs {
   width: 250px;
 }
 
-.pges{
+.pges {
   background-color: 
   #fffbfa;
   height: 100vh;
@@ -106,12 +106,11 @@ a{
   margin-left: auto;
 }
 
-.pges2{
+.pges2 {
   background-color: white;
-
 }
 
-.pg-container{
+.pg-container {
   width: 90%;
   margin: auto;
 }
@@ -120,26 +119,26 @@ a{
   border-radius: 5px;
 } */
 
-.orngbtn{
+.orngbtn {
   border: none;
-  background-color: #ED7966;
+  background-color: #ed7966;
   color: white;
   border-radius: 5px;
   height: 40px;
   padding: 10px 20px 10px 20px;
 }
 
-.modal-labels{
+.modal-labels {
   font-weight: 500;
   font-size: 16px;
   line-height: 19px;
-  color: #09174A;
+  color: #09174a;
 }
 
-.navcomp{
+.navcomp {
   /* border: 1px solid; */
   border-radius: 8px;
-  background-color: #ED7966;
+  background-color: #ed7966;
   /* opacity: 0.12;  */
   max-width: 100%;
   margin-left: 0.5rem;
@@ -147,34 +146,86 @@ a{
   color: white;
 }
 
-.navcomp1{
-  padding-right: 4rem ;
+.navcomp1 {
+  padding-right: 4rem;
 }
-.navcomp2{
+.navcomp2 {
   padding-right: 5.5rem;
 }
-.navcomp3{
+.navcomp3 {
   padding-right: 5.5rem;
 }
-.navcomp:focus{
-  background-color: #EC8D7E;
+.navcomp:focus {
+  background-color: #ec8d7e;
 }
 
-.pg-headings{
-
+.pg-headings {
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
   color: #646464;
-
 }
 
-  .pg-items{
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 20px;
-    color: #09174A;
-  }
-  .active{
-    background-color: #EC8D7E !important;
-  }
+.pg-items {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #09174a;
+}
+.active {
+  background-color: #ec8d7e !important;
+}
+
+.stdnts {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: rgba(9, 23, 74, 0.54);
+}
+
+.stdnt-name {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #09174a;
+}
+.issued-books {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: #282829;
+}
+
+.stdnt-details-div {
+  border-right: 1px solid !important;
+  border-color:#ECECEC;
+  ;
+}
+
+.stdnt-name2 {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  color: #282829;
+}
+.stdnt-email {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  /* identical to box height */
+
+  color: #414141;
+}
+
+.lbls {
+  font-weight: 500;
+  font-size: 14px;
+
+  color: #8b8b8b;
+}
+
+.nmbrs{
+  font-weight: 500;
+  font-size: 14px;
+  color: #414141;
+}

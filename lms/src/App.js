@@ -33,7 +33,7 @@ function App() {
           {authCheck && <Navbar />}
           <Routes>
             <Route path="/students" element={authCheck && <Students/>} />
-            {/* <Route path="/students" element={authCheck && <StudentDetails/>} /> */}
+            <Route path="/studentDetails" element={authCheck && <StudentDetails/>} />
             <Route path="/allbooks" element={authCheck && <AllBooks/>} />
             <Route path="/issuedbooks" element={authCheck && <IssuedBooks/>} />
           </Routes>
