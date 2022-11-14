@@ -1,12 +1,16 @@
 import "./App.css";
 import React from "react";
-import Login from "./Components/Login/Login";
+import Login from "./Components/Login";
 import Navbar from "./Components/Navbar";
 import { useState } from "react";
-import Students from "./Components/Pages/Students";
-import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
-import AllBooks from "./Components/Pages/AllBooks";
-import IssuedBooks from "./Components/Pages/IssuedBooks";
+// import Students from "./Components/Admin/Pages/Students";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Students from "./Components/Admin/Pages/Students";
+import IssuedBooks from "./Components/Admin/Pages/IssuedBooks";
+import AllBooks from "./Components/Admin/Pages/AllBooks";
+import StudentDetails from "./Components/Admin/Pages/StudentDetails";
+// import AllBooks from "./Components/Admin/Pages/AllBooks";
+// import IssuedBooks from "./Components/Admin/Pages/IssuedBooks";
 
 function App() {
   const email = "sreehari@gmail.com";
@@ -24,17 +28,15 @@ function App() {
             setauthCheck={setauthCheck}
           />
         )}
-        
+
         <div className="d-flex">
-        {authCheck && <Navbar />}
-      <Routes>
-        <Route path="/students" element={authCheck && <Students />}/>
-        <Route path="/allbooks" element={<AllBooks/>}/>
-        <Route path="/issuedbooks"element={<IssuedBooks/>}/>
-      </Routes>
-          
-          
-        
+          {authCheck && <Navbar />}
+          <Routes>
+            <Route path="/students" element={authCheck && <Students/>} />
+            {/* <Route path="/students" element={authCheck && <StudentDetails/>} /> */}
+            <Route path="/allbooks" element={authCheck && <AllBooks/>} />
+            <Route path="/issuedbooks" element={authCheck && <IssuedBooks/>} />
+          </Routes>
         </div>
 
         {/* <Tablet/> */}

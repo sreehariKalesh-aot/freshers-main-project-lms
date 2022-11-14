@@ -1,3 +1,4 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.1/font/bootstrap-icons.css");
 .body{
   font-family: 'Lato';
 }
@@ -42,7 +43,8 @@ color: #09174A;
 
 .login-btn{
   width: 100%;
-  background-color: #ED7966 !important; 
+  background-color: #ED7966; 
+  color: white;
   border-radius: 5px;
   border: none;
 }
@@ -54,6 +56,7 @@ color: #09174A;
   width: 17%;
   height: 100vh;
   background-color: #ED7966;
+  position: fixed;
 }
 
 .lms2{
@@ -96,10 +99,16 @@ a{
 }
 
 .pges{
-  background-color: white;
+  background-color: 
+  #fffbfa;
   height: 100vh;
   width: 83%;
   margin-left: auto;
+}
+
+.pges2{
+  background-color: white;
+
 }
 
 .pg-container{
@@ -130,6 +139,42 @@ a{
 .navcomp{
   /* border: 1px solid; */
   border-radius: 8px;
-  /* background: #FFFFFF;
-  opacity: 0.12; */
+  background-color: #ED7966;
+  /* opacity: 0.12;  */
+  max-width: 100%;
+  margin-left: 0.5rem;
+  border: none;
+  color: white;
 }
+
+.navcomp1{
+  padding-right: 4rem ;
+}
+.navcomp2{
+  padding-right: 5.5rem;
+}
+.navcomp3{
+  padding-right: 5.5rem;
+}
+.navcomp:focus{
+  background-color: #EC8D7E;
+}
+
+.pg-headings{
+
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #646464;
+
+}
+
+  .pg-items{
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    color: #09174A;
+  }
+  .active{
+    background-color: #EC8D7E !important;
+  }

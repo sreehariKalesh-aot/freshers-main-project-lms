@@ -10,47 +10,43 @@ import {
 // import Button from "react-bootstrap/esm/Button";
 import "react-web-tabs/dist/react-web-tabs.css";
 // import Students from "./Pages/Students";
-import {Link} from "react-router-dom"
+import { NavLink } from "react-router-dom";
 function Navbar() {
   return (
-    
-      <div className="nvbar">
-        <div className="d-flex align-items-center gap-3 ms-4">
-          <MdLocalLibrary
-            className="mt-5 "
-            size={41}
-            style={{ fill: "white" }}
-          />
-          <p className="mt-5 pt-3 lms2">LMS</p>
-        </div>
+    <div className="nvbar">
+      <div className="d-flex align-items-center gap-3 ms-4">
+        <MdLocalLibrary className="mt-5 " size={41} style={{ fill: "white" }} />
+        <p className="mt-5 pt-3 lms2">LMS</p>
+      </div>
 
-        {/* tabs using a href */}
-        <div className="ms-2 me-4 mt-4 navcomp">
-          <Link to="/issuedbooks" className="">
-            <div className="d-flex align-items-center gap-3 ps-3 pt-2 pb-2">
-              <MdTaskAlt size={20} />
-              <p className="mb-0">Issued Books</p>
-            </div>
-          </Link>
-        </div>
-        {/* <button className="d-flex align-items-center gap-3"></button> */}
-        <div className="ms-2 me-4 mt-4  navcomp">
-          <Link to="/allbooks">
-            <div className="d-flex align-items-center gap-3 ps-3 pt-2 pb-2">
-              <MdMenuBook size={20}/>
-              <p className="mb-0">All Books</p>
-            </div>
-          </Link>
-        </div>
-        <div className="ms-2 me-4 mt-4 navcomp">
-          <Link to="/students">
-            <div className="d-flex align-items-center gap-3 ps-3 pt-2 pb-2">
-              <MdOutlinePeople size={20}/>
-              <p className="mb-0">Students</p>
-            </div>
-          </Link>
-        </div>
-        {/* <Tabs defaultTab="vertical-tab-one" vertical className="vertical-tabs">
+      {/* tabs using a href */}
+      <NavLink to="/issuedbooks">
+        <button className="  mt-4 navcomp navcomp1">
+          <div className="d-flex align-items-center gap-3 ps-3 pt-2 pb-2">
+            <MdTaskAlt size={20} />
+            <p className="mb-0">Issued Books</p>
+          </div>
+        </button>
+      </NavLink>
+      {/* <button className="d-flex align-items-center gap-3"></button> */}
+      <NavLink to="/allbooks">
+        <button className=" mt-4  navcomp navcomp2">
+          <div className="d-flex align-items-center gap-3 ps-3 pt-2 pb-2">
+            <MdMenuBook size={20} />
+            <p className="mb-0">All Books</p>
+          </div>
+        </button>
+      </NavLink>
+      <NavLink to="/students">
+        {" "}
+        <button className="mt-4 navcomp navcomp3">
+          <div className="d-flex align-items-center gap-3 ps-3 pt-2 pb-2">
+            <MdOutlinePeople size={20} />
+            <p className="mb-0">Students</p>
+          </div>
+        </button>
+      </NavLink>
+      {/* <Tabs defaultTab="vertical-tab-one" vertical className="vertical-tabs">
         <TabList className="tabbs">
           <Tab tabFor="vertical-tab-one" className="d-flex align-items-center gap-3 mt-5">
             <MdTaskAlt  size={20} />
@@ -79,9 +75,7 @@ function Navbar() {
         </TabPanel>
 
       </Tabs> */}
-      </div>
-      
-    
+    </div>
   );
 }
 

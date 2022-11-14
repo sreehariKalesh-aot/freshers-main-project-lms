@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useState } from "react";
 // import {Link} from "react-router-dom"
@@ -63,9 +63,9 @@ function Login({email,password,authCheck,setauthCheck}) {
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" placeholder="Password" value={ipassword} onChange={handlePassword}/>
           </Form.Group>
-          <Button type="submit" className="login-btn" onClick={()=>navigate("/issuedbooks")} >
-            Submit
-          </Button>
+          <button type="submit" className="login-btn py-2" onClick={()=>navigate("/issuedbooks")} >
+            Login
+          </button>
         </Form>
       </div>
       
