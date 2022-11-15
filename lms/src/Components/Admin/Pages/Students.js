@@ -21,6 +21,8 @@ function Students() {
 
   const handleCloseDelete = () => setShowdelete(false);
   const handleShowDelete = () => setShowdelete(true);
+
+    // function to pass key for deletion
   const [studentKey, setstudentKey] = useState("");
   const handleStudentKey=(studentKey)=>{
         setstudentKey(studentKey)

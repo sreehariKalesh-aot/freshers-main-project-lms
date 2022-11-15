@@ -82,6 +82,7 @@ function AddStudentModal({showAdd,handleCloseAdd,studentArr,setstudentArr}) {
         </Button>
         <Button style={{backgroundColor : "#ED7966",color:"white"}}
         variant="light"
+        type="submit"
           onClick={() => {
             handleCloseAdd();
             handleAddStudent();
