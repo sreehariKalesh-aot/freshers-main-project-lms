@@ -3,8 +3,8 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
-
-function AddStudent({showAdd,handleCloseAdd,studentArr,setstudentArr}) {
+import shortid from "shortid";
+function AddStudentModal({showAdd,handleCloseAdd,studentArr,setstudentArr}) {
   // usestate to  take data from add student modals input fields
   const [addStudent, setaddStudent] = useState({name:"",email:"",password:"",cPassword:""})
 
@@ -13,11 +13,10 @@ function AddStudent({showAdd,handleCloseAdd,studentArr,setstudentArr}) {
     let name = e.target.name;
     let value = e.target.value
    setaddStudent({...addStudent,[name]:value})
-   console.log(addStudent)
   }
   
   const handleAddStudent=()=>{
-    setstudentArr([...studentArr,{name:addStudent.name,email:addStudent.email,password:addStudent.password}])
+    setstudentArr([...studentArr,{key: shortid.generate(), name:addStudent.name,email:addStudent.email,password:addStudent.password}])
   }
 
 
@@ -38,6 +37,7 @@ function AddStudent({showAdd,handleCloseAdd,studentArr,setstudentArr}) {
               type="text"
               placeholder="Eg: John Doe"
               autoFocus
+              required
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
@@ -60,6 +60,7 @@ function AddStudent({showAdd,handleCloseAdd,studentArr,setstudentArr}) {
             name="password"
               type="password"
               placeholder="*********"
+              
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
@@ -93,4 +94,4 @@ function AddStudent({showAdd,handleCloseAdd,studentArr,setstudentArr}) {
   );
 }
 
-export default AddStudent;
+export default AddStudentModal;

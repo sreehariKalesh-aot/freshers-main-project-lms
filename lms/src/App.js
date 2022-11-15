@@ -5,10 +5,10 @@ import Navbar from "./Components/Navbar";
 import { useState, createContext } from "react";
 // import Students from "./Components/Admin/Pages/Students";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Students from "./Components/Admin/Pages/Students";
-import IssuedBooks from "./Components/Admin/Pages/IssuedBooks";
-import AllBooks from "./Components/Admin/Pages/AllBooks";
-import StudentDetails from "./Components/Admin/Pages/StudentDetails";
+import Students from "./Components/Admin/Pges/Students";
+import IssuedBooks from "./Components/Admin/Pges/IssuedBooks";
+import AllBooks from "./Components/Admin/Pges/AllBooks";
+import StudentDetails from "./Components/Admin/Pges/StudentDetails";
 // import AllBooks from "./Components/Admin/Pages/AllBooks";
 // import IssuedBooks from "./Components/Admin/Pages/IssuedBooks";
 

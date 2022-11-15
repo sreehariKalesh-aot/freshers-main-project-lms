@@ -1,18 +1,19 @@
 import React from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import Form from "react-bootstrap/Form";
-
+import { useNavigate } from "react-router-dom";
 
 function StudentDetails() {
-   
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="pges">
         <div className="pg-container">
           {/* <p className="pt-4  login-p "></p> */}
           <div className="d-flex align-items-center pt-4">
-            <IoIosArrowBack />
-            <p className="m-0 stdnts">Students /</p>
+            <IoIosArrowBack onClick={()=>navigate(-1)}/>
+            <p className="m-0 stdnts" onClick={()=>navigate(-1)}>Students /</p>
             <p className="m-0 stdnt-name">  Nitha Samuel</p>
           </div>
           <hr />
