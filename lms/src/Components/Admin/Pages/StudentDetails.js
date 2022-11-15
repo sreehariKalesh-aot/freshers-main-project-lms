@@ -2,7 +2,9 @@ import React from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import Form from "react-bootstrap/Form";
 
+
 function StudentDetails() {
+   
   return (
     <>
       <div className="pges">
@@ -35,7 +37,7 @@ function StudentDetails() {
 
             </div>
 
-
+          
           {/* content div */}
           <div className="pges2 mt-4 pt-4 ps-5 pe-5 pb-5">
             <p className="issued-books pb-2">Issued Books (5)</p>
