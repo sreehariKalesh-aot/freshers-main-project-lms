@@ -18,17 +18,24 @@ function Students() {
   const handleShowAdd = () => setShowAdd(true);
   // use state and functions to delete confirmation modal
   const [showdelete, setShowdelete] = useState(false);
-
   const handleCloseDelete = () => setShowdelete(false);
   const handleShowDelete = () => setShowdelete(true);
 
-    // function to pass key for deletion
-  const [studentKey, setstudentKey] = useState("");
-  const handleStudentKey=(studentKey)=>{
-        setstudentKey(studentKey)
-        console.log(studentKey)
+  // use state for editing
+  const [isEditing, setisEditing] = useState(false);
+  // const [editStudent, seteditStudent] = useState({key:"",name:"",email:"",password:"",cPassword:""})
+  const [editKey, seteditkey] = useState();
+  const [editName, seteditName] = useState("");
+  const [editEmail, seteditEmail] = useState("");
+  const [editPassword, seteditPassword] = useState("");
+  const [editCpassword, seteditCPassword] = useState("");
 
-  }
+  // function to pass key for deletion
+  const [studentKey, setstudentKey] = useState("");
+  const handleStudentKey = (studentKey) => {
+    setstudentKey(studentKey);
+    console.log(studentKey);
+  };
 
   const navigate = useNavigate();
   return (
@@ -75,11 +82,26 @@ function Students() {
                     {student.email}
                   </p>
                   <div className="col d-flex justify-content-end gap-4">
-                    <MdEdit size={20} style={{ fill: "#7E7E7F" }} />{" "}
+                    <MdEdit
+                      size={20}
+                      style={{ fill: "#7E7E7F" }}
+                      onClick={() => {
+                        setisEditing(true);
+                        handleShowAdd();
+                        seteditkey(student.key);
+                        seteditName(student.name);
+                        seteditEmail(student.email);
+                        seteditPassword(student.password);
+                        seteditCPassword(student.cPassword)
+                      }}
+                    />{" "}
                     <BiTrash
                       size={20}
                       style={{ fill: "#D04444" }}
-                      onClick={()=>{handleShowDelete();handleStudentKey(student.key)}}
+                      onClick={() => {
+                        handleShowDelete();
+                        handleStudentKey(student.key);
+                      }}
                     />{" "}
                     <HiOutlineEye
                       size={20}
@@ -99,6 +121,20 @@ function Students() {
           handleCloseAdd={handleCloseAdd}
           studentArr={studentArr}
           setstudentArr={setstudentArr}
+          isEditing={isEditing}
+          setisEditing={setisEditing}
+          // editStudent={editStudent}
+          // seteditStudent={seteditStudent} 
+          editKey={editKey}
+          seteditkey={seteditkey}
+          editName={editName}
+          seteditName={seteditName}
+          editEmail={editEmail}
+          seteditEmail={seteditEmail}
+          editPassword={editPassword}
+          seteditPassword={seteditPassword}
+          editCpassword={editCpassword}
+          seteditCPassword={seteditCPassword}
         />
       )}
       {showdelete && (

@@ -23,10 +23,19 @@ function AllBooks() {
 
   // function for passing key for deletion of book
   const [bookKey, setbookKey] = useState("");
-  const handleBookKey=(bookKey)=>{
-    setbookKey(bookKey)
-    console.log(bookKey)
-  }
+  const handleBookKey = (bookKey) => {
+    setbookKey(bookKey);
+    console.log(bookKey);
+  };
+  // state for checking the edit key is true or not
+  const [isBookEdit, setisBookEdit] = useState(false);
+  // use state for passing edit values
+  const [editBname, seteditBname] = useState("");
+  const [editAuthor, seteditAuthor] = useState("");
+  const [editLanguage, seteditLanguage] = useState("");
+  const [editTotalCopies, seteditTotalCopies] = useState("");
+  const [editRemainingCopies, seteditRemainingCopies] = useState("");
+
   return (
     <>
       <div className="pges">
@@ -87,11 +96,27 @@ function AllBooks() {
                     {book.remainingCopies}
                   </p>
                   <p className="col d-flex justify-content-center gap-3">
-                    <MdEdit size={20} style={{ fill: "#7E7E7F" }} />{" "}
+                    <MdEdit
+                      size={20}
+                      style={{ fill: "#7E7E7F" }}
+                      onClick={() => {
+                        handleShowAddBook();
+                        setisBookEdit(true);
+                        seteditBname(book.bName);
+                        seteditAuthor(book.author);
+                        seteditLanguage(book.language);
+                        seteditTotalCopies(book.totalCopies);
+                        seteditRemainingCopies(book.remainingCopies);
+                        handleBookKey(book.key);
+                      }}
+                    />{" "}
                     <BiTrash
                       size={20}
                       style={{ fill: "#D04444" }}
-                      onClick={()=>{handleShowDeleteBook();handleBookKey(book.key)}}
+                      onClick={() => {
+                        handleShowDeleteBook();
+                        handleBookKey(book.key);
+                      }}
                     />
                   </p>
                 </div>
@@ -107,16 +132,30 @@ function AllBooks() {
           handleCloseAddBook={handleCloseAddBook}
           allBooksArr={allBooksArr}
           setallBooksArr={setallBooksArr}
+          isBookEdit={isBookEdit}
+          setisBookEdit={setisBookEdit}
+          editBname={editBname}
+          seteditBname={seteditBname}
+          editAuthor={editAuthor}
+          seteditAuthor={seteditAuthor}
+          editLanguage={editLanguage}
+          seteditLanguage={seteditLanguage}
+          editTotalCopies={editTotalCopies}
+          seteditTotalCopies={seteditTotalCopies}
+          editRemainingCopies={editRemainingCopies}
+          seteditRemainingCopies={seteditRemainingCopies}
+          bookKey={bookKey}
         />
       )}
-      {showdeleteBook && <DeleteBookModal
-      showdeleteBook={showdeleteBook}
-      handleCloseDeleteBook={handleCloseDeleteBook}
-      allBooksArr={allBooksArr}
-      setallBooksArr={setallBooksArr}
-      bookKey={bookKey}
-      
-      />}
+      {showdeleteBook && (
+        <DeleteBookModal
+          showdeleteBook={showdeleteBook}
+          handleCloseDeleteBook={handleCloseDeleteBook}
+          allBooksArr={allBooksArr}
+          setallBooksArr={setallBooksArr}
+          bookKey={bookKey}
+        />
+      )}
     </>
   );
 }

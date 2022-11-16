@@ -5,17 +5,17 @@ import Navbar from "./Components/Navbar";
 import { useState, createContext } from "react";
 // import Students from "./Components/Admin/Pages/Students";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Students from "./Components/Admin/Pages/Students";
-import IssuedBooks from "./Components/Admin/Pages/IssuedBooks";
-import AllBooks from "./Components/Admin/Pages/AllBooks";
-import StudentDetails from "./Components/Admin/Pages/StudentDetails";
+import Students from "./Components/Admin/Pges/Students";
+import IssuedBooks from "./Components/Admin/Pges/IssuedBooks";
+import AllBooks from "./Components/Admin/Pges/AllBooks";
+import StudentDetails from "./Components/Admin/Pges/StudentDetails";
 // import AllBooks from "./Components/Admin/Pages/AllBooks";
 // import IssuedBooks from "./Components/Admin/Pages/IssuedBooks";
 // context for updating the array of add student
 const studentContext = createContext();
 const allbooksContext = createContext();
 function App() {
-  const [studentArr, setstudentArr] = useState([]);
+  const [studentArr, setstudentArr] = useState([{key: "sfgasfg", name:"sreehar",email:"fewdas",password:"234"},{key: "sfgaXCsfg", name:"fsdf",email:"eqr",password:"34534"}]);
   const [allBooksArr, setallBooksArr] = useState([])
   const [authCheck, setauthCheck] = useState(false);
 
