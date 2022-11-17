@@ -8,10 +8,12 @@ import Navbar from "../../Navbar";
 import { createContext, useContext } from "react";
 import { studentContext } from "../../../App";
 import { allbooksContext } from "../../../App";
+import { issuedBooksContext } from "../../../App";
 
 function IssuedBooks() {
   const [allBooksArr, setallBooksArr] = useContext(allbooksContext);
   const [studentArr, setstudentArr] = useContext(studentContext);
+  const [issuedBooksArr, setissuedBooksArr] = useContext(issuedBooksContext);
 
   // usestate and functions for showing modal
   const [showIssuedBooks, setShowIssuedBooks] = useState(false);
@@ -65,27 +67,36 @@ function IssuedBooks() {
               </p>
             </div>
 
-            <div className="row mt-4 mb-4 border-bottom">
-              <p className="col d-flex justify-content-start  pg-items">
-                It Start With Us
-              </p>
-              <p className="col d-flex justify-content-center  pg-items">
-                Nitha Samuel{" "}
-              </p>
-              <p className="col d-flex justify-content-center  pg-items">
-                02-11-2022{" "}
-              </p>
-              <p className="col d-flex justify-content-center   pg-items">
-                09-11-2022
-              </p>
-              <p className="col d-flex justify-content-center  pg-items">10</p>
-              <p className="col d-flex justify-content-center gap-3">
-                <MdOutlineAssignmentReturn
-                  size={20}
-                  style={{ color: "#7E7E7F" }}
-                />
-              </p>
-            </div>
+            {issuedBooksArr.map((issuedBooks) => {
+              return (
+                <div
+                  className="row mt-4 mb-4 border-bottom"
+                  key={issuedBooks.key}
+                >
+                  <p className="col d-flex justify-content-start  pg-items">
+                    {issuedBooks.iBook}
+                  </p>
+                  <p className="col d-flex justify-content-center  pg-items">
+                    {issuedBooks.iStudent}
+                  </p>
+                  <p className="col d-flex justify-content-center  pg-items">
+                    {issuedBooks.iDate}
+                  </p>
+                  <p className="col d-flex justify-content-center   pg-items">
+                    {issuedBooks.iDueDate}
+                  </p>
+                  <p className="col d-flex justify-content-center  pg-items">
+                    10
+                  </p>
+                  <p className="col d-flex justify-content-center gap-3">
+                    <MdOutlineAssignmentReturn
+                      size={20}
+                      style={{ color: "#7E7E7F" }}
+                    />
+                  </p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
@@ -98,6 +109,8 @@ function IssuedBooks() {
           setallBooksArr={setallBooksArr}
           studentArr={studentArr}
           setstudentArr={setstudentArr}
+          issuedBooksArr={issuedBooksArr}
+          setissuedBooksArr={setissuedBooksArr}
         />
       )}
     </>

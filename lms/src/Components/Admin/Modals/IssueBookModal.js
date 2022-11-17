@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
+import shortid from "shortid";
 function IssueBookModal({
   showIssuedBooks,
   handleCloseIssuedBooks,
@@ -10,6 +11,9 @@ function IssueBookModal({
   setallBooksArr,
   studentArr,
   setstudentArr,
+  issuedBooksArr,
+  setissuedBooksArr
+  
 }) {
   // usestate for taking input from the issued bok modal input box
   const [selectBook, setselectBook] = useState("")
@@ -29,6 +33,18 @@ const handleIssueDate=(e)=>{
 }
 const handleDueDate=(e)=>{
   setdueDate(e.target.value)
+}
+
+const handleIssueBook=()=>{
+  console.log(selectBook)
+  setissuedBooksArr([...issuedBooksArr,{
+    key: shortid.generate(),
+    iBook: selectBook,
+    iStudent:selectStudent,
+    iDate: issueDate,
+    iDueDate:dueDate
+  }])
+  console.log(issuedBooksArr)
 }
   return (
 
@@ -95,7 +111,7 @@ const handleDueDate=(e)=>{
           style={{ backgroundColor: "#ED7966", color: "white" }}
           variant="light"
           onClick={() => {
-            handleCloseIssuedBooks();
+            handleCloseIssuedBooks();handleIssueBook()
           }}
         >
           Issue Book
