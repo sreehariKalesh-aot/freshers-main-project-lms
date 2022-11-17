@@ -2,12 +2,15 @@ import React from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../../Navbar";
+
 
 function StudentDetails() {
   const navigate = useNavigate();
 
   return (
     <>
+    <Navbar/>
       <div className="pges">
         <div className="pg-container">
           {/* <p className="pt-4  login-p "></p> */}

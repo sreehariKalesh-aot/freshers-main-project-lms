@@ -7,6 +7,7 @@ import { MdEdit } from "react-icons/md";
 import { createContext, useContext } from "react";
 import { allbooksContext } from "../../../App";
 import DeleteBookModal from "../Modals/DeleteBookModal";
+import Navbar from "../../Navbar";
 
 function AllBooks() {
   const [allBooksArr, setallBooksArr] = useContext(allbooksContext);
@@ -38,6 +39,7 @@ function AllBooks() {
 
   return (
     <>
+    <Navbar/>
       <div className="pges">
         <div className="pg-container">
           <p className="pt-5  login-p ">All Books</p>

@@ -20,9 +20,10 @@ function Login({email,password,authCheck,setauthCheck}) {
   }
 
   const handleAuth=(e)=>{
-    e.preventDefault()
+    // e.preventDefault()
     if(iemail===email && ipassword === password){
       setauthCheck(true)
+      console.log(authCheck)
     }
     else{
       alert("incorrect username or password")
@@ -63,7 +64,7 @@ function Login({email,password,authCheck,setauthCheck}) {
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" placeholder="Password" value={ipassword} onChange={handlePassword}/>
           </Form.Group>
-          <button type="submit" className="login-btn py-2" onClick={()=>navigate("/issuedbooks")} >
+          <button type="submit" className="login-btn py-2" onClick={()=>{navigate("/issuedbooks");handleAuth()}}>
             Login
           </button>
         </Form>

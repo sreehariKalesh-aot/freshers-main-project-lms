@@ -15,8 +15,12 @@ import StudentDetails from "./Components/Admin/Pges/StudentDetails";
 const studentContext = createContext();
 const allbooksContext = createContext();
 function App() {
-  const [studentArr, setstudentArr] = useState([{key: "sfgasfg", name:"sreehar",email:"fewdas",password:"234"},{key: "sfgaXCsfg", name:"fsdf",email:"eqr",password:"34534"}]);
-  const [allBooksArr, setallBooksArr] = useState([])
+  const [studentArr, setstudentArr] = useState([{key: "sfgasfg", name:"joy",email:"joy@gmail.com",password:"joy123",cPassword:"joy123"},
+  {key: "sfgaXCsfg", name:"mathew",email:"mathew@gmail.com",password:"mathew123",cPassword:"mathew123"},
+  {key: "fsdfsdfsadfqw", name:"walter",email:"white@gmail.com",password:"walter@343",cPassword:"walter@343"}]);
+  const [allBooksArr, setallBooksArr] = useState([{key:"fjfghjh",bName:"sapiens",author:"yuval noah harari",language:"English",totalCopies:"5",remainingCopies:"3"},
+  {key:"38358",bName:"game of thrones",author:"George R. R. Martin",language:"English",totalCopies:"8",remainingCopies:"1"},
+  {key:"asd",bName:"oru deshathinte kadha",author:"S.K. Pottakkad",language:"malayalam",totalCopies:"9",remainingCopies:"4"}])
   const [authCheck, setauthCheck] = useState(false);
 
   const email = "sreehari@gmail.com";
@@ -26,19 +30,22 @@ function App() {
     <>
       <studentContext.Provider value={[studentArr, setstudentArr]}>
         <allbooksContext.Provider value={[allBooksArr, setallBooksArr]}>
+{/*           
+          <div className="d-flex">
+            {authCheck && <Navbar />} */}
+            
         <Router>
-          {!authCheck && (
+          <Routes>
+          <Route path="/" element={!authCheck &&
             <Login
               email={email}
               password={password}
               authCheck={authCheck}
               setauthCheck={setauthCheck}
             />
-          )}
+          }/>
 
-          <div className="d-flex">
-            {authCheck && <Navbar />}
-            <Routes>
+          
               <Route path="/students" element={authCheck && <Students />} />
               <Route
                 path="/studentDetails"
@@ -49,12 +56,13 @@ function App() {
                 path="/issuedbooks"
                 element={authCheck && <IssuedBooks />}
               />
-            </Routes>
-          </div>
-
+            
+          
+          </Routes>
           {/* <Tablet/> */}
           {/* <Nav/> */}
         </Router>
+        {/* </div> */}
         </allbooksContext.Provider>
       </studentContext.Provider>
     </>

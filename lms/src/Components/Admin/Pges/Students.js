@@ -8,7 +8,7 @@ import { MdEdit } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { studentContext } from "../../../App";
 import DeleteStudentModal from "../Modals/DeleteStudentModal";
-
+import Navbar from "../../Navbar";
 function Students() {
   const [studentArr, setstudentArr] = useContext(studentContext);
 
@@ -39,7 +39,9 @@ function Students() {
 
   const navigate = useNavigate();
   return (
+
     <>
+    <Navbar/>
       <div className="pges">
         <div className="pg-container">
           <p className="pt-5  login-p ">Students</p>
