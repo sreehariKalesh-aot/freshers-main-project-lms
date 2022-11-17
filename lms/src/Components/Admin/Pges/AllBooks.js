@@ -37,6 +37,9 @@ function AllBooks() {
   const [editTotalCopies, seteditTotalCopies] = useState("");
   const [editRemainingCopies, seteditRemainingCopies] = useState("");
 
+  // usestate for searching
+  const [searchBook, setsearchBook] = useState("")
+
   return (
     <>
     <Navbar/>
@@ -51,6 +54,7 @@ function AllBooks() {
                 type="search"
                 className="searchinput mt-3"
                 placeholder="Search by student name or email"
+                onChange={(e=>{setsearchBook(e.target.value)})}
               />
             </div>
 
@@ -79,7 +83,16 @@ function AllBooks() {
                 Actions
               </p>
             </div>
-            {allBooksArr.map((book) => {
+            {allBooksArr.filter((book)=>{
+              if(searchBook==""){
+                return book
+              } else if (book.bName.toLowerCase().includes(searchBook.toLowerCase())){
+                return book
+              } else if(book.author.toLowerCase().includes(searchBook.toLowerCase())){
+                return book
+
+              }
+            }).map((book) => {
               return (
                 <div className="row mt-4 mb-4 border-bottom" key={book.key}>
                   <p className="col d-flex justify-content-start  pg-items">

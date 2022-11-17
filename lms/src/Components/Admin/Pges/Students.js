@@ -38,6 +38,9 @@ function Students() {
   };
 
   const navigate = useNavigate();
+
+  // use state for searching
+  const [search, setsearch] = useState("")
   return (
 
     <>
@@ -53,6 +56,7 @@ function Students() {
                 type="search"
                 className="searchinput mt-3"
                 placeholder="Search by student name or email"
+                onChange={(e)=>{setsearch(e.target.value)}}
               />
             </div>
 
@@ -74,7 +78,16 @@ function Students() {
               </p>
             </div>
 
-            {studentArr.map((student) => {
+            {studentArr.filter((student)=>{
+              if(search==""){
+                return student
+              } else if (student.name.toLowerCase().includes(search.toLowerCase())){
+                return student
+              } else if(student.email.toLowerCase().includes(search.toLowerCase())){
+                return student
+
+              }
+            }).map((student) => {
               return (
                 <div className="row mt-4 mb-4 border-bottom" key={student.key}>
                   <p className="col d-flex justify-content-start pg-items">

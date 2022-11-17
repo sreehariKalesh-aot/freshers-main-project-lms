@@ -16,15 +16,58 @@ const studentContext = createContext();
 const allbooksContext = createContext();
 const issuedBooksContext = createContext();
 function App() {
-  const [studentArr, setstudentArr] = useState([{key: "sfgasfg", name:"joy",email:"joy@gmail.com",password:"joy123",cPassword:"joy123"},
-  {key: "sfgaXCsfg", name:"mathew",email:"mathew@gmail.com",password:"mathew123",cPassword:"mathew123"},
-  {key: "fsdfsdfsadfqw", name:"walter",email:"white@gmail.com",password:"walter@343",cPassword:"walter@343"}]);
+  const [studentArr, setstudentArr] = useState([
+    {
+      key: "sfgasfg",
+      name: "joy",
+      email: "joy@gmail.com",
+      password: "joy123",
+      cPassword: "joy123",
+    },
+    {
+      key: "sfgaXCsfg",
+      name: "mathew",
+      email: "mathew@gmail.com",
+      password: "mathew123",
+      cPassword: "mathew123",
+    },
+    {
+      key: "fsdfsdfsadfqw",
+      name: "walter",
+      email: "white@gmail.com",
+      password: "walter@343",
+      cPassword: "walter@343",
+    },
+  ]);
 
-  const [allBooksArr, setallBooksArr] = useState([{key:"fjfghjh",bName:"sapiens",author:"yuval noah harari",language:"English",totalCopies:"5",remainingCopies:"3"},
-  {key:"38358",bName:"game of thrones",author:"George R. R. Martin",language:"English",totalCopies:"8",remainingCopies:"1"},
-  {key:"asd",bName:"oru deshathinte kadha",author:"S.K. Pottakkad",language:"malayalam",totalCopies:"9",remainingCopies:"4"}])
+  const [allBooksArr, setallBooksArr] = useState([
+    {
+      key: "fjfghjh",
+      bName: "sapiens",
+      author: "yuval noah harari",
+      language: "English",
+      totalCopies: 5,
+      remainingCopies: 3,
+    },
+    {
+      key: "38358",
+      bName: "game of thrones",
+      author: "George R. R. Martin",
+      language: "English",
+      totalCopies: 8,
+      remainingCopies: 1,
+    },
+    {
+      key: "asd",
+      bName: "oru deshathinte kadha",
+      author: "S.K. Pottakkad",
+      language: "malayalam",
+      totalCopies: 9,
+      remainingCopies: 4,
+    },
+  ]);
 
-  const [issuedBooksArr, setissuedBooksArr] = useState([])
+  const [issuedBooksArr, setissuedBooksArr] = useState([]);
 
   const [authCheck, setauthCheck] = useState(false);
 
@@ -35,41 +78,45 @@ function App() {
     <>
       <studentContext.Provider value={[studentArr, setstudentArr]}>
         <allbooksContext.Provider value={[allBooksArr, setallBooksArr]}>
-          <issuedBooksContext.Provider value={[issuedBooksArr, setissuedBooksArr]}>
-{/*           
+
+          <issuedBooksContext.Provider
+            value={[issuedBooksArr, setissuedBooksArr]}
+          >
+            {/*           
           <div className="d-flex">
             {authCheck && <Navbar />} */}
-            
-        <Router>
-          <Routes>
-          <Route path="/" element={!authCheck &&
-            <Login
-              email={email}
-              password={password}
-              authCheck={authCheck}
-              setauthCheck={setauthCheck}
-            />
-          }/>
 
-          
-              <Route path="/students" element={authCheck && <Students />} />
-              <Route
-                path="/studentDetails"
-                element={authCheck && <StudentDetails />}
-              />
-              <Route path="/allbooks" element={authCheck && <AllBooks />} />
-              <Route
-                path="/issuedbooks"
-                element={authCheck && <IssuedBooks />}
-              />
-            
-          
-          </Routes>
-          {/* <Tablet/> */}
-          {/* <Nav/> */}
-        </Router>
-        {/* </div> */}
-        </issuedBooksContext.Provider>
+            <Router>
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    !authCheck && (
+                      <Login
+                        email={email}
+                        password={password}
+                        authCheck={authCheck}
+                        setauthCheck={setauthCheck}
+                      />
+                    )
+                  }
+                />
+                <Route path="/students" element={authCheck && <Students />} />
+                <Route
+                  path="/studentDetails"
+                  element={authCheck && <StudentDetails />}
+                />
+                <Route path="/allbooks" element={authCheck && <AllBooks />} />
+                <Route
+                  path="/issuedbooks"
+                  element={authCheck && <IssuedBooks />}
+                />
+              </Routes>
+              {/* <Tablet/> */}
+              {/* <Nav/> */}
+            </Router>
+            {/* </div> */}
+          </issuedBooksContext.Provider>
         </allbooksContext.Provider>
       </studentContext.Provider>
     </>
@@ -77,4 +124,4 @@ function App() {
 }
 
 export default App;
-export {studentContext ,allbooksContext, issuedBooksContext}
+export { studentContext, allbooksContext, issuedBooksContext };

@@ -20,6 +20,9 @@ function IssuedBooks() {
 
   const handleCloseIssuedBooks = () => setShowIssuedBooks(false);
   const handleShowIssuedBooks = () => setShowIssuedBooks(true);
+
+// usestate for searching issued books
+const [searchIssuedBook, setsearchIssuedBook] = useState("")
   return (
     <>
       <Navbar />
@@ -35,6 +38,7 @@ function IssuedBooks() {
                 type="search"
                 className="searchinput mt-3"
                 placeholder="Search by book title or student"
+                onChange={(e)=>{setsearchIssuedBook(e.target.value)}}
               />
             </div>
 
@@ -67,7 +71,16 @@ function IssuedBooks() {
               </p>
             </div>
 
-            {issuedBooksArr.map((issuedBooks) => {
+            {issuedBooksArr.filter((book)=>{
+              if(searchIssuedBook==""){
+                return book
+              } else if (book.iBook.toLowerCase().includes(searchIssuedBook.toLowerCase())){
+                return book
+              } else if(book.iStudent.toLowerCase().includes(searchIssuedBook.toLowerCase())){
+                return book
+
+              }
+            }).map((issuedBooks) => {
               return (
                 <div
                   className="row mt-4 mb-4 border-bottom"
