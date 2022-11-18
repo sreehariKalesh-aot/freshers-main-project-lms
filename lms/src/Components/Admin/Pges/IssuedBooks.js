@@ -36,6 +36,7 @@ const [isReturned, setisReturned] = useState(false)
 
 // issued book key state
 const [issuedKey, setissuedKey] = useState("")
+const [returnedBookName, setreturnedBookName] = useState("")
 // function of returning issued book
 // const handleIssuedKey =(key)=>{
 //   setissuedKey(key)
@@ -125,7 +126,7 @@ const [issuedKey, setissuedKey] = useState("")
                     <MdOutlineAssignmentReturn
                       size={20}
                       style={{ color: "#7E7E7F" }}
-                      onClick={()=>{handleShowReturned();setissuedKey(issuedBooks.key)}}
+                      onClick={()=>{handleShowReturned();setissuedKey(issuedBooks.key);setreturnedBookName(issuedBooks.iBook)}}
                     />
                   </p>
                 </div>
@@ -157,7 +158,9 @@ const [issuedKey, setissuedKey] = useState("")
       issuedBooksArr={issuedBooksArr}
       setissuedBooksArr={setissuedBooksArr}
       issuedKey={issuedKey}
-
+      allBooksArr={allBooksArr}
+      setallBooksArr={setallBooksArr}
+      returnedBookName={returnedBookName}
 
       />)}
     </>

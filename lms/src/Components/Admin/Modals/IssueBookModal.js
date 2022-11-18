@@ -55,7 +55,7 @@ const [remainingCount, setremainingCount] = useState()
 // 
 
 const handleUpdateCount=()=>{
-  var index = allBooksArr.findIndex(book => book.bName === remainingBookName);
+  // var index = allBooksArr.findIndex(book => book.bName === remainingBookName);
     // setremainingCount(allBooksArr[index].value++)
     // console.log(remainingCount)
 

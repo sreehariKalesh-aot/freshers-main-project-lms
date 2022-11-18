@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
 
-function MarkReturned({handleCloseReturned,showReturned,setshowReturned,isReturned,setisReturned,issuedBooksArr,setissuedBooksArr,issuedKey}) {
+function MarkReturned({handleCloseReturned,showReturned,setshowReturned,isReturned,setisReturned,issuedBooksArr,setissuedBooksArr,issuedKey,returnedBookName, allBooksArr,setallBooksArr}) {
+    // const [returnedBookName, setreturnedBookName] = useState(null)
 
     const handleBookReturn=(issuedKey)=>{
         // no need of this use state u can directly set true
@@ -13,7 +14,9 @@ function MarkReturned({handleCloseReturned,showReturned,setshowReturned,isReturn
         setissuedBooksArr(
             issuedBooksArr.map((book) => {
                   if (book.key === issuedKey) {
-                    console.log("entered issued if")
+                    // console.log(book.iBook)
+                    // setreturnedBookName(book.iBook)
+                    console.log(returnedBookName)
                     return {
                       ...book,
                     isReturned: true
@@ -23,8 +26,30 @@ function MarkReturned({handleCloseReturned,showReturned,setshowReturned,isReturn
                 })
               );
         
-                console.log(issuedBooksArr)
+              console.log("entered handle returned actions")
+              console.log(returnedBookName)
+              setallBooksArr(
+                  allBooksArr.map((book) => {
+                      console.log("outside if")
+                    if (book.bName === returnedBookName) {
+                      console.log("entered updating remaining book count incrementing")
+                      // setremainingCount(book.remainingCopies++)
+                      // setremainingCount(book['remainingCopies']++)
+                      return {
+                        ...book,
+                        remainingCopies: book.remainingCopies + 1
+                      };
+                    }
+                    return book;
+                  })
+                );
+          
+                  console.log(issuedBooksArr)
+
+  
+        
     }
+
 
   return (
     <Modal show={showReturned} onHide={handleCloseReturned} key={issuedKey}>
@@ -53,7 +78,8 @@ function MarkReturned({handleCloseReturned,showReturned,setshowReturned,isReturn
           variant="danger"
           onClick={() => {
             handleCloseReturned();
-            handleBookReturn(issuedKey)
+            handleBookReturn(issuedKey);
+            // handleReturnActions()
             // handleDeleteBook(bookKey);
           }}
         >
