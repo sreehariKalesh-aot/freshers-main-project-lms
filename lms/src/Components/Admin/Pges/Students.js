@@ -79,7 +79,7 @@ function Students() {
             </div>
 
             {studentArr.filter((student)=>{
-              if(search==""){
+              if(search===""){
                 return student
               } else if (student.name.toLowerCase().includes(search.toLowerCase())){
                 return student
@@ -87,6 +87,7 @@ function Students() {
                 return student
 
               }
+              return student
             }).map((student) => {
               return (
                 <div className="row mt-4 mb-4 border-bottom" key={student.key}>

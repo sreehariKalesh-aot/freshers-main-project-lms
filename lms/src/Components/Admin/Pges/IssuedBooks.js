@@ -9,6 +9,7 @@ import { createContext, useContext } from "react";
 import { studentContext } from "../../../App";
 import { allbooksContext } from "../../../App";
 import { issuedBooksContext } from "../../../App";
+import MarkReturned from "../Modals/MarkReturned";
 
 function IssuedBooks() {
   const [allBooksArr, setallBooksArr] = useContext(allbooksContext);
@@ -21,8 +22,25 @@ function IssuedBooks() {
   const handleCloseIssuedBooks = () => setShowIssuedBooks(false);
   const handleShowIssuedBooks = () => setShowIssuedBooks(true);
 
+  // usestate and functions for confirming mark as returned
+  const [showReturned, setshowReturned] = useState(false);
+  const handleCloseReturned = () => setshowReturned(false);
+  const handleShowReturned = () => setshowReturned(true);
+
+
 // usestate for searching issued books
 const [searchIssuedBook, setsearchIssuedBook] = useState("")
+
+// usestate for marking issued book as returned
+const [isReturned, setisReturned] = useState(false)
+
+// issued book key state
+const [issuedKey, setissuedKey] = useState("")
+// function of returning issued book
+// const handleIssuedKey =(key)=>{
+//   setissuedKey(key)
+//   console.log(issuedKey)
+// }
   return (
     <>
       <Navbar />
@@ -81,6 +99,8 @@ const [searchIssuedBook, setsearchIssuedBook] = useState("")
 
               }
             }).map((issuedBooks) => {
+              if (issuedBooks.isReturned == false){
+          
               return (
                 <div
                   className="row mt-4 mb-4 border-bottom"
@@ -105,11 +125,13 @@ const [searchIssuedBook, setsearchIssuedBook] = useState("")
                     <MdOutlineAssignmentReturn
                       size={20}
                       style={{ color: "#7E7E7F" }}
+                      onClick={()=>{handleShowReturned();setissuedKey(issuedBooks.key)}}
                     />
                   </p>
                 </div>
               );
-            })}
+            }})}      
+        
           </div>
         </div>
       </div>
@@ -126,6 +148,18 @@ const [searchIssuedBook, setsearchIssuedBook] = useState("")
           setissuedBooksArr={setissuedBooksArr}
         />
       )}
+      {showReturned && (<MarkReturned
+      handleCloseReturned={handleCloseReturned}
+      showReturned={showReturned}
+      setshowReturned={setshowReturned}
+      setisReturned={setisReturned}
+      isReturned={isReturned}
+      issuedBooksArr={issuedBooksArr}
+      setissuedBooksArr={setissuedBooksArr}
+      issuedKey={issuedKey}
+
+
+      />)}
     </>
   );
 }

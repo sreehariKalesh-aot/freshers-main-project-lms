@@ -24,6 +24,7 @@ function IssueBookModal({
   // onchange functions for taking input from the issued book modal
 const handleSelectBook=(e)=>{
     setselectBook(e.target.value)
+    setremainingBookName(e.target.value)
 }
 const handleSelectStudent=(e)=>{
   setselectStudent(e.target.value)
@@ -36,16 +37,44 @@ const handleDueDate=(e)=>{
 }
 
 const handleIssueBook=()=>{
-  console.log(selectBook)
+  setremainingBookName(selectBook)
   setissuedBooksArr([...issuedBooksArr,{
     key: shortid.generate(),
     iBook: selectBook,
     iStudent:selectStudent,
     iDate: issueDate,
-    iDueDate:dueDate
+    iDueDate:dueDate,
+    isReturned:false
   }])
   console.log(issuedBooksArr)
+  console.log(remainingBookName)
 }
+// usestate for taking the name of the book on issuing the book for changing the remaning copies
+const [remainingBookName, setremainingBookName] = useState("")
+const [remainingCount, setremainingCount] = useState()
+// 
+
+const handleUpdateCount=()=>{
+  var index = allBooksArr.findIndex(book => book.bName === remainingBookName);
+    // setremainingCount(allBooksArr[index].value++)
+    // console.log(remainingCount)
+
+    setallBooksArr(
+      allBooksArr.map((book) => {
+        if (book.bName === remainingBookName) {
+      
+          // setremainingCount(book.remainingCopies++)
+          // setremainingCount(book['remainingCopies']++)
+          return {
+            ...book,
+            remainingCopies: book.remainingCopies - 1
+          };
+        }
+        return book;
+      })
+    );
+}
+
   return (
 
     <Modal show={showIssuedBooks} onHide={handleCloseIssuedBooks}>
@@ -59,7 +88,8 @@ const handleIssueBook=()=>{
             controlId="exampleForm.ControlInput1Issue"
           >
             <Form.Label className="modal-labels">Book</Form.Label>
-            <Form.Select className="mb-3" aria-label="Default select example 1" value={selectBook} onChange={handleSelectBook}>
+            <Form.Select className="mb-3" aria-label="Default select example 1" value={selectBook
+            } onChange={handleSelectBook}>
               <option>Select Book</option>
               {allBooksArr.map((book) => {
                 return (
@@ -111,7 +141,7 @@ const handleIssueBook=()=>{
           style={{ backgroundColor: "#ED7966", color: "white" }}
           variant="light"
           onClick={() => {
-            handleCloseIssuedBooks();handleIssueBook()
+            handleCloseIssuedBooks();handleIssueBook();handleUpdateCount()
           }}
         >
           Issue Book
