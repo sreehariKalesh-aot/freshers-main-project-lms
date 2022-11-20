@@ -13,7 +13,7 @@ import "react-web-tabs/dist/react-web-tabs.css";
 import { NavLink } from "react-router-dom";
 function Navbar() {
   return (
-    <div className="nvbar">
+    <div className="nvbar col-2">
       <div className="d-flex align-items-center gap-3 ms-4">
         <MdLocalLibrary className="mt-5 " size={41} style={{ fill: "white" }} />
         <p className="mt-5 pt-3 lms2">LMS</p>

@@ -84,6 +84,11 @@ const handleEditRemainingCopiesInput=(e)=>{
   seteditRemainingCopies(e.target.value)
 }
 const handleSaveBookEdit=()=>{
+  if(!editBname||!editAuthor||!editLanguage||!editTotalCopies||!editRemainingCopies){
+    seteditBookError(true)
+  }
+  else{
+    setisBookEdit(false);
   handleCloseAddBook();
     setallBooksArr(
       allBooksArr.map((book) => {
@@ -101,7 +106,7 @@ const handleSaveBookEdit=()=>{
         }
         return book;
       })
-    );
+    );}
     console.log(allBooksArr)
 }
 
@@ -111,7 +116,8 @@ const handleSaveBookEdit=()=>{
 
   // state for errors in add book modal
   const [addBookError, setaddBookError] = useState(false)
-  
+  // state for errors in edit book
+  const [editBookError, seteditBookError] = useState(false)
 
 
   const handleAddBook = () => {
@@ -169,6 +175,7 @@ const handleSaveBookEdit=()=>{
               onChange={isBookEdit  ? handleEditBookNameInput :  handleBookNameInput}
             />
             {addBookError && bName.length<=0? <p className="error">Please input a Name</p>:""}
+            {editBookError && editBname.length<=0? <p className="error">Please input a Name</p>:""}
           </Form.Group>
           <Form.Group
             className="mb-3"
@@ -184,6 +191,7 @@ const handleSaveBookEdit=()=>{
             value={isBookEdit ? editAuthor : author}
             />
             {addBookError && author.length<=0? <p className="error">Please input author name</p>:""}
+            {editBookError && editAuthor.length<=0? <p className="error">Please input author name</p>:""}
           </Form.Group>
           <Form.Label className="modal-labels">Language</Form.Label>
           <Form.Select
@@ -194,12 +202,13 @@ const handleSaveBookEdit=()=>{
             // onChange={handleLanguageInput}
             onChange={isBookEdit  ? handleEditLanguageInput :  handleLanguageInput}
           >
-            <option>Select Language</option>
+            <option value="">Select Language</option>
             <option value="English">English</option>
             <option value="Malayalam">Malayalam</option>
             <option value="Hindi">Hindi</option>
           </Form.Select>
           {addBookError && language.length<=0? <p className="error">Please Select a language</p>:""}
+          {editBookError && editLanguage.length<=0? <p className="error">Please Select a language</p>:""}
           <div className="d-flex justify-content-between">
             <Form.Group
               className="mb-3 col-5.5"
@@ -215,6 +224,7 @@ const handleSaveBookEdit=()=>{
                 onChange={isBookEdit  ? handleEditTotalCopiesInput :  handleTotalCopiesInput}
               />
                   {addBookError && totalCopies.length<=0? <p className="error">Please enter total copies</p>:""}
+                  {editBookError && editTotalCopies.length<=0? <p className="error">Please enter total copies</p>:""}
             </Form.Group>
 
             <Form.Group
@@ -231,6 +241,7 @@ const handleSaveBookEdit=()=>{
                 onChange={isBookEdit  ? handleEditRemainingCopiesInput :  handleRemainingCopiesInput}
               />
                   {addBookError && remainingCopies.length<=0? <p className="error">Please enter remaining copies</p>:""}
+                  {editBookError && editRemainingCopies.length<=0? <p className="error">Please enter remaining copies</p>:""}
             </Form.Group>
           </div>
         </Form>
@@ -243,7 +254,7 @@ const handleSaveBookEdit=()=>{
           style={{ backgroundColor: "#ED7966", color: "white" }}
           variant="light"
           onClick={() => {
-            {isBookEdit? handleSaveBookEdit() : handleAddBook();setisBookEdit(false)}
+            {isBookEdit? handleSaveBookEdit() : handleAddBook();}
           }}
         >
           {isBookEdit? "Save Edits":"Add Book"}
