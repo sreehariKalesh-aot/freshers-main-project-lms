@@ -84,6 +84,7 @@ const handleEditRemainingCopiesInput=(e)=>{
   seteditRemainingCopies(e.target.value)
 }
 const handleSaveBookEdit=()=>{
+  handleCloseAddBook();
     setallBooksArr(
       allBooksArr.map((book) => {
         if (book.key === bookKey) {
@@ -104,26 +105,50 @@ const handleSaveBookEdit=()=>{
     console.log(allBooksArr)
 }
 
+
+
+
+
+  // state for errors in add book modal
+  const [addBookError, setaddBookError] = useState(false)
+  
+
+
   const handleAddBook = () => {
-    setallBooksArr([
-      ...allBooksArr,
-      {
-        key: shortid.generate(),
-        bName:  bName,
-        author: author,
-        language: language,
-        totalCopies: totalCopies,
-        remainingCopies: remainingCopies,
-      },
-    ]);
-    setbName("")
-    setauthor("")
-    setlanguage("")
-    settotalCopies("")
-    setremainingCopies("")
-    console.log(allBooksArr)
-    console.log("add done")
+
+    if(!bName||!author||!language||!totalCopies||!remainingCopies){
+      setaddBookError(true)
+    }
+    else{
+      handleCloseAddBook();
+      setaddBookError(false)
+      setallBooksArr([
+        ...allBooksArr,
+        {
+          key: shortid.generate(),
+          bName:  bName,
+          author: author,
+          language: language,
+          totalCopies: totalCopies,
+          remainingCopies: remainingCopies,
+        },
+      ]);
+      setbName("")
+      setauthor("")
+      setlanguage("")
+      settotalCopies("")
+      setremainingCopies("")
+      console.log(allBooksArr)
+      console.log("add done")
+    }
+
+
+
+
+    
   };
+
+
   return (
     <Modal show={showAddBook} onHide={()=>{handleCloseAddBook();setisBookEdit(false)}}>
       <Modal.Header closeButton>
@@ -143,6 +168,7 @@ const handleSaveBookEdit=()=>{
               // onChange={handleBookNameInput}
               onChange={isBookEdit  ? handleEditBookNameInput :  handleBookNameInput}
             />
+            {addBookError && bName.length<=0? <p className="error">Please input a Name</p>:""}
           </Form.Group>
           <Form.Group
             className="mb-3"
@@ -157,6 +183,7 @@ const handleSaveBookEdit=()=>{
             onChange={isBookEdit  ? handleEditAuthorNameInput :  handleAuthorNameInput}
             value={isBookEdit ? editAuthor : author}
             />
+            {addBookError && author.length<=0? <p className="error">Please input author name</p>:""}
           </Form.Group>
           <Form.Label className="modal-labels">Language</Form.Label>
           <Form.Select
@@ -172,6 +199,7 @@ const handleSaveBookEdit=()=>{
             <option value="Malayalam">Malayalam</option>
             <option value="Hindi">Hindi</option>
           </Form.Select>
+          {addBookError && language.length<=0? <p className="error">Please Select a language</p>:""}
           <div className="d-flex justify-content-between">
             <Form.Group
               className="mb-3 col-5.5"
@@ -179,13 +207,14 @@ const handleSaveBookEdit=()=>{
             >
               <Form.Label className="modal-labels">Total Copies</Form.Label>
               <Form.Control
-                type="text"
+                type="number"
                 placeholder="5"
                 name="totalCopies"
                 value={isBookEdit ? editTotalCopies : totalCopies}
                 // onChange={handleTotalCopiesInput}
                 onChange={isBookEdit  ? handleEditTotalCopiesInput :  handleTotalCopiesInput}
               />
+                  {addBookError && totalCopies.length<=0? <p className="error">Please enter total copies</p>:""}
             </Form.Group>
 
             <Form.Group
@@ -194,13 +223,14 @@ const handleSaveBookEdit=()=>{
             >
               <Form.Label className="modal-labels">Remaining</Form.Label>
               <Form.Control
-                type="text"
+                type="number"
                 placeholder="2"
                 name="remainingCopies"
                 value={isBookEdit ? editRemainingCopies : remainingCopies}
                 // onChange={handleRemainingCopiesInput}
                 onChange={isBookEdit  ? handleEditRemainingCopiesInput :  handleRemainingCopiesInput}
               />
+                  {addBookError && remainingCopies.length<=0? <p className="error">Please enter remaining copies</p>:""}
             </Form.Group>
           </div>
         </Form>
@@ -213,7 +243,7 @@ const handleSaveBookEdit=()=>{
           style={{ backgroundColor: "#ED7966", color: "white" }}
           variant="light"
           onClick={() => {
-            handleCloseAddBook();{isBookEdit? handleSaveBookEdit() : handleAddBook();setisBookEdit(false)}
+            {isBookEdit? handleSaveBookEdit() : handleAddBook();setisBookEdit(false)}
           }}
         >
           {isBookEdit? "Save Edits":"Add Book"}

@@ -87,7 +87,6 @@ function Students() {
                 return student
 
               }
-              return student
             }).map((student) => {
               return (
                 <div className="row mt-4 mb-4 border-bottom" key={student.key}>

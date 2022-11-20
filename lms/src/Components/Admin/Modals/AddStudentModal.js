@@ -86,6 +86,7 @@ const handleEditcPasswordInput=(e)=>{
 }
 // function to save edit
 const handleSaveEdit=()=>{
+  handleCloseAdd();
   console.log("save done");
     setstudentArr(
       studentArr.map((student) => {
@@ -102,22 +103,19 @@ const handleSaveEdit=()=>{
       })
     );
 }
-  // const handleAddStudent = () => {
-  //   setstudentArr([
-  //     ...studentArr,
-  //     {
-  //       key: shortid.generate(),
-  //       name: addStudent.name,
-  //       email: addStudent.email,
-  //       password: addStudent.password,
-  //       cPassword: addStudent.cPassword,
-  //     },
-  //   ]);
-  //   setaddStudent({ name: "", email: "", password: "", cPassword: "" });
-  // };
-  
+ 
+// use state for add student form errors
+const [addStudentError, setaddStudentError] = useState(false)
+
 // function to add student
   const handleAddStudent = () => {
+    if(!name||!email||!password||!cPassword||password != cPassword){
+      setaddStudentError(true)
+      
+    }
+    else{
+
+    handleCloseAdd();
     console.log(cPassword)
     setstudentArr([
       ...studentArr,
@@ -130,6 +128,8 @@ const handleSaveEdit=()=>{
       },
     ]);
     console.log(studentArr)
+    }
+
   };
 
   console.log(editCpassword)
@@ -160,6 +160,7 @@ const handleSaveEdit=()=>{
            
                 onChange={isEditing  ? handleEditNameInput :  handleStudentNameInput}
             />
+            {addStudentError&& !name? <p className="error">Please enter a name</p>:""}
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
             <Form.Label className="modal-labels">Email</Form.Label>
@@ -173,6 +174,7 @@ const handleSaveEdit=()=>{
               type="email"
               placeholder="Eg: johndoe@gmail.com"
             />
+            {addStudentError&& !email? <p className="error">Please enter an Email</p>:""}
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
             <Form.Label className="modal-labels">Password</Form.Label>
@@ -187,6 +189,7 @@ const handleSaveEdit=()=>{
               type="text"
               placeholder="*********"
             />
+            {addStudentError&& !password? <p className="error">Please enter a Password</p>:""}
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
             <Form.Label className="modal-labels">Confirm Password</Form.Label>
@@ -201,6 +204,7 @@ const handleSaveEdit=()=>{
               type="text"
               placeholder="*******"
             />
+            {addStudentError&& password != cPassword? <p className="error">Please Confirm password</p>:""}
           </Form.Group>
         </Form>
       </Modal.Body>
@@ -218,7 +222,7 @@ const handleSaveEdit=()=>{
           style={{ backgroundColor: "#ED7966", color: "white" }}
           variant="light"
           type="submit"
-          onClick={() => {handleCloseAdd();{isEditing ? handleSaveEdit() : handleAddStudent();setisEditing(false);}}}
+          onClick={() => {{isEditing ? handleSaveEdit(): handleAddStudent();setisEditing(false);}}}
         >
           {isEditing ? "Save Edits" : "Add Student"}
         </Button>

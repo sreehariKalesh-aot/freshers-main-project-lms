@@ -10,6 +10,9 @@ function Login({email,password,authCheck,setauthCheck}) {
 
   const [iemail, setiemail] = useState("")
   const [ipassword, setipassword] = useState("")
+  
+// use state for checking login error
+  const [loginError, setloginError] = useState(false)
 
   const handleEmail =(e)=>{
     setiemail(e.target.value)
@@ -20,13 +23,23 @@ function Login({email,password,authCheck,setauthCheck}) {
   }
 
   const handleAuth=(e)=>{
+    if(!iemail||!ipassword){
+      e.preventDefault()
+      setloginError(true)
+    }
     // e.preventDefault()
-    if(iemail===email && ipassword === password){
+    else if(iemail===email && ipassword === password){
+      e.preventDefault()
       setauthCheck(true)
+      setloginError(false)
       console.log(authCheck)
+      navigate("/issuedbooks");
     }
     else{
-      alert("incorrect username or password")
+      // alert("incorrect username or password")
+      e.preventDefault()
+      setloginError(true)
+
     } 
   }
 
@@ -58,13 +71,15 @@ function Login({email,password,authCheck,setauthCheck}) {
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email</Form.Label>
             <Form.Control type="email" placeholder="Enter email"  value={iemail} onChange={handleEmail} />
+            {loginError&& iemail.length<=0? <p className="error">Please enter Email</p>:""}
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" placeholder="Password" value={ipassword} onChange={handlePassword}/>
+            {loginError&&ipassword.length<=0? <p className="error">please enter password</p>:""}
           </Form.Group>
-          <button type="submit" className="login-btn py-2" onClick={()=>{navigate("/issuedbooks");handleAuth()}}>
+          <button type="submit" className="login-btn py-2" onClick={()=>{handleAuth()}}>
             Login
           </button>
         </Form>

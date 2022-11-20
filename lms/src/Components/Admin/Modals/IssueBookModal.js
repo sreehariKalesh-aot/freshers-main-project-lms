@@ -36,23 +36,37 @@ const handleDueDate=(e)=>{
   setdueDate(e.target.value)
 }
 
+// use state for errors in issued books
+const [issuedBookError, setissuedBookError] = useState(false)
+
+
 const handleIssueBook=()=>{
-  setremainingBookName(selectBook)
-  setissuedBooksArr([...issuedBooksArr,{
-    key: shortid.generate(),
-    iBook: selectBook,
-    iStudent:selectStudent,
-    iDate: issueDate,
-    iDueDate:dueDate,
-    isReturned:false
-  }])
-  console.log(issuedBooksArr)
-  console.log(remainingBookName)
+  if(!selectBook||!selectStudent||!issueDate||!dueDate){
+    setissuedBookError(true)
+
+  }
+  else{
+    handleCloseIssuedBooks();
+    setremainingBookName(selectBook)
+    setissuedBooksArr([...issuedBooksArr,{
+      key: shortid.generate(),
+      iBook: selectBook,
+      iStudent:selectStudent,
+      iDate: issueDate,
+      iDueDate:dueDate,
+      isReturned:false
+    }])
+    console.log(issuedBooksArr)
+    console.log(remainingBookName)
+
+  }
+ 
 }
 // usestate for taking the name of the book on issuing the book for changing the remaning copies
 const [remainingBookName, setremainingBookName] = useState("")
 const [remainingCount, setremainingCount] = useState()
 // 
+
 
 const handleUpdateCount=()=>{
   // var index = allBooksArr.findIndex(book => book.bName === remainingBookName);
@@ -99,6 +113,7 @@ const handleUpdateCount=()=>{
                 );
               })}
             </Form.Select>
+            {issuedBookError && !selectBook? <p className="error">Please select a book</p>:""}
           </Form.Group>
           <Form.Group
             className="mb-3"
@@ -115,6 +130,7 @@ const handleUpdateCount=()=>{
                 );
               })}
             </Form.Select>
+            {issuedBookError && !selectStudent? <p className="error">Please select a student</p>:""}
           </Form.Group>
           <Form.Group
             className="mb-3"
@@ -122,6 +138,7 @@ const handleUpdateCount=()=>{
           >
             <Form.Label className="modal-labels">Issue Date</Form.Label>
             <Form.Control type="date" value={issueDate} onChange={handleIssueDate}/>
+            {issuedBookError && !issueDate? <p className="error">Please select a date</p>:""}
           </Form.Group>
 
           <Form.Group
@@ -130,6 +147,7 @@ const handleUpdateCount=()=>{
           >
             <Form.Label className="modal-labels">Due Date</Form.Label>
             <Form.Control type="date" value={dueDate} onChange={handleDueDate}/>
+            {issuedBookError && !dueDate? <p className="error">Please select a date</p>:""}
           </Form.Group>
         </Form>
       </Modal.Body>
@@ -141,7 +159,7 @@ const handleUpdateCount=()=>{
           style={{ backgroundColor: "#ED7966", color: "white" }}
           variant="light"
           onClick={() => {
-            handleCloseIssuedBooks();handleIssueBook();handleUpdateCount()
+            handleIssueBook();handleUpdateCount()
           }}
         >
           Issue Book

@@ -135,7 +135,7 @@ function AllBooks() {
                     />
                   </p>
                 </div>
-              );
+              );   
             })}
           </div>
         </div>
