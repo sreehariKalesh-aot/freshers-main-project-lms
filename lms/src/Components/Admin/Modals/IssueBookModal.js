@@ -24,7 +24,7 @@ function IssueBookModal({
   // onchange functions for taking input from the issued book modal
 const handleSelectBook=(e)=>{
     setselectBook(e.target.value)
-    setremainingBookName(e.target.value)
+    setremainingBookId(e.target.value)
 }
 const handleSelectStudent=(e)=>{
   setselectStudent(e.target.value)
@@ -47,35 +47,37 @@ const handleIssueBook=()=>{
   }
   else{
     handleCloseIssuedBooks();
-    setremainingBookName(selectBook)
+    // setremainingBookId(selectBook)
     setissuedBooksArr([...issuedBooksArr,{
       key: shortid.generate(),
       iBook: selectBook,
       iStudent:selectStudent,
       iDate: issueDate,
       iDueDate:dueDate,
-      isReturned:false
+      fine: "10",
+      isReturned:false,
+      returnDate: new Date()
     }])
     console.log(issuedBooksArr)
-    console.log(remainingBookName)
+    console.log(remainingBookId)
 
   }
  
 }
 // usestate for taking the name of the book on issuing the book for changing the remaning copies
-const [remainingBookName, setremainingBookName] = useState("")
-const [remainingCount, setremainingCount] = useState()
+const [remainingBookId, setremainingBookId] = useState("")
+// const [remainingCount, setremainingCount] = useState()
 // 
 
 
 const handleUpdateCount=()=>{
-  // var index = allBooksArr.findIndex(book => book.bName === remainingBookName);
+  // var index = allBooksArr.findIndex(book => book.bName === remainingBookId);
     // setremainingCount(allBooksArr[index].value++)
     // console.log(remainingCount)
 
     setallBooksArr(
       allBooksArr.map((book) => {
-        if (book.bName === remainingBookName) {
+        if (book.key === remainingBookId) {
       
           // setremainingCount(book.remainingCopies++)
           // setremainingCount(book['remainingCopies']++)
@@ -108,7 +110,7 @@ const handleUpdateCount=()=>{
               {allBooksArr.map((book) => {
                 return (
                   <>
-                    <option value={book.bName}>{book.bName}</option>
+                    <option value={book.key}>{book.bName}</option>
                   </>
                 );
               })}
@@ -125,7 +127,7 @@ const handleUpdateCount=()=>{
               {studentArr.map((student) => {
                 return (
                   <>
-                    <option value={student.name}>{student.name}</option>
+                    <option value={student.key}>{student.name}</option>
                   </>
                 );
               })}

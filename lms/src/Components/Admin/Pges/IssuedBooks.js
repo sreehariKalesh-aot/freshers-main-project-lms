@@ -27,21 +27,20 @@ function IssuedBooks() {
   const handleCloseReturned = () => setshowReturned(false);
   const handleShowReturned = () => setshowReturned(true);
 
+  // usestate for searching issued books
+  const [searchIssuedBook, setsearchIssuedBook] = useState("");
 
-// usestate for searching issued books
-const [searchIssuedBook, setsearchIssuedBook] = useState("")
+  // usestate for marking issued book as returned
+  const [isReturned, setisReturned] = useState(false);
 
-// usestate for marking issued book as returned
-const [isReturned, setisReturned] = useState(false)
-
-// issued book key state
-const [issuedKey, setissuedKey] = useState("")
-const [returnedBookName, setreturnedBookName] = useState("")
-// function of returning issued book
-// const handleIssuedKey =(key)=>{
-//   setissuedKey(key)
-//   console.log(issuedKey)
-// }
+  // issued book key state
+  const [issuedKey, setissuedKey] = useState("");
+  const [returnedBookId, setreturnedBookId] = useState("");
+  // function of returning issued book
+  // const handleIssuedKey =(key)=>{
+  //   setissuedKey(key)
+  //   console.log(issuedKey)
+  // }
   return (
     <>
       <Navbar />
@@ -57,7 +56,9 @@ const [returnedBookName, setreturnedBookName] = useState("")
                 type="search"
                 className="searchinput mt-3"
                 placeholder="Search by book title or student"
-                onChange={(e)=>{setsearchIssuedBook(e.target.value)}}
+                onChange={(e) => {
+                  setsearchIssuedBook(e.target.value);
+                }}
               />
             </div>
 
@@ -90,49 +91,78 @@ const [returnedBookName, setreturnedBookName] = useState("")
               </p>
             </div>
 
-            {issuedBooksArr.filter((book)=>{
-              if(searchIssuedBook==""){
-                return book
-              } else if (book.iBook.toLowerCase().includes(searchIssuedBook.toLowerCase())){
-                return book
-              } else if(book.iStudent.toLowerCase().includes(searchIssuedBook.toLowerCase())){
-                return book
-
-              }
-            }).map((issuedBooks) => {
-              if (issuedBooks.isReturned == false){
-          
-              return (
-                <div
-                  className="row mt-4 mb-4 border-bottom"
-                  key={issuedBooks.key}
-                >
-                  <p className="col d-flex justify-content-start  pg-items">
-                    {issuedBooks.iBook}
-                  </p>
-                  <p className="col d-flex justify-content-center  pg-items">
-                    {issuedBooks.iStudent}
-                  </p>
-                  <p className="col d-flex justify-content-center  pg-items">
-                    {issuedBooks.iDate}
-                  </p>
-                  <p className="col d-flex justify-content-center   pg-items">
-                    {issuedBooks.iDueDate}
-                  </p>
-                  <p className="col d-flex justify-content-center  pg-items">
-                    10
-                  </p>
-                  <p className="col d-flex justify-content-center gap-3">
-                    <MdOutlineAssignmentReturn
-                      size={20}
-                      style={{ color: "#7E7E7F" }}
-                      onClick={()=>{handleShowReturned();setissuedKey(issuedBooks.key);setreturnedBookName(issuedBooks.iBook)}}
-                    />
-                  </p>
-                </div>
-              );
-            }})}      
-        
+            {issuedBooksArr
+              .filter((book) => {
+                if (searchIssuedBook == "") {
+                  return book;
+                } else if (
+                  book.iBook
+                    .toLowerCase()
+                    .includes(searchIssuedBook.toLowerCase())
+                ) {
+                  return book;
+                } else if (
+                  book.iStudent
+                    .toLowerCase()
+                    .includes(searchIssuedBook.toLowerCase())
+                ) {
+                  return book;
+                }
+              })
+              .map((issuedBooks) => {
+                if (issuedBooks.isReturned == false) {
+                  return (
+                    <div
+                      className="row mt-4 mb-4 border-bottom"
+                      key={issuedBooks.key}
+                    >
+                      {/* {issuedBooks.iBook} */}
+                      {allBooksArr.map((books) => {
+                        if (books.key  === issuedBooks.iBook) {
+                          return (
+                            <p className="col d-flex justify-content-start  pg-items">
+                              {books.bName}
+                            </p>
+                          );
+                        }
+                      })}
+                      
+                      {studentArr.map((student) => {
+                        if (student.key  === issuedBooks.iStudent) {
+                          return (
+                            <p className="col d-flex justify-content-center  pg-items">
+                              {student.name}
+                            </p>
+                          );
+                        }
+                      })}
+                     
+                        {/* {issuedBooks.iStudent} */}
+                      
+                      <p className="col d-flex justify-content-center  pg-items">
+                        {issuedBooks.iDate}
+                      </p>
+                      <p className="col d-flex justify-content-center   pg-items">
+                        {issuedBooks.iDueDate}
+                      </p>
+                      <p className="col d-flex justify-content-center  pg-items">
+                        10
+                      </p>
+                      <p className="col d-flex justify-content-center gap-3">
+                        <MdOutlineAssignmentReturn
+                          size={20}
+                          style={{ color: "#7E7E7F" }}
+                          onClick={() => {
+                            handleShowReturned();
+                            setissuedKey(issuedBooks.key);
+                            setreturnedBookId(issuedBooks.iBook);
+                          }}
+                        />
+                      </p>
+                    </div>
+                  );
+                }
+              })}
           </div>
         </div>
       </div>
@@ -149,20 +179,21 @@ const [returnedBookName, setreturnedBookName] = useState("")
           setissuedBooksArr={setissuedBooksArr}
         />
       )}
-      {showReturned && (<MarkReturned
-      handleCloseReturned={handleCloseReturned}
-      showReturned={showReturned}
-      setshowReturned={setshowReturned}
-      setisReturned={setisReturned}
-      isReturned={isReturned}
-      issuedBooksArr={issuedBooksArr}
-      setissuedBooksArr={setissuedBooksArr}
-      issuedKey={issuedKey}
-      allBooksArr={allBooksArr}
-      setallBooksArr={setallBooksArr}
-      returnedBookName={returnedBookName}
-
-      />)}
+      {showReturned && (
+        <MarkReturned
+          handleCloseReturned={handleCloseReturned}
+          showReturned={showReturned}
+          setshowReturned={setshowReturned}
+          setisReturned={setisReturned}
+          isReturned={isReturned}
+          issuedBooksArr={issuedBooksArr}
+          setissuedBooksArr={setissuedBooksArr}
+          issuedKey={issuedKey}
+          allBooksArr={allBooksArr}
+          setallBooksArr={setallBooksArr}
+          returnedBookId={returnedBookId}
+        />
+      )}
     </>
   );
 }

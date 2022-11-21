@@ -171,6 +171,12 @@ a {
   font-size: 16px;
   line-height: 20px;
   color: #09174a;
+  /* border: 1px solid; 
+   width: 100px;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important; */
+
 }
 
 .stdnts {
