@@ -31,6 +31,7 @@ function MarkReturned({
           return {
             ...book,
             isReturned: true,
+            returnDate: new Date()
           };
         }
         return book;

@@ -3,9 +3,16 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 import { useState } from "react";
 // import {Link} from "react-router-dom"
-import {useNavigate} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
+import LoginForm from "./LoginForm";
+import {createContext, useContext } from "react";
+import { studentContext } from "../App";
+
   
 function Login({email,password,authCheck,setauthCheck}) {
+
+  const [studentArr, setstudentArr] = useContext(studentContext);
+
   const navigate = useNavigate();
 
   const [iemail, setiemail] = useState("")
@@ -43,6 +50,37 @@ function Login({email,password,authCheck,setauthCheck}) {
     } 
   }
 
+  // student login 
+  const [studentLogin, setstudentLogin] = useState(false)
+  const [studentEmail, setstudentEmail] = useState("")
+  const [studentPassword, setstudentPassword] = useState("")
+  // const [savedEmail, setsavedEmail] = useState("")
+  // const [savedPassword, setsavedPassword] = useState("")
+
+  const handleStudentEmail=(e)=>{
+    setstudentEmail(e.target.value)
+  }
+  const handleStudentPassword=(e)=>{
+    setstudentPassword(e.target.value)
+  }
+
+  const handleStudentAuth=()=>{
+    
+    studentArr.map((student)=>{
+      console.log(studentEmail)
+      console.log(studentPassword)
+      if(studentEmail === student.email && studentPassword === student.password){
+        navigate("/studenLogin");
+        console.log("student login")
+      }
+
+    })
+    // 
+    // if(studentEmail===email && studentPassword === password){
+
+    // }
+
+  }
   return (
     <div>
       <div className="d-flex align-items-center gap-3">
@@ -56,33 +94,26 @@ function Login({email,password,authCheck,setauthCheck}) {
         {/* tab for logging in as admin and student change when needed*/}
         <ul className="nav mb-3">
           <li className="nav-item">
-            <a className="nav-link active ps-0" href="#">
+            <a className="nav-link active ps-0" href="#" onClick={()=>{setstudentLogin(false)}}>
               Admin
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">
+            <a className="nav-link" href="#"  onClick={()=>{setstudentLogin(true)} }>
               Student
             </a>
           </li>
         </ul>
         <hr />
-        <Form className="login-form" onSubmit ={handleAuth}>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email</Form.Label>
-            <Form.Control type="email" placeholder="Enter email"  value={iemail} onChange={handleEmail} />
-            {loginError&& iemail.length<=0? <p className="error">Please enter Email</p>:""}
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" value={ipassword} onChange={handlePassword}/>
-            {loginError&&ipassword.length<=0? <p className="error">please enter password</p>:""}
-          </Form.Group>
-          <button type="submit" className="login-btn py-2" onClick={()=>{handleAuth()}}>
-            Login
-          </button>
-        </Form>
+       
+        <LoginForm iemail={iemail} handleEmail={handleEmail} loginError={loginError} ipassword={ipassword} handlePassword={handlePassword} handleAuth={handleAuth} studentLogin={studentLogin}
+        studentArr={studentArr}
+        studentEmail={studentEmail}
+        studentPassword={studentPassword}
+        handleStudentEmail={handleStudentEmail}
+        handleStudentPassword={handleStudentPassword}
+        handleStudentAuth={handleStudentAuth}
+         />
       </div>
       
       

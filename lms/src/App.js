@@ -9,6 +9,8 @@ import Students from "./Components/Admin/Pges/Students";
 import IssuedBooks from "./Components/Admin/Pges/IssuedBooks";
 import AllBooks from "./Components/Admin/Pges/AllBooks";
 import StudentDetails from "./Components/Admin/Pges/StudentDetails";
+import LoginForm from "./Components/LoginForm";
+import StudentLogin from "./Components/Student/StudentLogin";
 // import AllBooks from "./Components/Admin/Pages/AllBooks";
 // import IssuedBooks from "./Components/Admin/Pages/IssuedBooks";
 // context for updating the array of add student
@@ -45,55 +47,7 @@ function App() {
       return [];
     }
   }
-  // [
-  //   {
-  //     key: "sfgasfg",
-  //     name: "joy",
-  //     email: "joy@gmail.com",
-  //     password: "joy123",
-  //     cPassword: "joy123",
-  //   },
-  //   {
-  //     key: "sfgaXCsfg",
-  //     name: "mathew",
-  //     email: "mathew@gmail.com",
-  //     password: "mathew123",
-  //     cPassword: "mathew123",
-  //   },
-  //   {
-  //     key: "fsdfsdfsadfqw",
-  //     name: "walter",
-  //     email: "white@gmail.com",
-  //     password: "walter@343",
-  //     cPassword: "walter@343",
-  //   },
-  // ]
-  // [
-  //   {
-  //     key: "fjfghjh",
-  //     bName: "sapiens",
-  //     author: "yuval noah harari",
-  //     language: "English",
-  //     totalCopies: 5,
-  //     remainingCopies: 3,
-  //   },
-  //   {
-  //     key: "38358",
-  //     bName: "game of thrones",
-  //     author: "George R. R. Martin",
-  //     language: "English",
-  //     totalCopies: 8,
-  //     remainingCopies: 1,
-  //   },
-  //   {
-  //     key: "asd",
-  //     bName: "oru deshathinte kadha",
-  //     author: "S.K. Pottakkad",
-  //     language: "malayalam",
-  //     totalCopies: 9,
-  //     remainingCopies: 4,
-  //   },
-  // ]
+
   const [studentArr, setstudentArr] = useState(getStudentArray());
 
   const [allBooksArr, setallBooksArr] = useState(getBooksArray());
@@ -139,6 +93,8 @@ function App() {
                     )
                   }
                 />
+                {/* <Route path="/studentPage" element={authCheck && <StudentLogin/>} /> */}
+                <Route path="/studenLogin"  element={<StudentLogin/>}/>
                 <Route path="/students" element={authCheck && <Students />} />
                 <Route
                   path="/studentDetails"

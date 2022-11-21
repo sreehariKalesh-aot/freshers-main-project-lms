@@ -96,13 +96,13 @@ function IssuedBooks() {
                 if (searchIssuedBook == "") {
                   return book;
                 } else if (
-                  book.iBook
+                  book.iBookName
                     .toLowerCase()
                     .includes(searchIssuedBook.toLowerCase())
                 ) {
                   return book;
                 } else if (
-                  book.iStudent
+                  book.iStudentName 
                     .toLowerCase()
                     .includes(searchIssuedBook.toLowerCase())
                 ) {
@@ -126,7 +126,7 @@ function IssuedBooks() {
                           );
                         }
                       })}
-                      
+                        
                       {studentArr.map((student) => {
                         if (student.key  === issuedBooks.iStudent) {
                           return (

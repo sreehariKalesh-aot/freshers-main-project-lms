@@ -17,7 +17,9 @@ function IssueBookModal({
 }) {
   // usestate for taking input from the issued bok modal input box
   const [selectBook, setselectBook] = useState("")
+  const [selectbookBookName, setselectbookBookName] = useState("")
   const [selectStudent, setselectStudent] = useState("")
+  const [selectStudentName, setselectStudentName] = useState("")
   const [issueDate, setissueDate] = useState("")
   const [dueDate, setdueDate] = useState("")
 
@@ -25,9 +27,12 @@ function IssueBookModal({
 const handleSelectBook=(e)=>{
     setselectBook(e.target.value)
     setremainingBookId(e.target.value)
+    setselectbookBookName(e.target.key)
+    console.log(e.target.key)
 }
 const handleSelectStudent=(e)=>{
   setselectStudent(e.target.value)
+  setselectStudentName(e.target.key)
 }
 const handleIssueDate=(e)=>{
   setissueDate(e.target.value)
@@ -35,6 +40,16 @@ const handleIssueDate=(e)=>{
 const handleDueDate=(e)=>{
   setdueDate(e.target.value)
 }
+
+
+// const handleselectbookBookName=(e)=>{
+//   setselectbookBookName(e.target.name)
+//   console.log("selected book",selectbookBookName)
+// }
+
+// const handleselectStudentName=(e)=>{
+//   setselectStudentName(e.target.name)
+// }
 
 // use state for errors in issued books
 const [issuedBookError, setissuedBookError] = useState(false)
@@ -51,12 +66,14 @@ const handleIssueBook=()=>{
     setissuedBooksArr([...issuedBooksArr,{
       key: shortid.generate(),
       iBook: selectBook,
+      iBookName : selectbookBookName,
       iStudent:selectStudent,
+      iStudentName:selectStudentName,
       iDate: issueDate,
       iDueDate:dueDate,
       fine: "10",
       isReturned:false,
-      returnDate: new Date()
+      returnDate: null
     }])
     console.log(issuedBooksArr)
     console.log(remainingBookId)
@@ -105,14 +122,18 @@ const handleUpdateCount=()=>{
           >
             <Form.Label className="modal-labels">Book</Form.Label>
             <Form.Select className="mb-3" aria-label="Default select example 1" value={selectBook
-            } onChange={handleSelectBook}>
+            } key={selectbookBookName}  onChange={handleSelectBook}>
               <option>Select Book</option>
-              {allBooksArr.map((book) => {
-                return (
+              {allBooksArr.map((book) =>
+               {
+                if(book.remainingCopies > 0){
+                  return (
                   <>
-                    <option value={book.key}>{book.bName}</option>
+                    <option value={book.key}  key={book.bName} >{book.bName}</option>
                   </>
                 );
+                }
+                
               })}
             </Form.Select>
             {issuedBookError && !selectBook? <p className="error">Please select a book</p>:""}
@@ -122,12 +143,13 @@ const handleUpdateCount=()=>{
             controlId="exampleForm.ControlTextarea1Issue"
           >
             <Form.Label className="modal-labels">Student</Form.Label>
-            <Form.Select className="mb-3" aria-label="Default select example 2" value={selectStudent} onChange={handleSelectStudent}>
+            <Form.Select className="mb-3" aria-label="Default select example 2" value={selectStudent} key={selectStudentName}  onChange={handleSelectStudent}>
               <option>Select Student</option>
               {studentArr.map((student) => {
                 return (
                   <>
-                    <option value={student.key}>{student.name}</option>
+                    <option value={student.key} key={student.name}  
+                      >{student.name}</option>
                   </>
                 );
               })}
