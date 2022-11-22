@@ -126,8 +126,8 @@ const [fine, setfine] = useState("");
 // function for calculating fine
 const calculateFine=()=>{ 
   const today = new Date();
-  let diffInTime = today.getTime() - dueDatecalc.getTime();
-  let Difference = Math.floor(diffInTime / (1000 * 3600 * 24))
+  // let diffInTime = today.getTime() - dueDatecalc.getTime();
+  let Difference = Math.floor((today.getTime() - dueDatecalc.getTime())/ (1000 * 3600 * 24))
   setfine(Math.round(Difference*10))
   if (fine < 0){
     setfine("-")

@@ -8,6 +8,7 @@ import { createContext, useContext } from "react";
 import { allbooksContext } from "../../../App";
 import DeleteBookModal from "../Modals/DeleteBookModal";
 import Navbar from "../../Navbar";
+import ReactTooltip from 'react-tooltip';
 
 function AllBooks() {
   const [allBooksArr, setallBooksArr] = useContext(allbooksContext);
@@ -112,6 +113,7 @@ function AllBooks() {
                   </p>
                   <p className="col d-flex justify-content-center gap-3">
                     <MdEdit
+                    data-tip="Edit"
                       size={20}
                       style={{ fill: "#7E7E7F" }}
                       onClick={() => {
@@ -126,6 +128,7 @@ function AllBooks() {
                       }}
                     />{" "}
                     <BiTrash
+                    data-tip="Delete"
                       size={20}
                       style={{ fill: "#D04444" }}
                       onClick={() => {
@@ -141,6 +144,7 @@ function AllBooks() {
         </div>
       </div>
 
+      <ReactTooltip />
       {showAddBook && (
         <AddBookModal
           showAddBook={showAddBook}

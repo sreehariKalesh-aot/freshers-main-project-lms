@@ -10,7 +10,9 @@ import { studentContext } from "../../../App";
 import { allbooksContext } from "../../../App";
 import { issuedBooksContext } from "../../../App";
 import MarkReturned from "../Modals/MarkReturned";
+
 import shortid from "shortid";
+import ReactTooltip from 'react-tooltip';
 
 function IssuedBooks() {
   const [allBooksArr, setallBooksArr] = useContext(allbooksContext);
@@ -149,7 +151,7 @@ function IssuedBooks() {
                        {issuedBooks.fine}
                       </p>
                       <p className="col d-flex justify-content-center gap-3">
-                        <MdOutlineAssignmentReturn
+                        <MdOutlineAssignmentReturn data-tip="Mark Returned"
                           size={20}
                           style={{ color: "#7E7E7F" }}
                           onClick={() => {
@@ -165,7 +167,8 @@ function IssuedBooks() {
               })}
           </div>
         </div>
-      </div>
+      </div> 
+      <ReactTooltip />
 
       {showIssuedBooks && (
         <IssueBookModal

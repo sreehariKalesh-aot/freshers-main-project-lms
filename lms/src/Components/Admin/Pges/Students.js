@@ -1,6 +1,6 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
-import { useState, createContext, useContext } from "react";
+import { useState ,useContext} from "react";
 import AddStudent from "../Modals/AddStudentModal";
 import { BiTrash } from "react-icons/bi";
 import { HiOutlineEye } from "react-icons/hi";
@@ -9,7 +9,8 @@ import { useNavigate } from "react-router-dom";
 import { studentContext } from "../../../App";
 import DeleteStudentModal from "../Modals/DeleteStudentModal";
 import Navbar from "../../Navbar";
-import StudentDetails from "./StudentDetails";
+import ReactTooltip from 'react-tooltip';
+// import StudentDetails from "./StudentDetails";
 function Students({setstudentId,studentId,setstudentEmail,setstudentName}) {
   const [studentArr, setstudentArr] = useContext(studentContext);
 
@@ -107,6 +108,7 @@ function Students({setstudentId,studentId,setstudentEmail,setstudentName}) {
                   </p>
                   <div className="col d-flex justify-content-end gap-4">
                     <MdEdit
+                    data-tip="Edit"
                       size={20}
                       style={{ fill: "#7E7E7F" }}
                       onClick={() => {
@@ -120,6 +122,7 @@ function Students({setstudentId,studentId,setstudentEmail,setstudentName}) {
                       }}
                     />{" "}
                     <BiTrash
+                    data-tip="Delete"
                       size={20}
                       style={{ fill: "#D04444" }}
                       onClick={() => {
@@ -128,6 +131,7 @@ function Students({setstudentId,studentId,setstudentEmail,setstudentName}) {
                       }}
                     />{" "}
                     <HiOutlineEye
+                    data-tip="View student details"
                       size={20}
                       style={{ color: "#7E7E7F" }}
                       onClick={() => {setstudentId(student.key);setstudentEmail(student.email);setstudentName(student.name);handleStudentId();
@@ -142,6 +146,9 @@ function Students({setstudentId,studentId,setstudentEmail,setstudentName}) {
           </div>
         </div>
       </div>
+
+      <ReactTooltip />
+
       {showAdd && (
         <AddStudent
           showAdd={setShowAdd}
