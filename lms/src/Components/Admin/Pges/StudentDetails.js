@@ -101,34 +101,22 @@ function StudentDetails({ studentName, studentEmail, studentId }) {
                             <p className="col d-flex justify-content-start  pg-items">
                               {books.bName}
                             </p>
-
                             <p className="col d-flex justify-content-center  pg-items">
                               {books.author}
                             </p>
-                            {issuedBooksArr.map((issuedbooks) => {
-                              if (
-                                issuedbooks.iStudent === studentId &&
-                                books.key === issuedbooks.iBook
-                              )
-                                return (
-                                  <>
-                                    <p className="col d-flex justify-content-center  pg-items">
-                                      {issuedbooks.iDate}
-                                    </p>
-                                    <p className="col d-flex justify-content-center   pg-items">
-                                      {issuedbooks.iDueDate}
-                                    </p>
-                                    <p className="col d-flex justify-content-center  pg-items">
-                                      {issuedbooks.returnDate
-                                        ? issuedbooks.returnDate
-                                        : "-"}
-                                    </p>
-                                    <p className="col d-flex justify-content-center gap-3">
-                                      {issuedbooks.fine}
-                                    </p>
-                                  </>
-                                );
-                            })}
+                            <p className="col d-flex justify-content-center  pg-items">
+                        {issuedbooks.iDate}
+                      </p>
+                      <p className="col d-flex justify-content-center   pg-items">
+                        {issuedbooks.iDueDate}
+                      </p>
+                      <p className="col d-flex justify-content-center  pg-items">
+                        {issuedbooks.returnDate ? issuedbooks.returnDate : "-"}
+                      </p>
+                      <p className="col d-flex justify-content-center gap-3">
+                        {issuedbooks.fine}
+                      </p>
+                            
                           </div>
                         );
                       }
@@ -137,6 +125,35 @@ function StudentDetails({ studentName, studentEmail, studentId }) {
                 );
               }
             })}
+
+
+            {/* {issuedBooksArr.map((issuedbooks) => {
+              if (
+                issuedbooks.iStudent === studentId 
+              )
+                return (
+                  <>
+                    <div className="row mt-4 mb-4 border-bottom">
+                      <p className="col d-flex justify-content-center  pg-items">
+                        {issuedbooks.iDate}
+                      </p>
+                      <p className="col d-flex justify-content-center   pg-items">
+                        {issuedbooks.iDueDate}
+                      </p>
+                      <p className="col d-flex justify-content-center  pg-items">
+                        {issuedbooks.returnDate ? issuedbooks.returnDate : "-"}
+                      </p>
+                      <p className="col d-flex justify-content-center gap-3">
+                        {issuedbooks.fine}
+                      </p>
+                    </div>
+                  </>
+                );
+            })} */}
+
+
+
+            
           </div>
         </div>
       </div>

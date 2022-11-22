@@ -184,6 +184,7 @@ a {
   font-size: 14px;
   line-height: 17px;
   color: rgba(9, 23, 74, 0.54);
+  cursor: pointer;
 }
 
 .stdnt-name {
@@ -235,4 +236,10 @@ a {
 
 .error{
   color: #ed7966;
+}
+
+svg{
+
+  cursor: pointer;
+  
 }

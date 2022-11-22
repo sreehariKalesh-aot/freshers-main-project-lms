@@ -36,28 +36,7 @@ function IssuedBooks() {
   // issued book key state
   const [issuedKey, setissuedKey] = useState("");
   const [returnedBookId, setreturnedBookId] = useState("");
-  // function of returning issued book
-  // const handleIssuedKey =(key)=>{
-  //   setissuedKey(key)
-  //   console.log(issuedKey)
-  // }
-
-
-  //state for calculating date
-
-  // const [dueDatecalc, setdueDatecalc] = useState(new Date());
-
-  // const [fine, setfine] = useState("");
-
-  // const calculateFine=()=>{ 
-  //   const today = new Date();
-  //   let diffInTime = today.getTime() - dueDatecalc.getTime();
-  //   let Difference = Math.round(diffInTime / (1000 * 3600 * 24))
-  //   setfine(Math.round(Difference*10))
-  // } 
-  // useEffect(() => {
-  //   calculateFine()
-  // })
+ 
   
   return (
     <>
