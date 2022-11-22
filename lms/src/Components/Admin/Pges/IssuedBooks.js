@@ -4,7 +4,7 @@ import IssueBookModal from "../Modals/IssueBookModal";
 import { useState } from "react";
 import { MdOutlineAssignmentReturn } from "react-icons/md";
 import Navbar from "../../Navbar";
-
+import { useEffect } from "react";
 import { createContext, useContext } from "react";
 import { studentContext } from "../../../App";
 import { allbooksContext } from "../../../App";
@@ -41,6 +41,24 @@ function IssuedBooks() {
   //   setissuedKey(key)
   //   console.log(issuedKey)
   // }
+
+
+  //state for calculating date
+
+  // const [dueDatecalc, setdueDatecalc] = useState(new Date());
+
+  // const [fine, setfine] = useState("");
+
+  // const calculateFine=()=>{ 
+  //   const today = new Date();
+  //   let diffInTime = today.getTime() - dueDatecalc.getTime();
+  //   let Difference = Math.round(diffInTime / (1000 * 3600 * 24))
+  //   setfine(Math.round(Difference*10))
+  // } 
+  // useEffect(() => {
+  //   calculateFine()
+  // })
+  
   return (
     <>
       <Navbar />
@@ -126,7 +144,7 @@ function IssuedBooks() {
                           );
                         }
                       })}
-                        
+
                       {studentArr.map((student) => {
                         if (student.key  === issuedBooks.iStudent) {
                           return (
@@ -146,7 +164,7 @@ function IssuedBooks() {
                         {issuedBooks.iDueDate}
                       </p>
                       <p className="col d-flex justify-content-center  pg-items">
-                        10
+                       {issuedBooks.fine}
                       </p>
                       <p className="col d-flex justify-content-center gap-3">
                         <MdOutlineAssignmentReturn
@@ -177,6 +195,9 @@ function IssuedBooks() {
           setstudentArr={setstudentArr}
           issuedBooksArr={issuedBooksArr}
           setissuedBooksArr={setissuedBooksArr}
+          // dueDatecalc={dueDatecalc}
+          // setdueDatecalc={setdueDatecalc}
+          // calculateFine={calculateFine}
         />
       )}
       {showReturned && (

@@ -17,7 +17,9 @@ import StudentLogin from "./Components/Student/StudentLogin";
 const studentContext = createContext();
 const allbooksContext = createContext();
 const issuedBooksContext = createContext();
+
 function App() {
+  
   const getStudentArray = ()=>{
     let students = localStorage.getItem("students");
     if(students){
@@ -82,8 +84,7 @@ function App() {
               <Routes>
                 <Route
                   path="/"
-                  element={
-                    !authCheck && (
+                  element={(
                       <Login
                         email={email}
                         password={password}
@@ -95,15 +96,15 @@ function App() {
                 />
                 {/* <Route path="/studentPage" element={authCheck && <StudentLogin/>} /> */}
                 <Route path="/studenLogin"  element={<StudentLogin/>}/>
-                <Route path="/students" element={authCheck && <Students />} />
+                <Route path="/students" element={<Students />} />
                 <Route
                   path="/studentDetails"
-                  element={authCheck && <StudentDetails />}
+                  element={<StudentDetails />}
                 />
-                <Route path="/allbooks" element={authCheck && <AllBooks />} />
+                <Route path="/allbooks" element={<AllBooks />} />
                 <Route
                   path="/issuedbooks"
-                  element={authCheck && <IssuedBooks />}
+                  element={<IssuedBooks />}
                 />
               </Routes>
               {/* <Tablet/> */}

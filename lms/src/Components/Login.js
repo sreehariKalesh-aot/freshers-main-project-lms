@@ -3,84 +3,84 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 import { useState } from "react";
 // import {Link} from "react-router-dom"
-import {Link, useNavigate} from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom";
 import LoginForm from "./LoginForm";
-import {createContext, useContext } from "react";
+import { createContext, useContext } from "react";
 import { studentContext } from "../App";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-  
-function Login({email,password,authCheck,setauthCheck}) {
-
+function Login({ email, password, authCheck, setauthCheck }) {
   const [studentArr, setstudentArr] = useContext(studentContext);
 
   const navigate = useNavigate();
 
-  const [iemail, setiemail] = useState("")
-  const [ipassword, setipassword] = useState("")
-  
-// use state for checking login error
-  const [loginError, setloginError] = useState(false)
+  const [iemail, setiemail] = useState("");
+  const [ipassword, setipassword] = useState("");
 
-  const handleEmail =(e)=>{
-    setiemail(e.target.value)
-  }
+  // use state for checking login error
+  const [loginError, setloginError] = useState(false);
 
-  const handlePassword =(e)=>{
-    setipassword(e.target.value)
-  }
+  const handleEmail = (e) => {
+    setiemail(e.target.value);
+  };
 
-  const handleAuth=(e)=>{
-    if(!iemail||!ipassword){
-      e.preventDefault()
-      setloginError(true)
+  const handlePassword = (e) => {
+    setipassword(e.target.value);
+  };
+
+  const handleAuth = (e) => {
+    if (!iemail || !ipassword) {
+      e.preventDefault();
+      setloginError(true);
     }
     // e.preventDefault()
-    else if(iemail===email && ipassword === password){
-      e.preventDefault()
-      setauthCheck(true)
-      setloginError(false)
-      console.log(authCheck)
+    else if (iemail === email && ipassword === password) {
+      e.preventDefault();
+      setauthCheck(true);
+      setloginError(false);
+      console.log(authCheck);
       navigate("/issuedbooks");
-    }
-    else{
+    } else {
       // alert("incorrect username or password")
-      e.preventDefault()
-      setloginError(true)
+      e.preventDefault();
+      setloginError(true);
+      toast.error("Incorrect Email or Password",{position: "bottom-center",});
+    }
+  };
 
-    } 
-  }
-
-  // student login 
-  const [studentLogin, setstudentLogin] = useState(false)
-  const [studentEmail, setstudentEmail] = useState("")
-  const [studentPassword, setstudentPassword] = useState("")
+  // student login
+  const [studentLogin, setstudentLogin] = useState(false);
+  const [studentEmail, setstudentEmail] = useState("");
+  const [studentPassword, setstudentPassword] = useState("");
   // const [savedEmail, setsavedEmail] = useState("")
   // const [savedPassword, setsavedPassword] = useState("")
 
-  const handleStudentEmail=(e)=>{
-    setstudentEmail(e.target.value)
-  }
-  const handleStudentPassword=(e)=>{
-    setstudentPassword(e.target.value)
-  }
+  const handleStudentEmail = (e) => {
+    setstudentEmail(e.target.value);
+  };
+  const handleStudentPassword = (e) => {
+    setstudentPassword(e.target.value);
+  };
 
-  const handleStudentAuth=()=>{
-    
-    studentArr.map((student)=>{
-      console.log(studentEmail)
-      console.log(studentPassword)
-      if(studentEmail === student.email && studentPassword === student.password){
+  const handleStudentAuth = () => {
+    studentArr.map((student) => {
+      console.log(studentEmail);
+      console.log(studentPassword);
+      if (
+        studentEmail === student.email &&
+        studentPassword === student.password
+      ) {
         navigate("/studenLogin");
-        console.log("student login")
+        console.log("student login");
+      } else {
       }
-
-    })
-    // 
+    });
+    //
     // if(studentEmail===email && studentPassword === password){
 
     // }
-
-  }
+  };
   return (
     <div>
       <div className="d-flex align-items-center gap-3">
@@ -94,29 +94,49 @@ function Login({email,password,authCheck,setauthCheck}) {
         {/* tab for logging in as admin and student change when needed*/}
         <ul className="nav mb-3">
           <li className="nav-item">
-            <a className="nav-link active ps-0" href="#" onClick={()=>{setstudentLogin(false)}}>
+            <a
+              className="nav-link active ps-0"
+              href="#"
+              onClick={() => {
+                setstudentLogin(false);
+              }}
+            >
               Admin
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#"  onClick={()=>{setstudentLogin(true)} }>
+            <a
+              className="nav-link"
+              href="#"
+              onClick={() => {
+                setstudentLogin(true);
+              }}
+            >
               Student
             </a>
           </li>
         </ul>
         <hr />
+
+        <LoginForm
+          iemail={iemail}
+          handleEmail={handleEmail}
+          loginError={loginError}
+          ipassword={ipassword}
+          handlePassword={handlePassword}
+          handleAuth={handleAuth}
+          studentLogin={studentLogin}
+          studentArr={studentArr}
+          studentEmail={studentEmail}
+          studentPassword={studentPassword}
+          handleStudentEmail={handleStudentEmail}
+          handleStudentPassword={handleStudentPassword}
+          handleStudentAuth={handleStudentAuth}
+        />
+        <ToastContainer 
        
-        <LoginForm iemail={iemail} handleEmail={handleEmail} loginError={loginError} ipassword={ipassword} handlePassword={handlePassword} handleAuth={handleAuth} studentLogin={studentLogin}
-        studentArr={studentArr}
-        studentEmail={studentEmail}
-        studentPassword={studentPassword}
-        handleStudentEmail={handleStudentEmail}
-        handleStudentPassword={handleStudentPassword}
-        handleStudentAuth={handleStudentAuth}
-         />
+        />
       </div>
-      
-      
     </div>
   );
 }

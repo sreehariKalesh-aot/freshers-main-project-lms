@@ -2,7 +2,7 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import shortid from "shortid";
 function IssueBookModal({
   showIssuedBooks,
@@ -12,7 +12,9 @@ function IssueBookModal({
   studentArr,
   setstudentArr,
   issuedBooksArr,
-  setissuedBooksArr
+  setissuedBooksArr,
+  // dueDatecalc,
+  // setdueDatecalc,
   
 }) {
   // usestate for taking input from the issued bok modal input box
@@ -39,6 +41,10 @@ const handleIssueDate=(e)=>{
 }
 const handleDueDate=(e)=>{
   setdueDate(e.target.value)
+  
+  setdueDatecalc(new Date(e.target.value))
+  console.log(dueDatecalc)
+
 }
 
 
@@ -61,8 +67,11 @@ const handleIssueBook=()=>{
 
   }
   else{
+
     handleCloseIssuedBooks();
+    calculateFine();
     // setremainingBookId(selectBook)
+
     setissuedBooksArr([...issuedBooksArr,{
       key: shortid.generate(),
       iBook: selectBook,
@@ -71,7 +80,7 @@ const handleIssueBook=()=>{
       iStudentName:selectStudentName,
       iDate: issueDate,
       iDueDate:dueDate,
-      fine: "10",
+      fine: fine,
       isReturned:false,
       returnDate: null
     }])
@@ -107,6 +116,31 @@ const handleUpdateCount=()=>{
       })
     );
 }
+
+// for setting due date a default value
+const [dueDatecalc, setdueDatecalc] = useState(new Date());
+
+
+const [fine, setfine] = useState("");
+
+// function for calculating fine
+const calculateFine=()=>{ 
+  const today = new Date();
+  let diffInTime = today.getTime() - dueDatecalc.getTime();
+  let Difference = Math.round(diffInTime / (1000 * 3600 * 24))
+  setfine(Math.round(Difference*10))
+  if (fine < 0){
+    setfine("-")
+  }
+
+} 
+
+// for calculating the fine everytime the page renders
+useEffect(() => {
+  calculateFine()
+
+})
+
 
   return (
 
@@ -183,7 +217,7 @@ const handleUpdateCount=()=>{
           style={{ backgroundColor: "#ED7966", color: "white" }}
           variant="light"
           onClick={() => {
-            handleIssueBook();handleUpdateCount()
+            handleIssueBook();handleUpdateCount();
           }}
         >
           Issue Book
