@@ -9,7 +9,8 @@ import { useNavigate } from "react-router-dom";
 import { studentContext } from "../../../App";
 import DeleteStudentModal from "../Modals/DeleteStudentModal";
 import Navbar from "../../Navbar";
-function Students() {
+import StudentDetails from "./StudentDetails";
+function Students({setstudentId,studentId,setstudentEmail,setstudentName}) {
   const [studentArr, setstudentArr] = useContext(studentContext);
 
   // use state and functions for add student modal
@@ -41,6 +42,14 @@ function Students() {
 
   // use state for searching
   const [search, setsearch] = useState("")
+
+  const handleStudentId=()=>{
+    console.log(studentId)
+  }
+  // use state for student information
+  // const [studentId, setstudentId] = useState("")
+  // const [eyeBtn, seteyeBtn] = useState(false)
+
   return (
 
     <>
@@ -121,7 +130,10 @@ function Students() {
                     <HiOutlineEye
                       size={20}
                       style={{ color: "#7E7E7F" }}
-                      onClick={() => navigate("/studentDetails")}
+                      onClick={() => {setstudentId(student.key);setstudentEmail(student.email);setstudentName(student.name);handleStudentId();
+                        ;navigate("/studentDetails")
+                      }}
+
                     />
                   </div>
                 </div>
@@ -152,6 +164,8 @@ function Students() {
           seteditCPassword={seteditCPassword}
         />
       )}
+
+
       {showdelete && (
         <DeleteStudentModal
           studentKey={studentKey}
@@ -161,6 +175,8 @@ function Students() {
           setstudentArr={setstudentArr}
         />
       )}
+
+     {/* {eyeBtn&& <StudentDetails seteyeBtn={seteyeBtn} studentName={studentName} studentEmail={studentEmail}/>} */}
     </>
   );
 }

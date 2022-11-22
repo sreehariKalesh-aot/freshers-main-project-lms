@@ -68,6 +68,10 @@ function App() {
     localStorage.setItem("issuedbooks",JSON.stringify(issuedBooksArr))
   }, [studentArr,allBooksArr,issuedBooksArr])
   
+
+  const [studentId, setstudentId] = useState("")
+  const [studentName, setstudentName] = useState("")
+  const [studentEmail, setstudentEmail] = useState("")
   return (
     <div>
       <studentContext.Provider value={[studentArr, setstudentArr]}>
@@ -96,10 +100,10 @@ function App() {
                 />
                 {/* <Route path="/studentPage" element={authCheck && <StudentLogin/>} /> */}
                 <Route path="/studenLogin"  element={<StudentLogin/>}/>
-                <Route path="/students" element={<Students />} />
+                <Route path="/students" element={<Students setstudentId={setstudentId}  studentId={studentId} setstudentName={setstudentName} setstudentEmail={setstudentEmail}/>} />
                 <Route
                   path="/studentDetails"
-                  element={<StudentDetails />}
+                  element={<StudentDetails studentId={studentId} studentName={studentName} studentEmail={studentEmail}/>}
                 />
                 <Route path="/allbooks" element={<AllBooks />} />
                 <Route

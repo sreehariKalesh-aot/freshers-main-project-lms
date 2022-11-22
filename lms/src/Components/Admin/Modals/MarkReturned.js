@@ -31,7 +31,7 @@ function MarkReturned({
           return {
             ...book,
             isReturned: true,
-            returnDate: new Date()
+            returnDate: new Date().getDate() + "-" + new Date().getMonth() + "-" + new Date().getFullYear()
           };
         }
         return book;
