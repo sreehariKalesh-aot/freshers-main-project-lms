@@ -19,6 +19,10 @@ function StudentDetails({ studentName, studentEmail, studentId }) {
  
   const totalReturned =issuedBooksArr.filter((issued) => issued.iStudent === studentId && issued.isReturned === true)
 
+  const totalFine = totalBooks.reduce((acc , curr)=>{
+    return acc + curr.fine
+  },0)
+
   const navigate = useNavigate();
   console.log(studentId);
 
@@ -58,7 +62,7 @@ function StudentDetails({ studentName, studentEmail, studentId }) {
               <div>
                 <p className="mb-2 nmbrs">{totalBooks.length}</p>
                 <p className="mb-2 nmbrs">{totalReturned.length}</p>
-                <p className="mb-2 nmbrs">Rs.70</p>
+                <p className="mb-2 nmbrs">Rs.{totalFine}</p>
               </div>
             </div>
           </div>
