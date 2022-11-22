@@ -10,6 +10,7 @@ import { studentContext } from "../../../App";
 import { allbooksContext } from "../../../App";
 import { issuedBooksContext } from "../../../App";
 import MarkReturned from "../Modals/MarkReturned";
+import shortid from "shortid";
 
 function IssuedBooks() {
   const [allBooksArr, setallBooksArr] = useContext(allbooksContext);
@@ -37,7 +38,7 @@ function IssuedBooks() {
   const [issuedKey, setissuedKey] = useState("");
   const [returnedBookId, setreturnedBookId] = useState("");
  
-  
+
   return (
     <>
       <Navbar />
@@ -88,7 +89,7 @@ function IssuedBooks() {
               </p>
             </div>
 
-            {issuedBooksArr
+            {/* {issuedBooksArr
               .filter((book) => {
                 if (searchIssuedBook == "") {
                   return book;
@@ -106,8 +107,10 @@ function IssuedBooks() {
                   return book;
                 }
               })
-              .map((issuedBooks) => {
-                if (issuedBooks.isReturned == false) {
+              . */}
+
+              {/* you can also do this with only map and if condition */}
+              {issuedBooksArr.filter(issuedBooks=>issuedBooks.isReturned == false).map((issuedBooks) => {
                   return (
                     <div
                       className="row mt-4 mb-4 border-bottom"
@@ -117,7 +120,7 @@ function IssuedBooks() {
                       {allBooksArr.map((books) => {
                         if (books.key  === issuedBooks.iBook) {
                           return (
-                            <p className="col d-flex justify-content-start  pg-items">
+                            <p className="col d-flex justify-content-start  pg-items" key={shortid.generate()}>
                               {books.bName}
                             </p>
                           );
@@ -127,7 +130,7 @@ function IssuedBooks() {
                       {studentArr.map((student) => {
                         if (student.key  === issuedBooks.iStudent) {
                           return (
-                            <p className="col d-flex justify-content-center  pg-items">
+                            <p className="col d-flex justify-content-center  pg-items" key={shortid.generate()}> 
                               {student.name}
                             </p>
                           );
@@ -158,7 +161,7 @@ function IssuedBooks() {
                       </p>
                     </div>
                   );
-                }
+                
               })}
           </div>
         </div>

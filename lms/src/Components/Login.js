@@ -49,6 +49,7 @@ function Login({ email, password, authCheck, setauthCheck }) {
     }
   };
 
+
   // student login
   const [studentLogin, setstudentLogin] = useState(false);
   const [studentEmail, setstudentEmail] = useState("");
@@ -64,6 +65,7 @@ function Login({ email, password, authCheck, setauthCheck }) {
   };
 
   const handleStudentAuth = () => {
+
     studentArr.map((student) => {
       console.log(studentEmail);
       console.log(studentPassword);
@@ -74,8 +76,11 @@ function Login({ email, password, authCheck, setauthCheck }) {
         navigate("/studenLogin");
         console.log("student login");
       } else {
+        alert("invalid Credentials")
       }
     });
+
+
     //
     // if(studentEmail===email && studentPassword === password){
 

@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../Navbar";
 import { useState, useContext } from "react";
+import shortid from "shortid";
 
 import { allbooksContext } from "../../../App";
 import { studentContext } from "../../../App";
@@ -13,6 +14,10 @@ function StudentDetails({ studentName, studentEmail, studentId }) {
   const [allBooksArr, setallBooksArr] = useContext(allbooksContext);
   const [studentArr, setstudentArr] = useContext(studentContext);
   const [issuedBooksArr, setissuedBooksArr] = useContext(issuedBooksContext);
+
+  const totalBooks =issuedBooksArr.filter((issued) => issued.iStudent === studentId)
+ 
+  const totalReturned =issuedBooksArr.filter((issued) => issued.iStudent === studentId && issued.isReturned === true)
 
   const navigate = useNavigate();
   console.log(studentId);
@@ -39,7 +44,9 @@ function StudentDetails({ studentName, studentEmail, studentId }) {
 
           <div className="pges2 mt-4 pt-4 ps-4 pb-4 row">
             <div className="col-8 stdnt-details-div">
-              <h1 className="stdnt-name2">{studentName}</h1>
+              <h1 className="stdnt-name2" >
+                {studentName}
+              </h1>
               <p className="stdnt-email">{studentEmail}</p>
             </div>
             <div className="d-flex col-4 gap-5">
@@ -49,8 +56,8 @@ function StudentDetails({ studentName, studentEmail, studentId }) {
                 <p className="mb-2 lbls">Total Fine</p>
               </div>
               <div>
-                <p className="mb-2 nmbrs">1</p>
-                <p className="mb-2 nmbrs">4</p>
+                <p className="mb-2 nmbrs">{totalBooks.length}</p>
+                <p className="mb-2 nmbrs">{totalReturned.length}</p>
                 <p className="mb-2 nmbrs">Rs.70</p>
               </div>
             </div>
@@ -58,7 +65,7 @@ function StudentDetails({ studentName, studentEmail, studentId }) {
 
           {/* content div */}
           <div className="pges2 mt-4 pt-4 ps-5 pe-5 pb-5">
-            <p className="issued-books pb-2">Issued Books (5)</p>
+            <p className="issued-books pb-2">Issued Books ({totalBooks.length})</p>
             <div className="col-5">
               <Form.Control
                 type="search"
@@ -88,16 +95,16 @@ function StudentDetails({ studentName, studentEmail, studentId }) {
               </p>
             </div>
 
-            {issuedBooksArr.map((issuedbooks) => {
-              if (issuedbooks.iStudent === studentId) {
-                console.log("entered loop");
+            {issuedBooksArr
+              .filter((issued) => issued.iStudent === studentId)
+              .map((issuedbooks) => {
                 return (
                   <>
-                    {allBooksArr.map((books) => {
-                      if (books.key === issuedbooks.iBook) {
-                        console.log("entered book loop");
+                    {allBooksArr
+                      .filter((books) => books.key === issuedbooks.iBook)
+                      .map((books) => {
                         return (
-                          <div className="row mt-4 mb-4 border-bottom">
+                          <div className="row mt-4 mb-4 border-bottom" key={shortid.generate()}>
                             <p className="col d-flex justify-content-start  pg-items">
                               {books.bName}
                             </p>
@@ -105,27 +112,25 @@ function StudentDetails({ studentName, studentEmail, studentId }) {
                               {books.author}
                             </p>
                             <p className="col d-flex justify-content-center  pg-items">
-                        {issuedbooks.iDate}
-                      </p>
-                      <p className="col d-flex justify-content-center   pg-items">
-                        {issuedbooks.iDueDate}
-                      </p>
-                      <p className="col d-flex justify-content-center  pg-items">
-                        {issuedbooks.returnDate ? issuedbooks.returnDate : "-"}
-                      </p>
-                      <p className="col d-flex justify-content-center gap-3">
-                        {issuedbooks.fine}
-                      </p>
-                            
+                              {issuedbooks.iDate}
+                            </p>
+                            <p className="col d-flex justify-content-center   pg-items">
+                              {issuedbooks.iDueDate}
+                            </p>
+                            <p className="col d-flex justify-content-center  pg-items">
+                              {issuedbooks.returnDate
+                                ? issuedbooks.returnDate
+                                : "-"}
+                            </p>
+                            <p className="col d-flex justify-content-center gap-3">
+                              {issuedbooks.fine}
+                            </p>
                           </div>
                         );
-                      }
-                    })}
+                      })}
                   </>
                 );
-              }
-            })}
-
+              })}
 
             {/* {issuedBooksArr.map((issuedbooks) => {
               if (
@@ -150,10 +155,6 @@ function StudentDetails({ studentName, studentEmail, studentId }) {
                   </>
                 );
             })} */}
-
-
-
-            
           </div>
         </div>
       </div>
