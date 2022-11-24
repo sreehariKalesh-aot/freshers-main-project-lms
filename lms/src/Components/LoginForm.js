@@ -16,8 +16,6 @@ function LoginForm({
   handleStudentPassword,
   handleStudentAuth,
 }) {
-
-
   return (
     <Form className="login-form" onSubmit={handleAuth}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -60,8 +58,6 @@ function LoginForm({
       >
         Login
       </button>
-
-   
     </Form>
   );
 }

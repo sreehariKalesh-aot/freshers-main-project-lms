@@ -1,6 +1,6 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
-import { useState ,useContext} from "react";
+import { useState, useContext } from "react";
 import AddStudent from "../Modals/AddStudentModal";
 import { BiTrash } from "react-icons/bi";
 import { HiOutlineEye } from "react-icons/hi";
@@ -9,9 +9,10 @@ import { useNavigate } from "react-router-dom";
 import { studentContext } from "../../../App";
 import DeleteStudentModal from "../Modals/DeleteStudentModal";
 import Navbar from "../../Navbar";
-import ReactTooltip from 'react-tooltip';
+import ReactTooltip from "react-tooltip";
+
 // import StudentDetails from "./StudentDetails";
-function Students({setstudentId,studentId,setstudentEmail,setstudentName}) {
+function Students() {
   const [studentArr, setstudentArr] = useContext(studentContext);
 
   // use state and functions for add student modal
@@ -36,37 +37,30 @@ function Students({setstudentId,studentId,setstudentEmail,setstudentName}) {
   const [studentKey, setstudentKey] = useState("");
   const handleStudentKey = (studentKey) => {
     setstudentKey(studentKey);
-    console.log(studentKey);
   };
 
   const navigate = useNavigate();
 
   // use state for searching
-  const [search, setsearch] = useState("")
+  const [search, setsearch] = useState("");
 
-  const handleStudentId=()=>{
-    console.log(studentId)
-  }
-  // use state for student information
-  // const [studentId, setstudentId] = useState("")
-  // const [eyeBtn, seteyeBtn] = useState(false)
 
   return (
-
     <>
-    <Navbar/>
+      <Navbar />
       <div className="pges">
         <div className="pg-container">
           <p className="pt-5  login-p ">Students</p>
           <hr />
           <div className="d-flex justify-content-between">
-            {/* <input type="search" className='col-5 searchinput p-1 mt-3' placeholder='Search by student name or email' name="" id="" /> */}
             <div className="col-5">
               <Form.Control
                 type="search"
                 className="searchinput mt-3"
                 placeholder="Search by student name or email"
-                onChange={(e)=>{setsearch(e.target.value)}}
+                onChange={(e) => {
+                  setsearch(e.target.value);
+                }}
               />
             </div>
 
@@ -88,65 +82,71 @@ function Students({setstudentId,studentId,setstudentEmail,setstudentName}) {
               </p>
             </div>
 
-            {studentArr.filter((student)=>{
-              if(search===""){
-                return student
-              } else if (student.name.toLowerCase().includes(search.toLowerCase())){
-                return student
-              } else if(student.email.toLowerCase().includes(search.toLowerCase())){
-                return student
-
-              }
-            }).map((student) => {
-              return (
-                <div className="row mt-4 mb-4 border-bottom" key={student.key}>
-                  <p className="col d-flex justify-content-start pg-items">
-                    {student.name}
-                  </p>
-                  <p className="col d-flex justify-content-center pg-items">
-                    {student.email}
-                  </p>
-                  <div className="col d-flex justify-content-end gap-4">
-                    <MdEdit
-                    data-tip="Edit"
-                      size={20}
-                      style={{ fill: "#7E7E7F" }}
-                      onClick={() => {
-                        setisEditing(true);
-                        handleShowAdd();
-                        seteditkey(student.key);
-                        seteditName(student.name);
-                        seteditEmail(student.email);
-                        seteditPassword(student.password);
-                        seteditCPassword(student.cPassword)
-                      }}
-                    />{" "}
-                    <BiTrash
-                    data-tip="Delete"
-                      size={20}
-                      style={{ fill: "#D04444" }}
-                      onClick={() => {
-                        handleShowDelete();
-                        handleStudentKey(student.key);
-                      }}
-                    />{" "}
-                    <HiOutlineEye
-                    data-tip="View student details"
-                      size={20}
-                      style={{ color: "#7E7E7F" }}
-                      onClick={() => {setstudentId(student.key);setstudentEmail(student.email);setstudentName(student.name);handleStudentId();
-                        ;navigate("/studentDetails")
-                      }}
-
-                    />
+            {studentArr
+              .filter((student) => {
+                if (search === "") {
+                  return student;
+                } else if (
+                  student.name.toLowerCase().includes(search.toLowerCase())
+                ) {
+                  return student;
+                } else if (
+                  student.email.toLowerCase().includes(search.toLowerCase())
+                ) {
+                  return student;
+                }
+              })
+              .map((student) => {
+                return (
+                  <div
+                    className="row mt-4 mb-4 border-bottom"
+                    key={student.key}
+                  >
+                    <p className="col d-flex justify-content-start pg-items">
+                      {student.name}
+                    </p>
+                    <p className="col d-flex justify-content-center pg-items">
+                      {student.email}
+                    </p>
+                    <div className="col d-flex justify-content-end gap-4">
+                      <MdEdit
+                        data-tip="Edit"
+                        size={20}
+                        style={{ fill: "#7E7E7F" }}
+                        onClick={() => {
+                          setisEditing(true);
+                          handleShowAdd();
+                          seteditkey(student.key);
+                          seteditName(student.name);
+                          seteditEmail(student.email);
+                          seteditPassword(student.password);
+                          seteditCPassword(student.cPassword);
+                        }}
+                      />{" "}
+                      <BiTrash
+                        data-tip="Delete"
+                        size={20}
+                        style={{ fill: "#D04444" }}
+                        onClick={() => {
+                          handleShowDelete();
+                          handleStudentKey(student.key);
+                        }}
+                      />{" "}
+                      <HiOutlineEye
+                        data-tip="View student details"
+                        size={20}
+                        style={{ color: "#7E7E7F" }}
+                        onClick={() => {
+                          navigate(`/students/${student.key}`);
+                        }}
+                      />
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
           </div>
         </div>
       </div>
-
       <ReactTooltip />
 
       {showAdd && (
@@ -157,8 +157,6 @@ function Students({setstudentId,studentId,setstudentEmail,setstudentName}) {
           setstudentArr={setstudentArr}
           isEditing={isEditing}
           setisEditing={setisEditing}
-          // editStudent={editStudent}
-          // seteditStudent={seteditStudent} 
           editKey={editKey}
           seteditkey={seteditkey}
           editName={editName}
@@ -172,7 +170,6 @@ function Students({setstudentId,studentId,setstudentEmail,setstudentName}) {
         />
       )}
 
-
       {showdelete && (
         <DeleteStudentModal
           studentKey={studentKey}
@@ -182,8 +179,6 @@ function Students({setstudentId,studentId,setstudentEmail,setstudentName}) {
           setstudentArr={setstudentArr}
         />
       )}
-
-     {/* {eyeBtn&& <StudentDetails seteyeBtn={seteyeBtn} studentName={studentName} studentEmail={studentEmail}/>} */}
     </>
   );
 }

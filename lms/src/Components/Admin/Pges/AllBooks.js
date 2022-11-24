@@ -8,7 +8,7 @@ import { createContext, useContext } from "react";
 import { allbooksContext } from "../../../App";
 import DeleteBookModal from "../Modals/DeleteBookModal";
 import Navbar from "../../Navbar";
-import ReactTooltip from 'react-tooltip';
+import ReactTooltip from "react-tooltip";
 
 function AllBooks() {
   const [allBooksArr, setallBooksArr] = useContext(allbooksContext);
@@ -27,7 +27,6 @@ function AllBooks() {
   const [bookKey, setbookKey] = useState("");
   const handleBookKey = (bookKey) => {
     setbookKey(bookKey);
-    console.log(bookKey);
   };
   // state for checking the edit key is true or not
   const [isBookEdit, setisBookEdit] = useState(false);
@@ -39,12 +38,12 @@ function AllBooks() {
   const [editRemainingCopies, seteditRemainingCopies] = useState("");
 
   // usestate for searching
-  const [searchBook, setsearchBook] = useState("")
+  const [searchBook, setsearchBook] = useState("");
 
   return (
     <>
-    <Navbar/>
-      <div className="pges">
+      <Navbar />
+      <div className="pges col-10">
         <div className="pg-container">
           <p className="pt-5  login-p ">All Books</p>
           <hr />
@@ -55,7 +54,9 @@ function AllBooks() {
                 type="search"
                 className="searchinput mt-3"
                 placeholder="Search by student name or email"
-                onChange={(e=>{setsearchBook(e.target.value)})}
+                onChange={(e) => {
+                  setsearchBook(e.target.value);
+                }}
               />
             </div>
 
@@ -84,62 +85,67 @@ function AllBooks() {
                 Actions
               </p>
             </div>
-            {allBooksArr.filter((book)=>{
-              if(searchBook==""){
-                return book
-              } else if (book.bName.toLowerCase().includes(searchBook.toLowerCase())){
-                return book
-              } else if(book.author.toLowerCase().includes(searchBook.toLowerCase())){
-                return book
-
-              }
-            }).map((book) => {
-              return (
-                <div className="row mt-4 mb-4 border-bottom" key={book.key}>
-                  <p className="col d-flex justify-content-start  pg-items">
-                    {book.bName}
-                  </p>
-                  <p className="col d-flex justify-content-center  pg-items">
-                    {book.author}
-                  </p>
-                  <p className="col d-flex justify-content-center  pg-items">
-                    {book.language}
-                  </p>
-                  <p className="col d-flex justify-content-center   pg-items">
-                    {book.totalCopies}
-                  </p>
-                  <p className="col d-flex justify-content-center  pg-items">
-                    {book.remainingCopies}
-                  </p>
-                  <p className="col d-flex justify-content-center gap-3">
-                    <MdEdit
-                    data-tip="Edit"
-                      size={20}
-                      style={{ fill: "#7E7E7F" }}
-                      onClick={() => {
-                        handleShowAddBook();
-                        setisBookEdit(true);
-                        seteditBname(book.bName);
-                        seteditAuthor(book.author);
-                        seteditLanguage(book.language);
-                        seteditTotalCopies(book.totalCopies);
-                        seteditRemainingCopies(book.remainingCopies);
-                        handleBookKey(book.key);
-                      }}
-                    />{" "}
-                    <BiTrash
-                    data-tip="Delete"
-                      size={20}
-                      style={{ fill: "#D04444" }}
-                      onClick={() => {
-                        handleShowDeleteBook();
-                        handleBookKey(book.key);
-                      }}
-                    />
-                  </p>
-                </div>
-              );   
-            })}
+            {allBooksArr
+              .filter((book) => {
+                if (searchBook == "") {
+                  return book;
+                } else if (
+                  book.bName.toLowerCase().includes(searchBook.toLowerCase())
+                ) {
+                  return book;
+                } else if (
+                  book.author.toLowerCase().includes(searchBook.toLowerCase())
+                ) {
+                  return book;
+                }
+              })
+              .map((book) => {
+                return (
+                  <div className="row mt-4 mb-4 border-bottom" key={book.key}>
+                    <p className="col d-flex justify-content-start  pg-items">
+                      {book.bName}
+                    </p>
+                    <p className="col d-flex justify-content-center  pg-items">
+                      {book.author}
+                    </p>
+                    <p className="col d-flex justify-content-center  pg-items">
+                      {book.language}
+                    </p>
+                    <p className="col d-flex justify-content-center   pg-items">
+                      {book.totalCopies}
+                    </p>
+                    <p className="col d-flex justify-content-center  pg-items">
+                      {book.remainingCopies}
+                    </p>
+                    <p className="col d-flex justify-content-center gap-3">
+                      <MdEdit
+                        data-tip="Edit"
+                        size={20}
+                        style={{ fill: "#7E7E7F" }}
+                        onClick={() => {
+                          handleShowAddBook();
+                          setisBookEdit(true);
+                          seteditBname(book.bName);
+                          seteditAuthor(book.author);
+                          seteditLanguage(book.language);
+                          seteditTotalCopies(book.totalCopies);
+                          seteditRemainingCopies(book.remainingCopies);
+                          handleBookKey(book.key);
+                        }}
+                      />{" "}
+                      <BiTrash
+                        data-tip="Delete"
+                        size={20}
+                        style={{ fill: "#D04444" }}
+                        onClick={() => {
+                          handleShowDeleteBook();
+                          handleBookKey(book.key);
+                        }}
+                      />
+                    </p>
+                  </div>
+                );
+              })}
           </div>
         </div>
       </div>

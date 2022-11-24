@@ -12,7 +12,7 @@ import { issuedBooksContext } from "../../../App";
 import MarkReturned from "../Modals/MarkReturned";
 
 import shortid from "shortid";
-import ReactTooltip from 'react-tooltip';
+import ReactTooltip from "react-tooltip";
 
 function IssuedBooks() {
   const [allBooksArr, setallBooksArr] = useContext(allbooksContext);
@@ -33,13 +33,41 @@ function IssuedBooks() {
   // usestate for searching issued books
   const [searchIssuedBook, setsearchIssuedBook] = useState("");
 
+  const issuedBooksArrCopy = issuedBooksArr;
+
+  const tempIssuedArr = issuedBooksArrCopy.map((issuedbook) => {
+    let issued = {
+      key: issuedbook.key,
+      iBook: issuedbook.iBook,
+      iStudent: issuedbook.iStudent,
+      iDate: issuedbook.iDate,
+      iDueDate: issuedbook.iDueDate,
+      fine: issuedbook.fine,
+      isReturned: issuedbook.isReturned,
+      returnDate: issuedbook.returnDate,
+    };
+
+    allBooksArr.map((book) => {
+      if (book.key == issuedbook.iBook) {
+        issued.iBook = book.bName;
+      }
+    });
+
+    studentArr.map((obj) => {
+      if (obj.key == issuedbook.iStudent) {
+        issued.iStudent = obj.name;
+      }
+    });
+
+    return issued;
+  });
+
   // usestate for marking issued book as returned
   const [isReturned, setisReturned] = useState(false);
 
   // issued book key state
   const [issuedKey, setissuedKey] = useState("");
   const [returnedBookId, setreturnedBookId] = useState("");
- 
 
   return (
     <>
@@ -50,7 +78,6 @@ function IssuedBooks() {
           <p className="pt-5  login-p ">Issued Books</p>
           <hr />
           <div className="d-flex justify-content-between">
-            {/* <input type="search" className='col-5 searchinput p-1 mt-3' placeholder='Search by student name or email' name="" id="" /> */}
             <div className="col-5">
               <Form.Control
                 type="search"
@@ -91,56 +118,41 @@ function IssuedBooks() {
               </p>
             </div>
 
-            {/* {issuedBooksArr
-              .filter((book) => {
+            {tempIssuedArr
+              .filter((issuedBooks) => {
                 if (searchIssuedBook == "") {
-                  return book;
+                  return issuedBooks;
                 } else if (
-                  book.iBookName
+                  issuedBooks.iBook
                     .toLowerCase()
                     .includes(searchIssuedBook.toLowerCase())
                 ) {
-                  return book;
+                  return issuedBooks;
                 } else if (
-                  book.iStudentName 
+                  issuedBooks.iStudent
                     .toLowerCase()
                     .includes(searchIssuedBook.toLowerCase())
                 ) {
-                  return book;
+                  return issuedBooks;
                 }
               })
-              . */}
-
-              {/* you can also do this with only map and if condition */}
-              {issuedBooksArr.filter(issuedBooks=>issuedBooks.isReturned == false).map((issuedBooks) => {
+              .map((issuedBooks) => {
+                if (issuedBooks.isReturned == false) {
                   return (
                     <div
                       className="row mt-4 mb-4 border-bottom"
                       key={issuedBooks.key}
                     >
-                      {/* {issuedBooks.iBook} */}
-                      {allBooksArr.map((books) => {
-                        if (books.key  === issuedBooks.iBook) {
-                          return (
-                            <p className="col d-flex justify-content-start  pg-items" key={shortid.generate()}>
-                              {books.bName}
-                            </p>
-                          );
-                        }
-                      })}
+                      <p className="col d-flex justify-content-start  pg-items">
+                        {issuedBooks.iBook}
+                      </p>
 
-                      {studentArr.map((student) => {
-                        if (student.key  === issuedBooks.iStudent) {
-                          return (
-                            <p className="col d-flex justify-content-center  pg-items" key={shortid.generate()}> 
-                              {student.name}
-                            </p>
-                          );
-                        }
-                      })}
-                     
-                        {/* {issuedBooks.iStudent} */}
-                      
+                      <p className="col d-flex justify-content-center  pg-items">
+                        {issuedBooks.iStudent}
+                      </p>
+
+                      {/* {issuedBooks.iStudent} */}
+
                       <p className="col d-flex justify-content-center  pg-items">
                         {issuedBooks.iDate}
                       </p>
@@ -148,10 +160,11 @@ function IssuedBooks() {
                         {issuedBooks.iDueDate}
                       </p>
                       <p className="col d-flex justify-content-center  pg-items">
-                       {issuedBooks.fine}
+                        {issuedBooks.fine}
                       </p>
                       <p className="col d-flex justify-content-center gap-3">
-                        <MdOutlineAssignmentReturn data-tip="Mark Returned"
+                        <MdOutlineAssignmentReturn
+                          data-tip="Mark Returned"
                           size={20}
                           style={{ color: "#7E7E7F" }}
                           onClick={() => {
@@ -163,11 +176,11 @@ function IssuedBooks() {
                       </p>
                     </div>
                   );
-                
+                }
               })}
           </div>
         </div>
-      </div> 
+      </div>
       <ReactTooltip />
 
       {showIssuedBooks && (

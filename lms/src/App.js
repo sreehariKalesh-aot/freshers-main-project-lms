@@ -1,54 +1,45 @@
 import "./App.css";
 import React from "react";
 import Login from "./Components/Login";
-import Navbar from "./Components/Navbar";
-import { useState, createContext ,useEffect} from "react";
-// import Students from "./Components/Admin/Pages/Students";
-import { BrowserRouter as Router, Routes, Route,  } from "react-router-dom";
+import { useState, createContext, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Students from "./Components/Admin/Pges/Students";
 import IssuedBooks from "./Components/Admin/Pges/IssuedBooks";
 import AllBooks from "./Components/Admin/Pges/AllBooks";
 import StudentDetails from "./Components/Admin/Pges/StudentDetails";
-import LoginForm from "./Components/LoginForm";
 import StudentLogin from "./Components/Student/StudentLogin";
-// import AllBooks from "./Components/Admin/Pages/AllBooks";
-// import IssuedBooks from "./Components/Admin/Pages/IssuedBooks";
-// context for updating the array of add student
+
 const studentContext = createContext();
 const allbooksContext = createContext();
 const issuedBooksContext = createContext();
 
 function App() {
-  
-  const getStudentArray = ()=>{
+  const getStudentArray = () => {
     let students = localStorage.getItem("students");
-    if(students){
+    if (students) {
       return JSON.parse(localStorage.getItem("students"));
-    }
-    else{
+    } else {
       return [];
     }
-  }
+  };
 
-  const getBooksArray = ()=>{
+  const getBooksArray = () => {
     let books = localStorage.getItem("books");
-    if(books){
+    if (books) {
       return JSON.parse(localStorage.getItem("books"));
-    }
-    else{
+    } else {
       return [];
     }
-  }
+  };
 
-  const getIssuedBooksArray = ()=>{
+  const getIssuedBooksArray = () => {
     let iBooks = localStorage.getItem("issuedbooks");
-    if(iBooks){
+    if (iBooks) {
       return JSON.parse(localStorage.getItem("issuedbooks"));
-    }
-    else{
+    } else {
       return [];
     }
-  }
+  };
 
   const [studentArr, setstudentArr] = useState(getStudentArray());
 
@@ -60,23 +51,20 @@ function App() {
 
   const email = "sreehari@gmail.com";
   const password = "123";
-  
 
   useEffect(() => {
-    localStorage.setItem("students",JSON.stringify(studentArr))
-    localStorage.setItem("books",JSON.stringify(allBooksArr))
-    localStorage.setItem("issuedbooks",JSON.stringify(issuedBooksArr))
-  }, [studentArr,allBooksArr,issuedBooksArr])
-  
+    localStorage.setItem("students", JSON.stringify(studentArr));
+    localStorage.setItem("books", JSON.stringify(allBooksArr));
+    localStorage.setItem("issuedbooks", JSON.stringify(issuedBooksArr));
+  }, [studentArr, allBooksArr, issuedBooksArr]);
 
-  const [studentId, setstudentId] = useState("")
-  const [studentName, setstudentName] = useState("")
-  const [studentEmail, setstudentEmail] = useState("")
+  // const [studentId, setstudentId] = useState("")
+  // const [studentName, setstudentName] = useState("")
+  // const [studentEmail, setstudentEmail] = useState("")
   return (
     <div>
       <studentContext.Provider value={[studentArr, setstudentArr]}>
         <allbooksContext.Provider value={[allBooksArr, setallBooksArr]}>
-
           <issuedBooksContext.Provider
             value={[issuedBooksArr, setissuedBooksArr]}
           >
@@ -88,33 +76,22 @@ function App() {
               <Routes>
                 <Route
                   path="/"
-                  element={(
-                      <Login
-                        email={email}
-                        password={password}
-                        authCheck={authCheck}
-                        setauthCheck={setauthCheck}
-                      />
-                    )
+                  element={
+                    <Login
+                      email={email}
+                      password={password}
+                      authCheck={authCheck}
+                      setauthCheck={setauthCheck}
+                    />
                   }
                 />
-                {/* <Route path="/studentPage" element={authCheck && <StudentLogin/>} /> */}
-                <Route path="/studenLogin"  element={<StudentLogin/>}/>
-                <Route path="/students" element={<Students setstudentId={setstudentId}  studentId={studentId} setstudentName={setstudentName} setstudentEmail={setstudentEmail}/>} />
-                <Route
-                  path="/studentDetails"
-                  element={<StudentDetails studentId={studentId} studentName={studentName} studentEmail={studentEmail}/>}
-                />
+                <Route path="/studenLogin" element={<StudentLogin />} />
+                <Route path="/students" element={<Students />} />
+                <Route path="/students/:id" element={<StudentDetails />} />
                 <Route path="/allbooks" element={<AllBooks />} />
-                <Route
-                  path="/issuedbooks"
-                  element={<IssuedBooks />}
-                />
+                <Route path="/issuedbooks" element={<IssuedBooks />} />
               </Routes>
-              {/* <Tablet/> */}
-              {/* <Nav/> */}
             </Router>
-            {/* </div> */}
           </issuedBooksContext.Provider>
         </allbooksContext.Provider>
       </studentContext.Provider>

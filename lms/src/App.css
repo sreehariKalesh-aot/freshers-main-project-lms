@@ -52,10 +52,19 @@
 
 .nvbar {
   width: 17%;
-  height: 100vh;
+  height: 100%;
   background-color: #ed7966;
   position: fixed;
+  z-index: 1 !important;
 }
+
+.btn-container {
+  z-index: -1 !important;
+}
+
+/* .btn{
+  color: white !important;
+} */
 
 .lms2 {
   font-family: "Lato";
@@ -99,11 +108,11 @@ a {
 }
 
 .pges {
-  background-color: 
-  #fffbfa;
-  height: 100vh;
+  background-color: #fffbfa;
+  height: 100%;
   width: 83%;
   margin-left: auto;
+  min-width: 800px;
 }
 
 .pges2 {
@@ -135,6 +144,10 @@ a {
   color: #09174a;
 }
 
+.logodiv {
+  padding-left: 1.5rem;
+}
+
 .navcomp {
   /* border: 1px solid; */
   border-radius: 8px;
@@ -143,7 +156,7 @@ a {
   max-width: 100%;
   margin-left: 0.5rem;
   border: none;
-  color: white;
+  color: white !important;
 }
 
 .navcomp1 {
@@ -171,12 +184,18 @@ a {
   font-size: 16px;
   line-height: 20px;
   color: #09174a;
+
+  /* border: solid 2px blue; */
+  /* white-space: nowrap;
+  text-overflow: ellipsis !important;
+  width: 100px;
+  display: block;
+  overflow: hidden */
   /* border: 1px solid; 
    width: 100px;
   white-space: nowrap !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important; */
-
 }
 
 .stdnts {
@@ -202,8 +221,7 @@ a {
 
 .stdnt-details-div {
   border-right: 1px solid !important;
-  border-color:#ECECEC;
-  ;
+  border-color: #ececec;
 }
 
 .stdnt-name2 {
@@ -228,18 +246,66 @@ a {
   color: #8b8b8b;
 }
 
-.nmbrs{
+.nmbrs {
   font-weight: 500;
   font-size: 14px;
   color: #414141;
 }
 
-.error{
+.error {
   color: #ed7966;
 }
 
-svg{
-
+svg {
   cursor: pointer;
-  
 }
+
+.logout {
+  width: 16.5%;
+  position: fixed;
+  bottom: 40px;
+}
+
+.username {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+
+  color: #ffffff;
+}
+
+.useremail {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+
+  color: #ffffff;
+}
+
+.acive{
+  background-color: #09174a;
+}
+
+.row{
+  flex-wrap: nowrap !important;
+}
+
+@media (max-width: 936px) {
+  .pges {
+    margin-left: 150px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .logodiv {
+    padding-left: 0.4rem !important;
+  }
+
+  .btn {
+    padding-left: 0px !important;
+    display: flex !important;
+    justify-content: center !important;
+    margin-left: 0rem;
+  }
+}
+

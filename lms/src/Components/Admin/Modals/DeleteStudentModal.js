@@ -10,9 +10,7 @@ function DeleteStudentModal({
   studentKey,
 }) {
   const handleDeleteStudent = (studentKey) => {
-    console.log(studentKey);
     setstudentArr(studentArr.filter((student) => student.key !== studentKey));
-    console.log(studentArr);
   };
 
   return (

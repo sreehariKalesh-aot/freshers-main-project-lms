@@ -20,31 +20,30 @@ function MarkReturned({
   const handleBookReturn = (issuedKey) => {
     // no need of this use state u can directly set true
     setisReturned(true);
-    console.log(issuedKey);
+
+    const thisMonth = new Date().getMonth() + 1;
 
     setissuedBooksArr(
       issuedBooksArr.map((book) => {
         if (book.key === issuedKey) {
-          // console.log(book.iBook)
-          // setreturnedBookName(book.iBook)
-          // console.log(returnedBookName)
           return {
             ...book,
             isReturned: true,
-            returnDate: new Date().getDate() + "-" + new Date().getMonth()  + "-" + new Date().getFullYear()
+            returnDate:
+              new Date().getFullYear() +
+              "-" +
+              thisMonth +
+              "-" +
+              new Date().getDate(),
           };
         }
         return book;
       })
     );
 
-    console.log("entered handle returned actions");
-    // console.log(returnedBookName)
     setallBooksArr(
       allBooksArr.map((book) => {
-        console.log("outside if");
         if (book.key === returnedBookId) {
-          console.log("entered updating remaining book count incrementing");
           // setremainingCount(book.remainingCopies++)
           // setremainingCount(book['remainingCopies']++)
           return {
@@ -55,8 +54,6 @@ function MarkReturned({
         return book;
       })
     );
-
-    console.log(issuedBooksArr);
   };
 
   return (

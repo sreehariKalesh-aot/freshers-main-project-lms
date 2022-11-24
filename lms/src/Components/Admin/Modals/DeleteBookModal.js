@@ -10,9 +10,7 @@ function DeleteBookModal({
   bookKey,
 }) {
   const handleDeleteBook = (bookKey) => {
-    console.log(bookKey);
     setallBooksArr(allBooksArr.filter((book) => book.key !== bookKey));
-    console.log(allBooksArr);
   };
 
   return (

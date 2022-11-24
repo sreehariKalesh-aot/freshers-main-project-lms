@@ -5,26 +5,70 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../../Navbar";
 import { useState, useContext } from "react";
 import shortid from "shortid";
+import { useParams } from "react-router-dom";
 
 import { allbooksContext } from "../../../App";
 import { studentContext } from "../../../App";
 import { issuedBooksContext } from "../../../App";
 
-function StudentDetails({ studentName, studentEmail, studentId }) {
+function StudentDetails() {
+  const { id } = useParams();
+
   const [allBooksArr, setallBooksArr] = useContext(allbooksContext);
   const [studentArr, setstudentArr] = useContext(studentContext);
   const [issuedBooksArr, setissuedBooksArr] = useContext(issuedBooksContext);
 
-  const totalBooks =issuedBooksArr.filter((issued) => issued.iStudent === studentId)
- 
-  const totalReturned =issuedBooksArr.filter((issued) => issued.iStudent === studentId && issued.isReturned === true)
+  // usestate for search
+  const [searchStudent, setsearchStudent] = useState("");
 
-  const totalFine = totalBooks.reduce((acc , curr)=>{
-    return acc + curr.fine
-  },0)
+  //ejak;fksdfasdklnfkalsdnfkl;asdnf;klasdg;klasfgasfgnslfk;agnkals;fngkasfngkla;sf
+
+  const studentDetailsArr = issuedBooksArr.filter(
+    (student) => student.iStudent === id
+  );
+
+  const tempstudentDetailsArr = studentDetailsArr.map((student) => {
+    let studentobj = {
+      key: student.key,
+      book: "",
+      author: "",
+      issueDate: student.iDate,
+      dueDate: student.iDueDate,
+      returnDate: student.returnDate,
+      fine: student.fine,
+    };
+
+    allBooksArr.map((book) => {
+      if (book.key == student.iBook) {
+        studentobj.book = book.bName;
+        studentobj.author = book.author;
+      }
+    });
+
+    studentArr.map((obj) => {
+      if (obj.key == student.iStudent) {
+        studentobj.key = obj.key;
+      }
+    });
+
+    return studentobj;
+  });
+
+  //jssgasjaskdfjsadfsdafasdffsadfkjasdfjksadfsadfasdfsadfasdfasdfsfgdsg
+
+  const totalBooks = issuedBooksArr.filter((issued) => issued.iStudent === id);
+
+  const totalReturned = issuedBooksArr.filter(
+    (issued) => issued.iStudent === id && issued.isReturned === true
+  );
+
+  const totalFine = issuedBooksArr
+    .filter((issued) => issued.iStudent === id && issued.fine >= 0)
+    .reduce((acc, curr) => {
+      return acc + curr.fine;
+    }, 0);
 
   const navigate = useNavigate();
-  console.log(studentId);
 
   return (
     <>
@@ -42,16 +86,27 @@ function StudentDetails({ studentName, studentEmail, studentId }) {
             >
               Students /
             </p>
-            <p className="m-0 stdnt-name">{studentName}</p>
+            {studentArr.map((student) => {
+              if (student.key === id) {
+                return <p className="m-0 stdnt-name">{student.name}</p>;
+              }
+            })}
           </div>
           <hr />
 
           <div className="pges2 mt-4 pt-4 ps-4 pb-4 row">
             <div className="col-8 stdnt-details-div">
-              <h1 className="stdnt-name2" >
-                {studentName}
-              </h1>
-              <p className="stdnt-email">{studentEmail}</p>
+              {studentArr.map((student) => {
+                if (student.key === id) {
+                  return <h1 className="stdnt-name2">{student.name}</h1>;
+                }
+              })}
+
+              {studentArr.map((student) => {
+                if (student.key === id) {
+                  return <p className="stdnt-email">{student.email}</p>;
+                }
+              })}
             </div>
             <div className="d-flex col-4 gap-5">
               <div>
@@ -69,12 +124,16 @@ function StudentDetails({ studentName, studentEmail, studentId }) {
 
           {/* content div */}
           <div className="pges2 mt-4 pt-4 ps-5 pe-5 pb-5">
-            <p className="issued-books pb-2">Issued Books ({totalBooks.length})</p>
+            <p className="issued-books pb-2">
+              Issued Books ({totalBooks.length})
+            </p>
             <div className="col-5">
               <Form.Control
                 type="search"
                 className="searchinput mt-3"
                 placeholder="Search by student name or email"
+                value={searchStudent}
+                onChange={(e) => setsearchStudent(e.target.value)}
               />
             </div>
             <div className="row border-bottom pt-4">
@@ -99,66 +158,53 @@ function StudentDetails({ studentName, studentEmail, studentId }) {
               </p>
             </div>
 
-            {issuedBooksArr
-              .filter((issued) => issued.iStudent === studentId)
-              .map((issuedbooks) => {
-                return (
-                  <>
-                    {allBooksArr
-                      .filter((books) => books.key === issuedbooks.iBook)
-                      .map((books) => {
-                        return (
-                          <div className="row mt-4 mb-4 border-bottom" key={shortid.generate()}>
-                            <p className="col d-flex justify-content-start  pg-items">
-                              {books.bName}
-                            </p>
-                            <p className="col d-flex justify-content-center  pg-items">
-                              {books.author}
-                            </p>
-                            <p className="col d-flex justify-content-center  pg-items">
-                              {issuedbooks.iDate}
-                            </p>
-                            <p className="col d-flex justify-content-center   pg-items">
-                              {issuedbooks.iDueDate}
-                            </p>
-                            <p className="col d-flex justify-content-center  pg-items">
-                              {issuedbooks.returnDate
-                                ? issuedbooks.returnDate
-                                : "-"}
-                            </p>
-                            <p className="col d-flex justify-content-center gap-3">
-                              {issuedbooks.fine}
-                            </p>
-                          </div>
-                        );
-                      })}
-                  </>
-                );
+            {tempstudentDetailsArr
+              .filter((book) => {
+                if (searchStudent == "") {
+                  return book;
+                } else if (
+                  book.book.toLowerCase().includes(searchStudent.toLowerCase())
+                ) {
+                  return book;
+                } else if (
+                  book.author
+                    .toLowerCase()
+                    .includes(searchStudent.toLowerCase())
+                ) {
+                  return book;
+                }
+              })
+              .map((book) => {
+                if (book.key === id) {
+                  return (
+                    <>
+                      <div
+                        className="row mt-4 mb-4 border-bottom"
+                        key={shortid.generate()}
+                      >
+                        <p className="col d-flex justify-content-start  pg-items">
+                          {book.book}
+                        </p>
+                        <p className="col d-flex justify-content-center  pg-items">
+                          {book.author}
+                        </p>
+                        <p className="col d-flex justify-content-center  pg-items">
+                          {book.issueDate}
+                        </p>
+                        <p className="col d-flex justify-content-center   pg-items">
+                          {book.dueDate}
+                        </p>
+                        <p className="col d-flex justify-content-center  pg-items">
+                          {book.returnDate ? book.returnDate : "-"}
+                        </p>
+                        <p className="col d-flex justify-content-center gap-3 pg-items">
+                          {book.fine}
+                        </p>
+                      </div>
+                    </>
+                  );
+                }
               })}
-
-            {/* {issuedBooksArr.map((issuedbooks) => {
-              if (
-                issuedbooks.iStudent === studentId 
-              )
-                return (
-                  <>
-                    <div className="row mt-4 mb-4 border-bottom">
-                      <p className="col d-flex justify-content-center  pg-items">
-                        {issuedbooks.iDate}
-                      </p>
-                      <p className="col d-flex justify-content-center   pg-items">
-                        {issuedbooks.iDueDate}
-                      </p>
-                      <p className="col d-flex justify-content-center  pg-items">
-                        {issuedbooks.returnDate ? issuedbooks.returnDate : "-"}
-                      </p>
-                      <p className="col d-flex justify-content-center gap-3">
-                        {issuedbooks.fine}
-                      </p>
-                    </div>
-                  </>
-                );
-            })} */}
           </div>
         </div>
       </div>

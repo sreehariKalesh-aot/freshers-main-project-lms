@@ -1,7 +1,6 @@
 import React from "react";
 // import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // import {Link} from "react-router-dom"
 import { Link, useNavigate } from "react-router-dom";
 import LoginForm from "./LoginForm";
@@ -9,6 +8,7 @@ import { createContext, useContext } from "react";
 import { studentContext } from "../App";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import secureLocalStorage from "react-secure-storage";
 
 function Login({ email, password, authCheck, setauthCheck }) {
   const [studentArr, setstudentArr] = useContext(studentContext);
@@ -20,6 +20,15 @@ function Login({ email, password, authCheck, setauthCheck }) {
 
   // use state for checking login error
   const [loginError, setloginError] = useState(false);
+
+  // state and useeffect for retrieving encrypted password from local storage
+
+  // const [email, setemail] = useState()
+  // const [password, setpassword] = useState()
+  // useEffect(() => {
+  //  setemail(secureLocalStorage.getItem("email"))
+  //  setpassword(secureLocalStorage.getItem("password"))
+  // }, [])
 
   const handleEmail = (e) => {
     setiemail(e.target.value);
@@ -36,19 +45,21 @@ function Login({ email, password, authCheck, setauthCheck }) {
     }
     // e.preventDefault()
     else if (iemail === email && ipassword === password) {
+      // const hashPassword = bcrypt.hash(password);
+
+      secureLocalStorage.setItem("email", email);
+      secureLocalStorage.setItem("password", password);
+
       e.preventDefault();
       setauthCheck(true);
       setloginError(false);
-      console.log(authCheck);
       navigate("/issuedbooks");
     } else {
-      // alert("incorrect username or password")
       e.preventDefault();
       setloginError(true);
-      toast.error("Incorrect Email or Password",{position: "bottom-center",});
+      toast.error("Incorrect Email or Password", { position: "top-right" });
     }
   };
-
 
   // student login
   const [studentLogin, setstudentLogin] = useState(false);
@@ -65,27 +76,19 @@ function Login({ email, password, authCheck, setauthCheck }) {
   };
 
   const handleStudentAuth = () => {
-
     studentArr.map((student) => {
-      console.log(studentEmail);
-      console.log(studentPassword);
       if (
         studentEmail === student.email &&
         studentPassword === student.password
       ) {
         navigate("/studenLogin");
-        console.log("student login");
       } else {
-        alert("invalid Credentials")
+        alert("invalid Credentials");
       }
     });
-
-
-    //
-    // if(studentEmail===email && studentPassword === password){
-
-    // }
   };
+
+  // state for highlighting nav
   return (
     <div>
       <div className="d-flex align-items-center gap-3">
@@ -97,7 +100,7 @@ function Login({ email, password, authCheck, setauthCheck }) {
         <p className="welcome-p">Welcome back! Please enter your details.</p>
 
         {/* tab for logging in as admin and student change when needed*/}
-        <ul className="nav mb-3">
+        <ul className="nav mb-2">
           <li className="nav-item">
             <a
               className="nav-link active ps-0"
@@ -116,12 +119,13 @@ function Login({ email, password, authCheck, setauthCheck }) {
               onClick={() => {
                 setstudentLogin(true);
               }}
+              style={{ borderBottom: "1px", borderColor: "orange" }}
             >
               Student
             </a>
           </li>
         </ul>
-        <hr />
+        <hr className="mt-0" />
 
         <LoginForm
           iemail={iemail}
@@ -138,9 +142,7 @@ function Login({ email, password, authCheck, setauthCheck }) {
           handleStudentPassword={handleStudentPassword}
           handleStudentAuth={handleStudentAuth}
         />
-        <ToastContainer 
-       
-        />
+        <ToastContainer />
       </div>
     </div>
   );
