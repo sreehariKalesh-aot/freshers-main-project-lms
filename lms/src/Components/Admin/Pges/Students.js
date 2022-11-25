@@ -10,6 +10,7 @@ import { studentContext } from "../../../App";
 import DeleteStudentModal from "../Modals/DeleteStudentModal";
 import Navbar from "../../Navbar";
 import ReactTooltip from "react-tooltip";
+import LinesEllipsis from "react-lines-ellipsis";
 
 // import StudentDetails from "./StudentDetails";
 function Students() {
@@ -26,7 +27,6 @@ function Students() {
 
   // use state for editing
   const [isEditing, setisEditing] = useState(false);
-  // const [editStudent, seteditStudent] = useState({key:"",name:"",email:"",password:"",cPassword:""})
   const [editKey, seteditkey] = useState();
   const [editName, seteditName] = useState("");
   const [editEmail, seteditEmail] = useState("");
@@ -43,7 +43,6 @@ function Students() {
 
   // use state for searching
   const [search, setsearch] = useState("");
-
 
   return (
     <>

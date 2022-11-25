@@ -21,7 +21,6 @@ function StudentDetails() {
   // usestate for search
   const [searchStudent, setsearchStudent] = useState("");
 
-  //ejak;fksdfasdklnfkalsdnfkl;asdnf;klasdg;klasfgasfgnslfk;agnkals;fngkasfngkla;sf
 
   const studentDetailsArr = issuedBooksArr.filter(
     (student) => student.iStudent === id
@@ -54,7 +53,6 @@ function StudentDetails() {
     return studentobj;
   });
 
-  //jssgasjaskdfjsadfsdafasdffsadfkjasdfjksadfsadfasdfsadfasdfasdfsfgdsg
 
   const totalBooks = issuedBooksArr.filter((issued) => issued.iStudent === id);
 

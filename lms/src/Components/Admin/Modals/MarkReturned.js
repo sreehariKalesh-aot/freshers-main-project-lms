@@ -6,8 +6,6 @@ function MarkReturned({
   handleCloseReturned,
   showReturned,
   setshowReturned,
-  isReturned,
-  setisReturned,
   issuedBooksArr,
   setissuedBooksArr,
   issuedKey,
@@ -18,8 +16,7 @@ function MarkReturned({
   // const [returnedBookName, setreturnedBookName] = useState(null)
 
   const handleBookReturn = (issuedKey) => {
-    // no need of this use state u can directly set true
-    setisReturned(true);
+
 
     const thisMonth = new Date().getMonth() + 1;
 
@@ -58,7 +55,6 @@ function MarkReturned({
 
   return (
     <Modal show={showReturned} onHide={handleCloseReturned} key={issuedKey}>
-      {/* <Modal.Header  closeButton > */}
       <Modal.Title
         style={{
           textAlign: "center",
@@ -67,7 +63,6 @@ function MarkReturned({
       >
         Mark as returned?
       </Modal.Title>
-      {/* </Modal.Header> */}
       <Modal.Body
         style={{
           textAlign: "center",
@@ -84,8 +79,6 @@ function MarkReturned({
           onClick={() => {
             handleCloseReturned();
             handleBookReturn(issuedKey);
-            // handleReturnActions()
-            // handleDeleteBook(bookKey);
           }}
         >
           Yes

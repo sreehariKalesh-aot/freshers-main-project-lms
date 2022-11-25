@@ -15,7 +15,6 @@ function DeleteBookModal({
 
   return (
     <Modal show={showdeleteBook} onHide={handleCloseDeleteBook}>
-      {/* <Modal.Header  closeButton > */}
       <Modal.Title
         style={{
           textAlign: "center",
@@ -24,7 +23,6 @@ function DeleteBookModal({
       >
         Delete book?
       </Modal.Title>
-      {/* </Modal.Header> */}
       <Modal.Body
         style={{
           textAlign: "center",

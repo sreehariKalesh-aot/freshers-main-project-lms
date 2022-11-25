@@ -184,18 +184,6 @@ a {
   font-size: 16px;
   line-height: 20px;
   color: #09174a;
-
-  /* border: solid 2px blue; */
-  /* white-space: nowrap;
-  text-overflow: ellipsis !important;
-  width: 100px;
-  display: block;
-  overflow: hidden */
-  /* border: 1px solid; 
-   width: 100px;
-  white-space: nowrap !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important; */
 }
 
 .stdnts {
@@ -289,6 +277,10 @@ svg {
 .row{
   flex-wrap: nowrap !important;
 }
+.modal-backdrop{
+  width: 100% !important;
+  height: 100% !important;
+} 
 
 @media (max-width: 936px) {
   .pges {
@@ -301,7 +293,7 @@ svg {
     padding-left: 0.4rem !important;
   }
 
-  .btn {
+  .navcomp {
     padding-left: 0px !important;
     display: flex !important;
     justify-content: center !important;

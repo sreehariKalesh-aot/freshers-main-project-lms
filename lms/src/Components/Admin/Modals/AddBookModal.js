@@ -146,10 +146,10 @@ function AddBookModal({
               autoFocus
               name="bName"
               value={isBookEdit ? editBname : bName}
-              // onChange={handleBookNameInput}
               onChange={
                 isBookEdit ? handleEditBookNameInput : handleBookNameInput
               }
+              autocomplete="off"
             />
             {addBookError && bName.length <= 0 ? (
               <p className="error">Please input a Name</p>
@@ -171,17 +171,18 @@ function AddBookModal({
               type="text"
               name="author"
               placeholder="Eg: Jane Austen"
-              // onChange={handleAuthorNameInput}
               onChange={
                 isBookEdit ? handleEditAuthorNameInput : handleAuthorNameInput
               }
               value={isBookEdit ? editAuthor : author}
+              autocomplete="off"
             />
             {addBookError && author.length <= 0 ? (
               <p className="error">Please input author name</p>
             ) : (
               ""
-            )}
+            )
+            }
             {editBookError && editAuthor.length <= 0 ? (
               <p className="error">Please input author name</p>
             ) : (
@@ -194,7 +195,6 @@ function AddBookModal({
             aria-label="Default select example"
             name="language"
             value={isBookEdit ? editLanguage : language}
-            // onChange={handleLanguageInput}
             onChange={
               isBookEdit ? handleEditLanguageInput : handleLanguageInput
             }

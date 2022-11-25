@@ -41,13 +41,6 @@ function AddStudentModal({
     setcPassword(e.target.value);
   };
 
-  // function to take data on onchange from the modal form
-  // const handleStudentInput = (e) => {
-  //   let name = e.target.name;
-  //   let value = e.target.value;
-  //   setaddStudent({ ...addStudent, [name]: value });
-  // };
-
   // function to take  edit data onchange from the modal form
   const handleEditNameInput = (e) => {
     seteditName(e.target.value);
@@ -132,8 +125,6 @@ function AddStudentModal({
             <Form.Label className="modal-labels">Name</Form.Label>
             <Form.Control
               name="name"
-              // {isEditing? value={addStudent.name}:value={editStudent.name}}
-              //  value={editName}
               value={isEditing ? editName : name}
               type="text"
               placeholder="Eg: John Doe"
@@ -142,6 +133,7 @@ function AddStudentModal({
               onChange={
                 isEditing ? handleEditNameInput : handleStudentNameInput
               }
+              autocomplete="off"
             />
             {addStudentError && !name ? (
               <p className="error">Please enter a name</p>
@@ -158,14 +150,13 @@ function AddStudentModal({
             <Form.Label className="modal-labels">Email</Form.Label>
             <Form.Control
               name="email"
-              // onChange={()=>{{isEditing? handleStudentEmailInput() : handleEditEmailInput() }}}
               onChange={
                 isEditing ? handleEditEmailInput : handleStudentEmailInput
               }
-              // value={addStudent.email}
               value={isEditing ? editEmail : email}
               type="email"
               placeholder="Eg: johndoe@gmail.com"
+              autocomplete="off"
             />
             {addStudentError && !email ? (
               <p className="error">Please enter an Email</p>
@@ -181,16 +172,15 @@ function AddStudentModal({
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
             <Form.Label className="modal-labels">Password</Form.Label>
             <Form.Control
-              // onChange={()=>{{isEditing? handleDtudentPasswordInput() : handleEditPasswordInput() }}}
               onChange={
                 isEditing ? handleEditPasswordInput : handleStudentPasswordInput
               }
-              // value={addStudent.password}
               value={isEditing ? editPassword : password}
               name="password"
               // type="password"
               type="text"
               placeholder="*********"
+              autocomplete="off"
             />
             {addStudentError && !password ? (
               <p className="error">Please enter a Password</p>
@@ -206,18 +196,17 @@ function AddStudentModal({
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
             <Form.Label className="modal-labels">Confirm Password</Form.Label>
             <Form.Control
-              // onChange={()=>{{isEditing? handleStudentcPasswordInput() : handleEditcPasswordInput() }}}
               onChange={
                 isEditing
                   ? handleEditcPasswordInput
                   : handleStudentcPasswordInput
               }
-              // value={addStudent.cPassword}
               value={isEditing ? editCpassword : cPassword}
               name="cPassword"
               // type="password"
               type="text"
               placeholder="*******"
+              autocomplete="off"
             />
             {addStudentError && password != cPassword ? (
               <p className="error">Please Confirm password</p>

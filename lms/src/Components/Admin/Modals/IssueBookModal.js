@@ -13,14 +13,38 @@ function IssueBookModal({
   setstudentArr,
   issuedBooksArr,
   setissuedBooksArr,
-  // dueDatecalc,
-  // setdueDatecalc,
 }) {
   // usestate for taking input from the issued bok modal input box
   const [selectBook, setselectBook] = useState("");
   const [selectStudent, setselectStudent] = useState("");
   const [issueDate, setissueDate] = useState("");
   const [dueDate, setdueDate] = useState("");
+
+  // for setting due date a default value
+  const [dueDatecalc, setdueDatecalc] = useState(new Date());
+
+  const [fine, setfine] = useState("");
+
+  // function for calculating fine
+  const calculateFine = () => {
+    const today = new Date();
+    // let diffInTime = today.getTime() - dueDatecalc.getTime();
+    let Difference = Math.round(
+      (today.getTime() - dueDatecalc.getTime()) / (1000 * 3600 * 24)
+    );
+
+    if (Difference > 0) {
+      setfine(Math.round(Difference * 10));
+    } else {
+      setfine("-");
+    }
+  };
+
+  // for calculating the fine everytime the page renders
+
+  useEffect(() => {
+    calculateFine();
+  }, [dueDate]);
 
   // onchange functions for taking input from the issued book modal
   const handleSelectBook = (e) => {
@@ -33,26 +57,12 @@ function IssueBookModal({
   };
   const handleIssueDate = (e) => {
     setissueDate(e.target.value);
-
-    // const issue = new Date(issueDate);
-    // issue.setDate(issue.getDate()+7);
-    // setdueDate(issue.toDateString());
-    // console.log(dueDate)
   };
   const handleDueDate = (e) => {
     setdueDate(e.target.value);
 
     setdueDatecalc(new Date(e.target.value));
   };
-
-  // const handleselectbookBookName=(e)=>{
-  //   setselectbookBookName(e.target.name)
-  //   console.log("selected book",selectbookBookName)
-  // }
-
-  // const handleselectStudentName=(e)=>{
-  //   setselectStudentName(e.target.name)
-  // }
 
   // use state for errors in issued books
   const [issuedBookError, setissuedBookError] = useState(false);
@@ -86,15 +96,9 @@ function IssueBookModal({
   //
 
   const handleUpdateCount = () => {
-    // var index = allBooksArr.findIndex(book => book.bName === remainingBookId);
-    // setremainingCount(allBooksArr[index].value++)
-    // console.log(remainingCount)
-
     setallBooksArr(
       allBooksArr.map((book) => {
         if (book.key === remainingBookId) {
-          // setremainingCount(book.remainingCopies++)
-          // setremainingCount(book['remainingCopies']++)
           return {
             ...book,
             remainingCopies: book.remainingCopies - 1,
@@ -104,29 +108,6 @@ function IssueBookModal({
       })
     );
   };
-
-  // for setting due date a default value
-  const [dueDatecalc, setdueDatecalc] = useState(new Date());
-
-  const [fine, setfine] = useState("");
-
-  // function for calculating fine
-  const calculateFine = () => {
-    const today = new Date();
-    // let diffInTime = today.getTime() - dueDatecalc.getTime();
-    let Difference = Math.round(
-      (today.getTime() - dueDatecalc.getTime()) / (1000 * 3600 * 24)
-    );
-    setfine(Math.round(Difference * 10));
-    if (fine < 0) {
-      setfine("-");
-    }
-  };
-
-  // for calculating the fine everytime the page renders
-  useEffect(() => {
-    calculateFine();
-  });
 
   return (
     <Modal show={showIssuedBooks} onHide={handleCloseIssuedBooks}>

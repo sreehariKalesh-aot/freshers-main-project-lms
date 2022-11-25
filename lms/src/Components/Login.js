@@ -82,9 +82,10 @@ function Login({ email, password, authCheck, setauthCheck }) {
         studentPassword === student.password
       ) {
         navigate("/studenLogin");
-      } else {
-        alert("invalid Credentials");
-      }
+      } 
+      // else {
+      //   alert("invalid Credentials");
+      // }
     });
   };
 

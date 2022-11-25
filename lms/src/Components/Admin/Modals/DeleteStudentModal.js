@@ -15,12 +15,7 @@ function DeleteStudentModal({
 
   return (
     <>
-      {/* <Button variant="primary" onClick={handleShow}>
-        Launch demo modal
-      </Button> */}
-
       <Modal show={showdelete} onHide={handleCloseDelete}>
-        {/* <Modal.Header  closeButton > */}
         <Modal.Title
           style={{
             textAlign: "center",
@@ -29,7 +24,6 @@ function DeleteStudentModal({
         >
           Delete Student?
         </Modal.Title>
-        {/* </Modal.Header> */}
         <Modal.Body
           style={{
             textAlign: "center",
