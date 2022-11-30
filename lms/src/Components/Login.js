@@ -10,7 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import secureLocalStorage from "react-secure-storage";
 
-function Login({ email, password, authCheck, setauthCheck }) {
+function Login({ email, password, authCheck, setauthCheck,studentBoolean,setstudentBoolean,studentLoginId,setstudentLoginId}) {
   const [studentArr, setstudentArr] = useContext(studentContext);
 
   const navigate = useNavigate();
@@ -53,7 +53,10 @@ function Login({ email, password, authCheck, setauthCheck }) {
       e.preventDefault();
       setauthCheck(true);
       setloginError(false);
+      setstudentBoolean(false);
+      localStorage.setItem("studentLogin", studentBoolean);
       navigate("/issuedbooks");
+      
     } else {
       e.preventDefault();
       setloginError(true);
@@ -62,7 +65,8 @@ function Login({ email, password, authCheck, setauthCheck }) {
   };
 
   // student login
-  const [studentLogin, setstudentLogin] = useState(false);
+  // const [studentLogin, setstudentLogin] = useState(false);
+
   const [studentEmail, setstudentEmail] = useState("");
   const [studentPassword, setstudentPassword] = useState("");
   // const [savedEmail, setsavedEmail] = useState("")
@@ -76,16 +80,23 @@ function Login({ email, password, authCheck, setauthCheck }) {
   };
 
   const handleStudentAuth = () => {
-    studentArr.map((student) => {
+    studentArr.find((student) => {
       if (
         studentEmail === student.email &&
         studentPassword === student.password
       ) {
-        navigate("/studenLogin");
+        console.log(student.email)
+        console.log(student.key)
+        let tempkey = student.key
+        setstudentLoginId(tempkey)
+        console.log(studentLoginId)
+        navigate("/Mybooks");
+        setstudentBoolean(true)
+
       } 
-      // else {
-      //   alert("invalid Credentials");
-      // }
+      else {
+        alert("invalid Credentials");
+      }
     });
   };
 
@@ -101,13 +112,16 @@ function Login({ email, password, authCheck, setauthCheck }) {
         <p className="welcome-p">Welcome back! Please enter your details.</p>
 
         {/* tab for logging in as admin and student change when needed*/}
-        <ul className="nav mb-2">
+        <ul className="nav">
           <li className="nav-item">
             <a
               className="nav-link active ps-0"
               href="#"
               onClick={() => {
-                setstudentLogin(false);
+                setstudentBoolean(false);
+              }}
+              style={{
+                borderBottom: !studentBoolean ? "3px solid #ED7966" : "none",
               }}
             >
               Admin
@@ -118,9 +132,12 @@ function Login({ email, password, authCheck, setauthCheck }) {
               className="nav-link"
               href="#"
               onClick={() => {
-                setstudentLogin(true);
+                setstudentBoolean(true);
               }}
-              style={{ borderBottom: "1px", borderColor: "orange" }}
+              // style={{ borderBottom: "1px", borderColor: "orange" }}
+              style={{
+                borderBottom: !studentBoolean ? "none": "3px solid #ED7966" ,
+              }}
             >
               Student
             </a>
@@ -135,7 +152,7 @@ function Login({ email, password, authCheck, setauthCheck }) {
           ipassword={ipassword}
           handlePassword={handlePassword}
           handleAuth={handleAuth}
-          studentLogin={studentLogin}
+          studentBoolean={studentBoolean}
           studentArr={studentArr}
           studentEmail={studentEmail}
           studentPassword={studentPassword}

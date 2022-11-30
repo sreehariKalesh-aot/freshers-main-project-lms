@@ -48,6 +48,7 @@
 }
 .nav-link {
   color: black !important;
+  border-bottom: 10px;
 }
 
 .nvbar {
@@ -281,6 +282,19 @@ svg {
   width: 100% !important;
   height: 100% !important;
 } 
+.register{
+  
+font-family: 'Lato';
+font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+
+  color: #646464;
+}
+.orng-register{
+ color: #ED7966;
+}
 
 @media (max-width: 936px) {
   .pges {

@@ -9,8 +9,10 @@ import { allbooksContext } from "../../../App";
 import DeleteBookModal from "../Modals/DeleteBookModal";
 import Navbar from "../../Navbar";
 import ReactTooltip from "react-tooltip";
+import { HiOutlineEye } from "react-icons/hi";
 
-function AllBooks() {
+function AllBooks({ studentBoolean, setstudentBoolean}) {
+
   const [allBooksArr, setallBooksArr] = useContext(allbooksContext);
 
   // use state and functions for adding books
@@ -42,8 +44,13 @@ function AllBooks() {
 
   return (
     <>
-      <Navbar />
-      <div className="pges col-10">
+      <Navbar studentBoolean={studentBoolean} />
+      <div
+        className="pges col-10"
+        style={{
+          backgroundColor: studentBoolean ? "#fbfbff" : "#fffbfa",
+        }}
+      >
         <div className="pg-container">
           <p className="pt-5  login-p ">All Books</p>
           <hr />
@@ -59,10 +66,26 @@ function AllBooks() {
                 }}
               />
             </div>
-
-            <button className="orngbtn me-4 mt-2" onClick={handleShowAddBook}>
-              Add New Book
-            </button>
+            {studentBoolean ? (
+              <div className="d-flex align-items-center gap-2">
+                <p className="mb-0">Sort By:</p>
+                <Form.Select
+                  aria-label="Default select example"
+                  className="sort"
+                >
+                  <option value="1" className="sort-options">
+                    Ascending
+                  </option>
+                  <option value="2" className="sort-options">
+                    Descending
+                  </option>
+                </Form.Select>
+              </div>
+            ) : (
+              <button className="orngbtn me-4 mt-2" onClick={handleShowAddBook}>
+                Add New Book
+              </button>
+            )}
           </div>
           <div className="pges2 mt-4 pt-4 ps-5 pe-5 pb-4">
             <div className="row border-bottom">
@@ -117,32 +140,42 @@ function AllBooks() {
                     <p className="col d-flex justify-content-center  pg-items">
                       {book.remainingCopies}
                     </p>
-                    <p className="col d-flex justify-content-center gap-3">
-                      <MdEdit
-                        data-tip="Edit"
-                        size={20}
-                        style={{ fill: "#7E7E7F" }}
-                        onClick={() => {
-                          handleShowAddBook();
-                          setisBookEdit(true);
-                          seteditBname(book.bName);
-                          seteditAuthor(book.author);
-                          seteditLanguage(book.language);
-                          seteditTotalCopies(book.totalCopies);
-                          seteditRemainingCopies(book.remainingCopies);
-                          handleBookKey(book.key);
-                        }}
-                      />{" "}
-                      <BiTrash
-                        data-tip="Delete"
-                        size={20}
-                        style={{ fill: "#D04444" }}
-                        onClick={() => {
-                          handleShowDeleteBook();
-                          handleBookKey(book.key);
-                        }}
-                      />
-                    </p>
+                    {studentBoolean ? (
+                      <p className="col d-flex justify-content-center gap-3">
+                        {" "}
+                        <HiOutlineEye
+                          size={20}
+                          style={{ color: "#7E7E7F" }}
+                        />{" "}
+                      </p>
+                    ) : (
+                      <p className="col d-flex justify-content-center gap-3">
+                        <MdEdit
+                          data-tip="Edit"
+                          size={20}
+                          style={{ fill: "#7E7E7F" }}
+                          onClick={() => {
+                            handleShowAddBook();
+                            setisBookEdit(true);
+                            seteditBname(book.bName);
+                            seteditAuthor(book.author);
+                            seteditLanguage(book.language);
+                            seteditTotalCopies(book.totalCopies);
+                            seteditRemainingCopies(book.remainingCopies);
+                            handleBookKey(book.key);
+                          }}
+                        />{" "}
+                        <BiTrash
+                          data-tip="Delete"
+                          size={20}
+                          style={{ fill: "#D04444" }}
+                          onClick={() => {
+                            handleShowDeleteBook();
+                            handleBookKey(book.key);
+                          }}
+                        />
+                      </p>
+                    )}
                   </div>
                 );
               })}

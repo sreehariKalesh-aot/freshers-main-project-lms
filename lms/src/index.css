@@ -1,0 +1,20 @@
+.student-pges {
+    background-color: #fbfbff;
+    height: 100%;
+    width: 83%;
+    margin-left: auto;
+    min-width: 800px;
+  }
+  .sort{
+    width: 180px !important;
+    border: none !important;
+  }
+
+  .sort-options{
+    padding: 20px !important;
+  }
+  @media (max-width: 936px) {
+    .student-pges {
+      margin-left: 150px !important;
+    }
+  }
