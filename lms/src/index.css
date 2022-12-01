@@ -14,18 +14,26 @@
     padding: 20px !important;
   }
 
-  ul,li{
-    text-decoration: none;
-    list-style: none;
+  .student-ul,.student-li{
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
-    color: #09174A !important;
-    opacity: 0.6;
+    color: #646464 !important;
     cursor: pointer ;
+    padding-bottom: 10px;
   }
-  li{
+  /* .student-li{
     width: 180px;
+  } */
+  .student-li-active{
+    font-weight: 500 !important;
+    font-size: 16px !important;
+    line-height: 20px !important;
+    /* identical to box height */
+    color: #09174A !important;
+    border-bottom: 3px solid  #0C39C7;
+    ;
+
   }
 
   /* #fill-tab-example-tab-home,#fill-tab-example-tab-profile,#fill-tab-example-tab-longer-tab{

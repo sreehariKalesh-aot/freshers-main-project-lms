@@ -97,7 +97,7 @@ function Login({ email, password, authCheck, setauthCheck,studentBoolean,setstud
       } 
     });
     if(!x){
-      alert("invalid credentials")
+      toast.error("Incorrect Email or Password", { position: "top-right" });
     }
   };
 

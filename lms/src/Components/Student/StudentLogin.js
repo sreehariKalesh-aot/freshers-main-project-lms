@@ -17,13 +17,18 @@ import { useState } from "react";
 // import Tab from "react-bootstrap/Tab";
 // import Tabs from "react-bootstrap/Tabs";
 import Nav from 'react-bootstrap/Nav';
+import StudentBookList from "./StudentBookList";
 
 function StudentLogin({ studentBoolean, setstudentBoolean, studentLoginId }) {
   const [allBooksArr, setallBooksArr] = useContext(allbooksContext);
   const [issuedBooksArr, setissuedBooksArr] = useContext(issuedBooksContext);
   const [studentArr, setstudentArr] = useContext(studentContext);
 
+  // usestate for search
   const [searchMyBooks, setsearchMyBooks] = useState("");
+
+  const [myBooksFilter, setmyBooksFilter] = useState("issued")
+
 
   console.log(studentLoginId);
 
@@ -100,14 +105,15 @@ function StudentLogin({ studentBoolean, setstudentBoolean, studentLoginId }) {
             <Tab eventKey="profile" title="Pending to return" className="tabs"></Tab>
             <Tab eventKey="longer-tab" title="Returned books" className="tabs"></Tab>
           </Tabs> */}
-            <ul className="d-flex gap-5 p-0 mt-5">
-              <li>
-                Issued Books
-              </li>
-              <li>Pending To Return</li>
-              <li>Returned Books</li>
-            </ul>
-           <hr />
+            <div className="d-flex gap-5 p-0 mt-5 student-ul">
+              <p className={myBooksFilter === "issued" ? "student-li student-li-active m-0" : "student-li m-0" }
+               onClick={()=>setmyBooksFilter("issued")}>
+                Issued Books ({tempStudentArr.length})
+              </p>
+              <p className={myBooksFilter === "pending" ? "student-li student-li-active m-0" : "student-li m-0" }onClick={()=>setmyBooksFilter("pending")}>Pending To Return ({tempStudentArr.filter((obj)=>obj.isReturned === false).length})</p>
+              <p className={myBooksFilter === "returned" ? "student-li student-li-active m-0" : "student-li m-0" } onClick={()=>setmyBooksFilter("returned")}>Returned Books ({tempStudentArr.filter((obj)=>obj.isReturned === true).length})</p>
+            </div>
+           <hr className="mt-0"/>
           <div className="pges2 mt-4 pt-4 ps-5 pe-5 pb-4">
             <div className="row border-bottom">
               <p className="col d-flex justify-content-start pg-headings">
@@ -150,29 +156,23 @@ function StudentLogin({ studentBoolean, setstudentBoolean, studentLoginId }) {
                 }
               })
               .map((obj) => {
-                return (
-                  <div className="row mt-4 mb-4 border-bottom">
-                    <p className="col d-flex justify-content-start  pg-items">
-                      {obj.bookTitle}
-                    </p>
-                    <p className="col d-flex justify-content-center   pg-items">
-                      {obj.author}
-                    </p>
-                    <p className="col d-flex justify-content-center  pg-items">
-                      {obj.issueDate}
-                    </p>
-                    {/* {issuedBooks.iStudent} */}
-                    <p className="col d-flex justify-content-center  pg-items">
-                      {obj.dueDate}
-                    </p>
-                    <p className="col d-flex justify-content-center   pg-items">
-                      {obj.returnDate}
-                    </p>
-                    <p className="col d-flex justify-content-center  pg-items">
-                      {obj.fine}
-                    </p>
-                  </div>
+                if(myBooksFilter === "issued"){
+                  return (
+                  <StudentBookList obj={obj}/>
                 );
+                }
+                if(myBooksFilter === "pending" && obj.isReturned === false){
+                  return (
+                  <StudentBookList obj={obj}/>
+                );
+                }
+                if(myBooksFilter === "returned" && obj.isReturned === true){
+                  return (
+                  <StudentBookList obj={obj}/>
+                );
+                }
+
+                
               })}
           </div>
         </div>
