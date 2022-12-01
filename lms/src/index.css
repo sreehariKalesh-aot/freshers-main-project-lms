@@ -13,6 +13,34 @@
   .sort-options{
     padding: 20px !important;
   }
+
+  ul,li{
+    text-decoration: none;
+    list-style: none;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #09174A !important;
+    opacity: 0.6;
+    cursor: pointer ;
+  }
+  li{
+    width: 180px;
+  }
+
+  /* #fill-tab-example-tab-home,#fill-tab-example-tab-profile,#fill-tab-example-tab-longer-tab{
+    width: 500px !important;
+    margin-right: 0px !important;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #09174A;
+    opacity: 0.6;
+  }
+  .nav-item{
+    width: 100px !important;
+  }
+   */
   @media (max-width: 936px) {
     .student-pges {
       margin-left: 150px !important;

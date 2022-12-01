@@ -6,14 +6,16 @@ import { BiTrash } from "react-icons/bi";
 import { MdEdit } from "react-icons/md";
 import { createContext, useContext } from "react";
 import { allbooksContext } from "../../../App";
+import { studentContext } from "../../../App";
 import DeleteBookModal from "../Modals/DeleteBookModal";
 import Navbar from "../../Navbar";
 import ReactTooltip from "react-tooltip";
 import { HiOutlineEye } from "react-icons/hi";
 
-function AllBooks({ studentBoolean, setstudentBoolean}) {
+function AllBooks({ studentBoolean, setstudentBoolean,studentLoginId}) {
 
   const [allBooksArr, setallBooksArr] = useContext(allbooksContext);
+  const [studentArr, setstudentArr] = useContext(studentContext); 
 
   // use state and functions for adding books
   const [showAddBook, setShowAddBook] = useState(false);
@@ -44,7 +46,7 @@ function AllBooks({ studentBoolean, setstudentBoolean}) {
 
   return (
     <>
-      <Navbar studentBoolean={studentBoolean} />
+      <Navbar studentBoolean={studentBoolean} studentArr={studentArr} studentLoginId={studentLoginId} />
       <div
         className="pges col-10"
         style={{

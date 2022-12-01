@@ -6,17 +6,27 @@ import {
   MdLocalLibrary,
   MdLogout,
 } from "react-icons/md";
-import { FaUserCircle ,FaBookReader} from "react-icons/fa";
+import { FaUserCircle, FaBookReader } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 import { NavLink } from "react-router-dom";
 import ReactTooltip from "react-tooltip";
+import { useState } from "react";
 
-function Navbar({ studentBoolean }) {
+function Navbar({ studentBoolean, studentLoginId, studentArr }) {
   const navigate = useNavigate();
   const handleLogout = () => {
     navigate("/");
   };
+
+
+  // studentArr.map((obj)=>{
+  //   if(obj.key === studentLoginId){
+  //      setStdntName(obj.name)
+  //      setstdntEmail(obj.email)
+  //   }
+  // })
+
   return (
     <div
       className="nvbar col-2"
@@ -30,38 +40,35 @@ function Navbar({ studentBoolean }) {
       </div>
 
       <div className="btn-container">
-            
-            {studentBoolean?  <NavLink to="/Mybooks">
-              <button className="btn  mt-4 navcomp navcomp1 d-flex align-items-center gap-3 ps-3 pt-2 pb-2">
-                <FaBookReader size={20} />
-                My Books
-              </button>
-            </NavLink> 
-
-            :
-
-            <NavLink to="/issuedbooks">
-              <button className="btn  mt-4 navcomp navcomp1 d-flex align-items-center gap-3 ps-3 pt-2 pb-2">
-                <MdTaskAlt size={20} />
-                Issued Books
-              </button>
-            </NavLink>} 
-            <NavLink to="/allbooks">
-              <button className="btn mt-4  navcomp navcomp2 d-flex align-items-center gap-3 ps-3 pt-2 pb-2">
-                <MdMenuBook size={20} />
-                All Books
-              </button>
-            </NavLink>
-            {!studentBoolean&&
-              <NavLink to="/students">
-              <button className="btn mt-4 navcomp navcomp3 d-flex align-items-center gap-3 ps-3 pt-2 pb-2">
-                <MdOutlinePeople size={20} />
-                Students
-              </button>
-            </NavLink>
-            }
-            
-         
+        {studentBoolean ? (
+          <NavLink to="/Mybooks">
+            <button className="btn  mt-4 navcomp navcomp1 d-flex align-items-center gap-3 ps-3 pt-2 pb-2">
+              <FaBookReader size={20} />
+              My Books
+            </button>
+          </NavLink>
+        ) : (
+          <NavLink to="/issuedbooks">
+            <button className="btn  mt-4 navcomp navcomp1 d-flex align-items-center gap-3 ps-3 pt-2 pb-2">
+              <MdTaskAlt size={20} />
+              Issued Books
+            </button>
+          </NavLink>
+        )}
+        <NavLink to="/allbooks">
+          <button className="btn mt-4  navcomp navcomp2 d-flex align-items-center gap-3 ps-3 pt-2 pb-2">
+            <MdMenuBook size={20} />
+            All Books
+          </button>
+        </NavLink>
+        {!studentBoolean && (
+          <NavLink to="/students">
+            <button className="btn mt-4 navcomp navcomp3 d-flex align-items-center gap-3 ps-3 pt-2 pb-2">
+              <MdOutlinePeople size={20} />
+              Students
+            </button>
+          </NavLink>
+        )}
       </div>
 
       <div className="logout" data-tip="Logout">
@@ -71,8 +78,24 @@ function Navbar({ studentBoolean }) {
         >
           <FaUserCircle size={30} style={{ color: "white" }} />
           <div>
-            <p className="m-0 mb-2 username">name</p>
-            <p className="m-0 mt-1 useremail">@gmail.com</p>
+            {!studentBoolean && (
+              <>
+                <p className="m-0 mb-2 username">Admin</p>
+                <p className="m-0 mt-1 useremail">admin@gmail.com</p>
+              </>
+            )}
+
+            {studentBoolean &&
+              studentArr.map((obj) => {
+                if (obj.key === studentLoginId) {
+                  return (
+                    <>
+                      <p className="m-0 mb-2 username">{obj.name}</p>
+                      <p className="m-0 mt-1 useremail">{obj.email}</p>
+                    </>
+                  );
+                }
+              })}
           </div>
           {/* <MdLogout size={30} style={{ color: "white" }} className="ms-5"/> */}
         </div>

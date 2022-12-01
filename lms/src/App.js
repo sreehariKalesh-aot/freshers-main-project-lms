@@ -14,8 +14,15 @@ const allbooksContext = createContext();
 const issuedBooksContext = createContext();
 
 function App() {
-  const [studentLoginId, setstudentLoginId] = useState("")
+  const getStudentLoginId=()=>{
+    return localStorage.getItem("studentId")
+  }
+  const [studentLoginId, setstudentLoginId] = useState(getStudentLoginId())
 
+  useEffect(() => { 
+    localStorage.setItem("studentId", studentLoginId)
+  },[studentLoginId])
+  
   const getStudentLogin = ()=>{
     return localStorage.getItem("studentLogin")
   }
@@ -103,12 +110,13 @@ function App() {
                   }
                 />
                 <Route path="/Mybooks" element={<StudentLogin studentBoolean={studentBoolean} 
-
-                      setstudentBoolean={setstudentBoolean}
-                      studentLoginId={studentLoginId}/>} />
+                setstudentBoolean={setstudentBoolean}
+                studentLoginId={studentLoginId}
+                    />} />
                 <Route path="/students" element={<Students />} />
                 <Route path="/students/:id" element={<StudentDetails />} />
                 <Route path="/allbooks" element={<AllBooks  studentBoolean={studentBoolean} 
+                       studentLoginId={studentLoginId}
                       setstudentBoolean={setstudentBoolean}/>} />
                 <Route path="/issuedbooks" element={<IssuedBooks />} />
               </Routes>

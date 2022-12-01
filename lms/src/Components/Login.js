@@ -80,7 +80,8 @@ function Login({ email, password, authCheck, setauthCheck,studentBoolean,setstud
   };
 
   const handleStudentAuth = () => {
-    studentArr.find((student) => {
+
+    let x = studentArr.find((student) => {
       if (
         studentEmail === student.email &&
         studentPassword === student.password
@@ -94,10 +95,10 @@ function Login({ email, password, authCheck, setauthCheck,studentBoolean,setstud
         setstudentBoolean(true)
 
       } 
-      else {
-        alert("invalid Credentials");
-      }
     });
+    if(!x){
+      alert("invalid credentials")
+    }
   };
 
   // state for highlighting nav

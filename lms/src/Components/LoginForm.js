@@ -58,7 +58,7 @@ function LoginForm({
       >
         Login
       </button>
-      {studentBoolean&& <p className="pt-3 d-flex justify-content-center register">Don’t have an account? &nbsp;<span className="orng-register">Register</span></p>}
+      {studentBoolean? <p className="pt-3 d-flex justify-content-center register">Don’t have an account? &nbsp;<span className="orng-register">Register</span></p> : <p className="pt-3 d-flex justify-content-center register">.</p>}
     </Form>
   );
 }
