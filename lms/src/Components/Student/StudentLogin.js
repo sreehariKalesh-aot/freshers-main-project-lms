@@ -16,7 +16,7 @@ import { useContext } from "react";
 import { useState } from "react";
 // import Tab from "react-bootstrap/Tab";
 // import Tabs from "react-bootstrap/Tabs";
-import Nav from 'react-bootstrap/Nav';
+import Nav from "react-bootstrap/Nav";
 import StudentBookList from "./StudentBookList";
 
 function StudentLogin({ studentBoolean, setstudentBoolean, studentLoginId }) {
@@ -27,14 +27,15 @@ function StudentLogin({ studentBoolean, setstudentBoolean, studentLoginId }) {
   // usestate for search
   const [searchMyBooks, setsearchMyBooks] = useState("");
 
-  const [myBooksFilter, setmyBooksFilter] = useState("issued")
-
+  // state for filtering the temp array
+  const [myBooksFilter, setmyBooksFilter] = useState("issued");
 
   console.log(studentLoginId);
 
   const temp = issuedBooksArr.filter(
     (book) => book.iStudent === studentLoginId
   );
+
   const tempStudentArr = temp.map((issuedbook) => {
     if (issuedbook.iStudent === studentLoginId) {
       let issued = {
@@ -59,7 +60,38 @@ function StudentLogin({ studentBoolean, setstudentBoolean, studentLoginId }) {
     }
   });
 
-  console.log(tempStudentArr);
+  const [sortName, setsortName] = useState("");
+  const handleMybooksSort = (e) => {
+    setsortName(e.target.value);
+
+    if (sortName === "newest") {
+      console.log(sortName);
+
+      // tempStudentArr.sort(function (a, b) {
+      //   let dateA = new Date(a.issueDate);
+      //   let dateB = new Date(b.issueDate);
+      //   if (dateA < dateB) return -1;
+      //   if (dateA > dateB) return 1;
+      //   return 0;
+      // })
+
+      issuedBooksArr.sort(
+        (objA, objB) => new Date(objA.iDate) - new Date(objB.iDate)
+      );
+    }
+
+    if (sortName === "oldest") {
+      // tempStudentArr.sort(function (a, b) {
+      //   if (new Date(a.issueDate) > new Date(b.issueDate)) return -1;
+      //   if (new Date(a.issueDate) < new Date(b.issueDate)) return 1;
+      //   return 0;
+      // })
+      issuedBooksArr.sort(
+        (objA, objB) => new Date(objB.iDate) - new Date(objA.iDate)
+      );
+      console.log(tempStudentArr)
+    }
+  };
 
   return (
     <>
@@ -86,34 +118,56 @@ function StudentLogin({ studentBoolean, setstudentBoolean, studentLoginId }) {
             {/* <button className="orngbtn me-4 mt-2">Issue</button> */}
             <div className="d-flex align-items-center gap-2">
               <p className="mb-0">Sort By:</p>
-              <Form.Select aria-label="Default select example" className="sort">
-                <option value="1" className="sort-options">
-                  Issue Date
+              <Form.Select
+                aria-label="Default select example"
+                className="sort"
+                onClick={handleMybooksSort}
+              >
+                <option value="newest" className="sort-options">
+                  Newest
                 </option>
-                <option value="2" className="sort-options">
-                  Due Date
+                <option value="oldest" className="sort-options">
+                  Oldest
                 </option>
               </Form.Select>
             </div>
           </div>
-          {/* <Tabs
-            defaultActiveKey="profile"
-            id="fill-tab-example"
-            className="mb-3 mt-4"
-          >
-            <Tab eventKey="home" title="Issued Books" className="tabs"></Tab>
-            <Tab eventKey="profile" title="Pending to return" className="tabs"></Tab>
-            <Tab eventKey="longer-tab" title="Returned books" className="tabs"></Tab>
-          </Tabs> */}
-            <div className="d-flex gap-5 p-0 mt-5 student-ul">
-              <p className={myBooksFilter === "issued" ? "student-li student-li-active m-0" : "student-li m-0" }
-               onClick={()=>setmyBooksFilter("issued")}>
-                Issued Books ({tempStudentArr.length})
-              </p>
-              <p className={myBooksFilter === "pending" ? "student-li student-li-active m-0" : "student-li m-0" }onClick={()=>setmyBooksFilter("pending")}>Pending To Return ({tempStudentArr.filter((obj)=>obj.isReturned === false).length})</p>
-              <p className={myBooksFilter === "returned" ? "student-li student-li-active m-0" : "student-li m-0" } onClick={()=>setmyBooksFilter("returned")}>Returned Books ({tempStudentArr.filter((obj)=>obj.isReturned === true).length})</p>
-            </div>
-           <hr className="mt-0"/>
+          
+          <div className="d-flex gap-5 p-0 mt-5 student-ul">
+            <p
+              className={
+                myBooksFilter === "issued"
+                  ? "student-li student-li-active m-0"
+                  : "student-li m-0"
+              }
+              onClick={() => setmyBooksFilter("issued")}
+            >
+              Issued Books ({tempStudentArr.length})
+            </p>
+            <p
+              className={
+                myBooksFilter === "pending"
+                  ? "student-li student-li-active m-0"
+                  : "student-li m-0"
+              }
+              onClick={() => setmyBooksFilter("pending")}
+            >
+              Pending To Return (
+              {tempStudentArr.filter((obj) => obj.isReturned === false).length})
+            </p>
+            <p
+              className={
+                myBooksFilter === "returned"
+                  ? "student-li student-li-active m-0"
+                  : "student-li m-0"
+              }
+              onClick={() => setmyBooksFilter("returned")}
+            >
+              Returned Books (
+              {tempStudentArr.filter((obj) => obj.isReturned === true).length})
+            </p>
+          </div>
+          <hr className="mt-0" />
           <div className="pges2 mt-4 pt-4 ps-5 pe-5 pb-4">
             <div className="row border-bottom">
               <p className="col d-flex justify-content-start pg-headings">
@@ -156,23 +210,15 @@ function StudentLogin({ studentBoolean, setstudentBoolean, studentLoginId }) {
                 }
               })
               .map((obj) => {
-                if(myBooksFilter === "issued"){
-                  return (
-                  <StudentBookList obj={obj}/>
-                );
+                if (myBooksFilter === "issued") {
+                  return <StudentBookList obj={obj} />;
                 }
-                if(myBooksFilter === "pending" && obj.isReturned === false){
-                  return (
-                  <StudentBookList obj={obj}/>
-                );
+                if (myBooksFilter === "pending" && obj.isReturned === false) {
+                  return <StudentBookList obj={obj} />;
                 }
-                if(myBooksFilter === "returned" && obj.isReturned === true){
-                  return (
-                  <StudentBookList obj={obj}/>
-                );
+                if (myBooksFilter === "returned" && obj.isReturned === true) {
+                  return <StudentBookList obj={obj} />;
                 }
-
-                
               })}
           </div>
         </div>

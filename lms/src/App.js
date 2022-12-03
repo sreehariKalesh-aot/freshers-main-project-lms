@@ -14,14 +14,6 @@ const allbooksContext = createContext();
 const issuedBooksContext = createContext();
 
 function App() {
-  const getStudentLoginId=()=>{
-    return localStorage.getItem("studentId")
-  }
-  const [studentLoginId, setstudentLoginId] = useState(getStudentLoginId())
-
-  useEffect(() => { 
-    localStorage.setItem("studentId", studentLoginId)
-  },[studentLoginId])
   
   const getStudentLogin = ()=>{
     return localStorage.getItem("studentLogin")
@@ -32,6 +24,16 @@ function App() {
     localStorage.setItem("studentLogin", studentBoolean)
   },[studentBoolean])
   
+  const getStudentLoginId=()=>{
+    return localStorage.getItem("studentId")
+  }
+  const [studentLoginId, setstudentLoginId] = useState(getStudentLoginId())
+
+  useEffect(() => { 
+    localStorage.setItem("studentId", studentLoginId)
+  },[studentLoginId])
+  
+
 
 
   const getStudentArray = () => {

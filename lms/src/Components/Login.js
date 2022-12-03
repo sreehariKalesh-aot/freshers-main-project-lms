@@ -93,6 +93,7 @@ function Login({ email, password, authCheck, setauthCheck,studentBoolean,setstud
         console.log(studentLoginId)
         navigate("/Mybooks");
         setstudentBoolean(true)
+        localStorage.setItem("studentLogin", studentBoolean);
 
       } 
     });

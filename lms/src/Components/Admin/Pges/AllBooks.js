@@ -44,6 +44,30 @@ function AllBooks({ studentBoolean, setstudentBoolean,studentLoginId}) {
   // usestate for searching
   const [searchBook, setsearchBook] = useState("");
 
+  console.log(studentBoolean)
+
+  const [sortValue, setsortValue] = useState("")
+
+  const handleSort=(e)=>{
+    setsortValue(e.target.value)
+    console.log(sortValue)
+    if(sortValue === "author"){
+      allBooksArr.sort(function (a, b) {
+        if (a.bName.toLowerCase() < b.bName.toLowerCase()) return -1;
+        if (a.bName.toLowerCase() > b.bName.toLowerCase()) return 1;
+        return 0;
+      })
+    }
+    if(sortValue === "bookTitle"){
+      allBooksArr.sort(function (a, b) {
+        if (a.author.toLowerCase() < b.author.toLowerCase()) return -1;
+        if (a.author.toLowerCase() > b.author.toLowerCase()) return 1;
+        return 0;
+      })
+    }
+  }
+  
+
   return (
     <>
       <Navbar studentBoolean={studentBoolean} studentArr={studentArr} studentLoginId={studentLoginId} />
@@ -74,15 +98,26 @@ function AllBooks({ studentBoolean, setstudentBoolean,studentLoginId}) {
                 <Form.Select
                   aria-label="Default select example"
                   className="sort"
+                  onClick={handleSort}
                 >
-                  <option value="1" className="sort-options">
-                    Ascending
+                  <option value="bookTitle" className="sort-options" >  
+                      Book Title
                   </option>
-                  <option value="2" className="sort-options">
-                    Descending
+                  <option value="author" className="sort-options">
+                    Author
                   </option>
                 </Form.Select>
+
+
+                {/* <div className="dropdown">
+                  <button className="dropdown-toggle" type="button" data-bs-toggle="dropdown"></button>
+                
+                <ul class="dropdown-menu">
+                  <li class="dropdown-item " onClick={handleSortByTitle}> sfsdsdfsdfsdfsd</li>
+                  <li class="dropdown-item ">adalksdn</li>
+                </ul></div> */}
               </div>
+              
             ) : (
               <button className="orngbtn me-4 mt-2" onClick={handleShowAddBook}>
                 Add New Book

@@ -19,13 +19,7 @@ function Navbar({ studentBoolean, studentLoginId, studentArr }) {
     navigate("/");
   };
 
-
-  // studentArr.map((obj)=>{
-  //   if(obj.key === studentLoginId){
-  //      setStdntName(obj.name)
-  //      setstdntEmail(obj.email)
-  //   }
-  // })
+  const [navbarBtn, setnavbarBtn] = useState("");
 
   return (
     <div
@@ -48,22 +42,39 @@ function Navbar({ studentBoolean, studentLoginId, studentArr }) {
             </button>
           </NavLink>
         ) : (
-          <NavLink to="/issuedbooks">
-            <button className="btn  mt-4 navcomp navcomp1 d-flex align-items-center gap-3 ps-3 pt-2 pb-2">
+          <NavLink to="/issuedbooks" onClick={() => setnavbarBtn("1")}>
+            <button
+              className={
+                navbarBtn === "1"
+                  ? "btn  mt-4 navcomp navcomp1 d-flex align-items-center gap-3 ps-3 pt-2 pb-2 nvbar-btn"
+                  : "btn  mt-4 navcomp navcomp1 d-flex align-items-center gap-3 ps-3 pt-2 pb-2"
+              }
+              onClick={() => setnavbarBtn("1")}
+            >
               <MdTaskAlt size={20} />
               Issued Books
             </button>
           </NavLink>
         )}
-        <NavLink to="/allbooks">
-          <button className="btn mt-4  navcomp navcomp2 d-flex align-items-center gap-3 ps-3 pt-2 pb-2">
+        <NavLink to="/allbooks"  onClick={() => setnavbarBtn("2")}>
+          <button className={
+                navbarBtn === "2"
+                  ? "btn  mt-4 navcomp navcomp1 d-flex align-items-center gap-3 ps-3 pt-2 pb-2 nvbar-btn"
+                  : "btn  mt-4 navcomp navcomp1 d-flex align-items-center gap-3 ps-3 pt-2 pb-2"
+              }
+              onClick={() => setnavbarBtn("2")}>
             <MdMenuBook size={20} />
             All Books
           </button>
         </NavLink>
         {!studentBoolean && (
-          <NavLink to="/students">
-            <button className="btn mt-4 navcomp navcomp3 d-flex align-items-center gap-3 ps-3 pt-2 pb-2">
+          <NavLink to="/students"    onClick={() => setnavbarBtn("3")}  >
+            <button className={
+                navbarBtn === "3"
+                  ? "btn  mt-4 navcomp navcomp1 d-flex align-items-center gap-3 ps-3 pt-2 pb-2 nvbar-btn"
+                  : "btn  mt-4 navcomp navcomp1 d-flex align-items-center gap-3 ps-3 pt-2 pb-2"
+              }
+              onClick={() => setnavbarBtn("3")}>
               <MdOutlinePeople size={20} />
               Students
             </button>
