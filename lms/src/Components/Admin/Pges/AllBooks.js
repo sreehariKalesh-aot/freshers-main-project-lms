@@ -74,7 +74,7 @@ function AllBooks({ studentBoolean, setstudentBoolean,studentLoginId}) {
       <div
         className="pges col-10"
         style={{
-          backgroundColor: studentBoolean ? "#fbfbff" : "#fffbfa",
+          backgroundColor: studentBoolean === "student" ? "#fbfbff" : "#fffbfa",
         }}
       >
         <div className="pg-container">
@@ -92,7 +92,7 @@ function AllBooks({ studentBoolean, setstudentBoolean,studentLoginId}) {
                 }}
               />
             </div>
-            {studentBoolean ? (
+            {studentBoolean === "student"? (
               <div className="d-flex align-items-center gap-2">
                 <p className="mb-0">Sort By:</p>
                 <Form.Select
@@ -177,7 +177,7 @@ function AllBooks({ studentBoolean, setstudentBoolean,studentLoginId}) {
                     <p className="col d-flex justify-content-center  pg-items">
                       {book.remainingCopies}
                     </p>
-                    {studentBoolean ? (
+                    {studentBoolean === "student" ? (
                       <p className="col d-flex justify-content-center gap-3">
                         {" "}
                         <HiOutlineEye

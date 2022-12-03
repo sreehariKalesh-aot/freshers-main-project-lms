@@ -25,7 +25,7 @@ function Navbar({ studentBoolean, studentLoginId, studentArr }) {
     <div
       className="nvbar col-2"
       style={{
-        backgroundColor: studentBoolean ? "#303179" : "#ED7966",
+        backgroundColor: studentBoolean === "student" ? "#303179" : "#ED7966",
       }}
     >
       <div className="d-flex align-items-center gap-3 logodiv">
@@ -34,7 +34,7 @@ function Navbar({ studentBoolean, studentLoginId, studentArr }) {
       </div>
 
       <div className="btn-container">
-        {studentBoolean ? (
+        {studentBoolean === "student" ? (
           <NavLink to="/Mybooks">
             <button className="btn  mt-4 navcomp navcomp1 d-flex align-items-center gap-3 ps-3 pt-2 pb-2">
               <FaBookReader size={20} />
@@ -67,7 +67,7 @@ function Navbar({ studentBoolean, studentLoginId, studentArr }) {
             All Books
           </button>
         </NavLink>
-        {!studentBoolean && (
+        {studentBoolean !== "student" && (
           <NavLink to="/students"    onClick={() => setnavbarBtn("3")}  >
             <button className={
                 navbarBtn === "3"
@@ -89,14 +89,14 @@ function Navbar({ studentBoolean, studentLoginId, studentArr }) {
         >
           <FaUserCircle size={30} style={{ color: "white" }} />
           <div>
-            {!studentBoolean && (
+            {studentBoolean !== "student" && (
               <>
                 <p className="m-0 mb-2 username">Admin</p>
                 <p className="m-0 mt-1 useremail">admin@gmail.com</p>
               </>
             )}
 
-            {studentBoolean &&
+            {studentBoolean === "student" &&
               studentArr.map((obj) => {
                 if (obj.key === studentLoginId) {
                   return (

@@ -23,8 +23,8 @@ function LoginForm({
         <Form.Control
           type="email"
           placeholder="Enter email"
-          value={studentBoolean ? studentEmail : iemail}
-          onChange={studentBoolean ? handleStudentEmail : handleEmail}
+          value={studentBoolean === "student" ? studentEmail : iemail}
+          onChange={studentBoolean === "student" ? handleStudentEmail : handleEmail}
         />
         {loginError && iemail.length <= 0 ? (
           <p className="error">Please enter Email</p>
@@ -38,8 +38,8 @@ function LoginForm({
         <Form.Control
           type="password"
           placeholder="Password"
-          value={studentBoolean ? studentPassword : ipassword}
-          onChange={studentBoolean ? handleStudentPassword : handlePassword}
+          value={studentBoolean === "student" ? studentPassword : ipassword}
+          onChange={studentBoolean === "student" ? handleStudentPassword : handlePassword}
         />
         {loginError && ipassword.length <= 0 ? (
           <p className="error">please enter password</p>
@@ -52,13 +52,13 @@ function LoginForm({
         className="login-btn py-2"
         onClick={() => {
           {
-            studentBoolean ? handleStudentAuth() : handleAuth();
+            studentBoolean === "student" ? handleStudentAuth() : handleAuth();
           }
         }}
       >
         Login
       </button>
-      {studentBoolean? <p className="pt-3 d-flex justify-content-center register">Don’t have an account? &nbsp;<span className="orng-register">Register</span></p> : <p className="pt-3 d-flex justify-content-center register">.</p>}
+      {studentBoolean === "student" ? <p className="pt-3 d-flex justify-content-center register">Don’t have an account? &nbsp;<span className="orng-register">Register</span></p> : <p className="pt-3 d-flex justify-content-center register">.</p>}
     </Form>
   );
 }

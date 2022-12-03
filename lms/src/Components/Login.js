@@ -53,7 +53,7 @@ function Login({ email, password, authCheck, setauthCheck,studentBoolean,setstud
       e.preventDefault();
       setauthCheck(true);
       setloginError(false);
-      setstudentBoolean(false);
+      setstudentBoolean("admin");
       localStorage.setItem("studentLogin", studentBoolean);
       navigate("/issuedbooks");
       
@@ -92,7 +92,7 @@ function Login({ email, password, authCheck, setauthCheck,studentBoolean,setstud
         setstudentLoginId(tempkey)
         console.log(studentLoginId)
         navigate("/Mybooks");
-        setstudentBoolean(true)
+        setstudentBoolean("student")
         localStorage.setItem("studentLogin", studentBoolean);
 
       } 
@@ -120,10 +120,10 @@ function Login({ email, password, authCheck, setauthCheck,studentBoolean,setstud
               className="nav-link active ps-0"
               href="#"
               onClick={() => {
-                setstudentBoolean(false);
+                setstudentBoolean("admin");
               }}
               style={{
-                borderBottom: !studentBoolean ? "3px solid #ED7966" : "none",
+                borderBottom: studentBoolean === "admin" ? "3px solid #ED7966"  :"none"  ,
               }}
             >
               Admin
@@ -134,11 +134,11 @@ function Login({ email, password, authCheck, setauthCheck,studentBoolean,setstud
               className="nav-link"
               href="#"
               onClick={() => {
-                setstudentBoolean(true);
+                setstudentBoolean("student");
               }}
               // style={{ borderBottom: "1px", borderColor: "orange" }}
               style={{
-                borderBottom: !studentBoolean ? "none": "3px solid #ED7966" ,
+                borderBottom: studentBoolean === "student" ? "3px solid #ED7966" :  "none",
               }}
             >
               Student
