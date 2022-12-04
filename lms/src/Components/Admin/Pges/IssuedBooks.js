@@ -39,6 +39,7 @@ function IssuedBooks() {
     let issued = {
       key: issuedbook.key,
       iBook: issuedbook.iBook,
+      bookId:"",
       iStudent: issuedbook.iStudent,
       iDate: issuedbook.iDate,
       iDueDate: issuedbook.iDueDate,
@@ -50,6 +51,7 @@ function IssuedBooks() {
     allBooksArr.map((book) => {
       if (book.key == issuedbook.iBook) {
         issued.iBook = book.bName;
+        issued.bookId = book.key;
       }
     });
 
@@ -170,7 +172,7 @@ function IssuedBooks() {
                           onClick={() => {
                             handleShowReturned();
                             setissuedKey(issuedBooks.key);
-                            setreturnedBookId(issuedBooks.iBook);
+                            setreturnedBookId(issuedBooks.bookId);
                           }}
                         />
                       </p>

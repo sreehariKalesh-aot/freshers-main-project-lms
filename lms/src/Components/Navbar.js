@@ -20,7 +20,10 @@ function Navbar({ studentBoolean, studentLoginId, studentArr }) {
   };
 
   const [navbarBtn, setnavbarBtn] = useState("");
+  const [studentNavbarBtn, setstudentNavbarBtn] = useState("")
 
+  console.log(navbarBtn);
+  
   return (
     <div
       className="nvbar col-2"
@@ -35,8 +38,12 @@ function Navbar({ studentBoolean, studentLoginId, studentArr }) {
 
       <div className="btn-container">
         {studentBoolean === "student" ? (
-          <NavLink to="/Mybooks">
-            <button className="btn  mt-4 navcomp navcomp1 d-flex align-items-center gap-3 ps-3 pt-2 pb-2">
+          <NavLink to="/Mybooks" onClick={()=>setstudentNavbarBtn("1")}>
+            <button className={
+                studentNavbarBtn === "1"
+                  ? "btn  mt-4 navcomp navcomp1 d-flex align-items-center gap-3 ps-3 pt-2 pb-2 student-nvbar-btn"
+                  : "btn  mt-4 navcomp navcomp1 d-flex align-items-center gap-3 ps-3 pt-2 pb-2"
+              }>
               <FaBookReader size={20} />
               My Books
             </button>
@@ -49,7 +56,6 @@ function Navbar({ studentBoolean, studentLoginId, studentArr }) {
                   ? "btn  mt-4 navcomp navcomp1 d-flex align-items-center gap-3 ps-3 pt-2 pb-2 nvbar-btn"
                   : "btn  mt-4 navcomp navcomp1 d-flex align-items-center gap-3 ps-3 pt-2 pb-2"
               }
-              onClick={() => setnavbarBtn("1")}
             >
               <MdTaskAlt size={20} />
               Issued Books
@@ -58,11 +64,11 @@ function Navbar({ studentBoolean, studentLoginId, studentArr }) {
         )}
         <NavLink to="/allbooks"  onClick={() => setnavbarBtn("2")}>
           <button className={
-                navbarBtn === "2"
+                navbarBtn === "2" && studentBoolean === "admin"
                   ? "btn  mt-4 navcomp navcomp1 d-flex align-items-center gap-3 ps-3 pt-2 pb-2 nvbar-btn"
                   : "btn  mt-4 navcomp navcomp1 d-flex align-items-center gap-3 ps-3 pt-2 pb-2"
               }
-              onClick={() => setnavbarBtn("2")}>
+            >
             <MdMenuBook size={20} />
             All Books
           </button>
@@ -74,7 +80,7 @@ function Navbar({ studentBoolean, studentLoginId, studentArr }) {
                   ? "btn  mt-4 navcomp navcomp1 d-flex align-items-center gap-3 ps-3 pt-2 pb-2 nvbar-btn"
                   : "btn  mt-4 navcomp navcomp1 d-flex align-items-center gap-3 ps-3 pt-2 pb-2"
               }
-              onClick={() => setnavbarBtn("3")}>
+            >
               <MdOutlinePeople size={20} />
               Students
             </button>

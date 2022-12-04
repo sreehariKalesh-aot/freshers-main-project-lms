@@ -16,7 +16,8 @@ function MarkReturned({
   // const [returnedBookName, setreturnedBookName] = useState(null)
 
   const handleBookReturn = (issuedKey) => {
-
+  
+    console.log(returnedBookId);
 
     const thisMonth = new Date().getMonth() + 1;
 
@@ -43,6 +44,7 @@ function MarkReturned({
         if (book.key === returnedBookId) {
           // setremainingCount(book.remainingCopies++)
           // setremainingCount(book['remainingCopies']++)
+          console.log("book return count added")
           return {
             ...book,
             remainingCopies: book.remainingCopies + 1,
