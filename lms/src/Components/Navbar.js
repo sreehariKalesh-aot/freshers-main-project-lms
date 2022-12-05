@@ -38,7 +38,7 @@ function Navbar({ studentBoolean, studentLoginId, studentArr }) {
 
       <div className="btn-container">
         {studentBoolean === "student" ? (
-          <NavLink to="/Mybooks" onClick={()=>setstudentNavbarBtn("1")}>
+          <NavLink to="/student/Mybooks" onClick={()=>setstudentNavbarBtn("1")}>
             <button className={
                 studentNavbarBtn === "1"
                   ? "btn  mt-4 navcomp navcomp1 d-flex align-items-center gap-3 ps-3 pt-2 pb-2 student-nvbar-btn"
@@ -62,7 +62,7 @@ function Navbar({ studentBoolean, studentLoginId, studentArr }) {
             </button>
           </NavLink>
         )}
-        <NavLink to="/allbooks"  onClick={() => setnavbarBtn("2")}>
+        <NavLink to={studentBoolean !== "student"?"/allbooks"  : "/student/allbooks"}  onClick={() => setnavbarBtn("2")}>
           <button className={
                 navbarBtn === "2" && studentBoolean === "admin"
                   ? "btn  mt-4 navcomp navcomp1 d-flex align-items-center gap-3 ps-3 pt-2 pb-2 nvbar-btn"

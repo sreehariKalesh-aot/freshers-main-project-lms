@@ -21,6 +21,9 @@ function Login({ email, password, authCheck, setauthCheck,studentBoolean,setstud
   // use state for checking login error
   const [loginError, setloginError] = useState(false);
 
+  // use state for checking student login error
+  const [studentLoginError, setstudentLoginError] = useState("")
+
   // state and useeffect for retrieving encrypted password from local storage
 
   // const [email, setemail] = useState()
@@ -54,7 +57,6 @@ function Login({ email, password, authCheck, setauthCheck,studentBoolean,setstud
       setauthCheck(true);
       setloginError(false);
       setstudentBoolean("admin");
-      localStorage.setItem("studentLogin", studentBoolean);
       navigate("/issuedbooks");
       
     } else {
@@ -79,24 +81,32 @@ function Login({ email, password, authCheck, setauthCheck,studentBoolean,setstud
     setstudentPassword(e.target.value);
   };
 
-  const handleStudentAuth = () => {
+  const handleStudentAuth = (e) => {
+ 
 
     let x = studentArr.find((student) => {
-      if (
+      if (!studentEmail || !studentPassword) {
+        e.preventDefault();
+        setstudentLoginError(true);
+      
+      }
+
+      else if (
         studentEmail === student.email &&
         studentPassword === student.password
       ) {
+        setstudentLoginError(false)
         console.log(student.email)
         console.log(student.key)
         let tempkey = student.key
         setstudentLoginId(tempkey)
         console.log(studentLoginId)
-        navigate("/Mybooks");
+        navigate("/student/Mybooks");
         setstudentBoolean("student")
-        localStorage.setItem("studentLogin", studentBoolean);
 
       } 
     });
+
     if(!x){
       toast.error("Incorrect Email or Password", { position: "top-right" });
     }
@@ -151,6 +161,7 @@ function Login({ email, password, authCheck, setauthCheck,studentBoolean,setstud
           iemail={iemail}
           handleEmail={handleEmail}
           loginError={loginError}
+          studentLoginError={studentLoginError}
           ipassword={ipassword}
           handlePassword={handlePassword}
           handleAuth={handleAuth}

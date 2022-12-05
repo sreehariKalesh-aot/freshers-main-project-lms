@@ -61,31 +61,18 @@ function StudentLogin({ studentBoolean, setstudentBoolean, studentLoginId }) {
   });
 
   const [sortName, setsortName] = useState("");
+  
   const handleMybooksSort = (e) => {
     setsortName(e.target.value);
 
     if (sortName === "newest") {
       console.log(sortName);
-
-      // tempStudentArr.sort(function (a, b) {
-      //   let dateA = new Date(a.issueDate);
-      //   let dateB = new Date(b.issueDate);
-      //   if (dateA < dateB) return -1;
-      //   if (dateA > dateB) return 1;
-      //   return 0;
-      // })
-
       issuedBooksArr.sort(
         (objA, objB) => new Date(objA.iDate) - new Date(objB.iDate)
       );
     }
 
     if (sortName === "oldest") {
-      // tempStudentArr.sort(function (a, b) {
-      //   if (new Date(a.issueDate) > new Date(b.issueDate)) return -1;
-      //   if (new Date(a.issueDate) < new Date(b.issueDate)) return 1;
-      //   return 0;
-      // })
       issuedBooksArr.sort(
         (objA, objB) => new Date(objB.iDate) - new Date(objA.iDate)
       );
@@ -96,7 +83,7 @@ function StudentLogin({ studentBoolean, setstudentBoolean, studentLoginId }) {
   return (
     <>
       <Navbar
-        studentBoolean={studentBoolean}
+        studentBoolean={"student"}
         studentLoginId={studentLoginId}
         studentArr={studentArr}
       />

@@ -8,33 +8,30 @@ import IssuedBooks from "./Components/Admin/Pges/IssuedBooks";
 import AllBooks from "./Components/Admin/Pges/AllBooks";
 import StudentDetails from "./Components/Admin/Pges/StudentDetails";
 import StudentLogin from "./Components/Student/StudentLogin";
+import StudentAllBooks from "./Components/Student/StudentAllBooks";
 
 const studentContext = createContext();
 const allbooksContext = createContext();
 const issuedBooksContext = createContext();
 
 function App() {
-  
-  const getStudentLogin = ()=>{
-    return localStorage.getItem("studentLogin")
-  }
-  const [studentBoolean, setstudentBoolean] = useState(getStudentLogin());
+  // const getStudentLogin = ()=>{
+  //   return localStorage.getItem("studentLogin")
+  // }
+  const [studentBoolean, setstudentBoolean] = useState("admin");
 
-  useEffect(() => { 
-    localStorage.setItem("studentLogin", studentBoolean)
-  },[studentBoolean])
-  
-  const getStudentLoginId=()=>{
-    return localStorage.getItem("studentId")
-  }
-  const [studentLoginId, setstudentLoginId] = useState(getStudentLoginId())
+  // useEffect(() => {
+  //   localStorage.setItem("studentLogin", studentBoolean)
+  // },[studentBoolean])
 
-  useEffect(() => { 
-    localStorage.setItem("studentId", studentLoginId)
-  },[studentLoginId])
-  
+  const getStudentLoginId = () => {
+    return localStorage.getItem("studentId");
+  };
+  const [studentLoginId, setstudentLoginId] = useState(getStudentLoginId());
 
-
+  useEffect(() => {
+    localStorage.setItem("studentId", studentLoginId);
+  }, [studentLoginId]);
 
   const getStudentArray = () => {
     let students = localStorage.getItem("students");
@@ -111,15 +108,32 @@ function App() {
                     />
                   }
                 />
-                <Route path="/Mybooks" element={<StudentLogin studentBoolean={studentBoolean} 
-                setstudentBoolean={setstudentBoolean}
-                studentLoginId={studentLoginId}
-                    />} />
+                <Route
+                  path="/student/Mybooks"
+                  element={
+                    <StudentLogin
+                      studentBoolean={studentBoolean}
+                      setstudentBoolean={setstudentBoolean}
+                      studentLoginId={studentLoginId}
+                    />
+                  }
+                />
+                <Route
+                  path="/student/allbooks"
+                  element={<StudentAllBooks studentLoginId={studentLoginId} />}
+                />
                 <Route path="/students" element={<Students />} />
                 <Route path="/students/:id" element={<StudentDetails />} />
-                <Route path="/allbooks" element={<AllBooks  studentBoolean={studentBoolean} 
-                       studentLoginId={studentLoginId}
-                      setstudentBoolean={setstudentBoolean}/>} />
+                <Route
+                  path="/allbooks"
+                  element={
+                    <AllBooks
+                      studentBoolean={"admin"}
+                      studentLoginId={studentLoginId}
+                      setstudentBoolean={setstudentBoolean}
+                    />
+                  }
+                />
                 <Route path="/issuedbooks" element={<IssuedBooks />} />
               </Routes>
             </Router>

@@ -15,6 +15,7 @@ function LoginForm({
   handleStudentEmail,
   handleStudentPassword,
   handleStudentAuth,
+  studentLoginError
 }) {
   return (
     <Form className="login-form" onSubmit={handleAuth}>
@@ -24,10 +25,17 @@ function LoginForm({
           type="email"
           placeholder="Enter email"
           value={studentBoolean === "student" ? studentEmail : iemail}
-          onChange={studentBoolean === "student" ? handleStudentEmail : handleEmail}
+          onChange={
+            studentBoolean === "student" ? handleStudentEmail : handleEmail
+          }
         />
         {loginError && iemail.length <= 0 ? (
           <p className="error">Please enter Email</p>
+        ) : (
+          ""
+        )}
+        {studentLoginError && studentEmail.length <= 0 ? (
+          <p className="error">Please enter aa Email</p>
         ) : (
           ""
         )}
@@ -39,10 +47,19 @@ function LoginForm({
           type="password"
           placeholder="Password"
           value={studentBoolean === "student" ? studentPassword : ipassword}
-          onChange={studentBoolean === "student" ? handleStudentPassword : handlePassword}
+          onChange={
+            studentBoolean === "student"
+              ? handleStudentPassword
+              : handlePassword
+          }
         />
         {loginError && ipassword.length <= 0 ? (
-          <p className="error">please enter password</p>
+          <p className="error">please enter  password</p>
+        ) : (
+          ""
+        )}
+        {studentLoginError && studentPassword.length <= 0 ? (
+          <p className="error">please enter aa password</p>
         ) : (
           ""
         )}
@@ -52,13 +69,20 @@ function LoginForm({
         className="login-btn py-2"
         onClick={() => {
           {
-            studentBoolean === "student" ? handleStudentAuth() : handleAuth();
+            studentBoolean !== "student" ? handleAuth() :handleStudentAuth() ;
           }
         }}
       >
         Login
       </button>
-      {studentBoolean === "student" ? <p className="pt-3 d-flex justify-content-center register">Don’t have an account? &nbsp;<span className="orng-register">Register</span></p> : <p className="pt-3 d-flex justify-content-center register">.</p>}
+      {studentBoolean === "student" ? (
+        <p className="pt-3 d-flex justify-content-center register">
+          Don’t have an account? &nbsp;
+          <span className="orng-register">Register</span>
+        </p>
+      ) : (
+        <p className="pt-3 d-flex justify-content-center register">.</p>
+      )}
     </Form>
   );
 }
